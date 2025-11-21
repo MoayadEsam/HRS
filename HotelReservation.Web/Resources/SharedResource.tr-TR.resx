@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  
+  <!-- Navigation -->
+  <data name="Home" xml:space="preserve">
+    <value>Ana Sayfa</value>
+  </data>
+  <data name="Hotels" xml:space="preserve">
+    <value>Oteller</value>
+  </data>
+  <data name="Rooms" xml:space="preserve">
+    <value>Odalar</value>
+  </data>
+  <data name="MyBookings" xml:space="preserve">
+    <value>Rezervasyonlarım</value>
+  </data>
+  <data name="Management" xml:space="preserve">
+    <value>Yönetim</value>
+  </data>
+  <data name="Amenities" xml:space="preserve">
+    <value>Olanaklar</value>
+  </data>
+  <data name="Reservations" xml:space="preserve">
+    <value>Rezervasyonlar</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Giriş Yap</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Kayıt Ol</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Çıkış Yap</value>
+  </data>
+  
+  <!-- Common -->
+  <data name="Welcome" xml:space="preserve">
+    <value>Hoş Geldiniz</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Ara</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>Gönder</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>İptal</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Kaydet</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Düzenle</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Sil</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Oluştur</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Detaylar</value>
+  </data>
+  <data name="BackToList" xml:space="preserve">
+    <value>Listeye Dön</value>
+  </data>
+  <data name="Actions" xml:space="preserve">
+    <value>İşlemler</value>
+  </data>
+  
+  <!-- Home Page -->
+  <data name="FindYourPerfectStay" xml:space="preserve">
+    <value>Mükemmel Konaklamanızı Bulun</value>
+  </data>
+  <data name="DiscoverLuxuryHotels" xml:space="preserve">
+    <value>Dünya çapında lüks otelleri ve özel deneyimleri keşfedin</value>
+  </data>
+  <data name="SearchRooms" xml:space="preserve">
+    <value>Oda Ara</value>
+  </data>
+  <data name="FeaturedHotels" xml:space="preserve">
+    <value>Öne Çıkan Oteller</value>
+  </data>
+  <data name="ExploreOurPremium" xml:space="preserve">
+    <value>Premium lüks konaklama seçimimizi keşfedin</value>
+  </data>
+  <data name="ViewDetails" xml:space="preserve">
+    <value>Detayları Görüntüle</value>
+  </data>
+  <data name="PerNight" xml:space="preserve">
+    <value>gecelik</value>
+  </data>
+  
+  <!-- Hotel -->
+  <data name="HotelName" xml:space="preserve">
+    <value>Otel Adı</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Adres</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>Şehir</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Ülke</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Açıklama</value>
+  </data>
+  <data name="StarRating" xml:space="preserve">
+    <value>Yıldız Sayısı</value>
+  </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Telefon Numarası</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>E-posta</value>
+  </data>
+  <data name="ImageUrl" xml:space="preserve">
+    <value>Görsel URL</value>
+  </data>
+  <data name="AddHotel" xml:space="preserve">
+    <value>Otel Ekle</value>
+  </data>
+  
+  <!-- Room -->
+  <data name="RoomNumber" xml:space="preserve">
+    <value>Oda Numarası</value>
+  </data>
+  <data name="RoomType" xml:space="preserve">
+    <value>Oda Tipi</value>
+  </data>
+  <data name="Capacity" xml:space="preserve">
+    <value>Kapasite</value>
+  </data>
+  <data name="PricePerNight" xml:space="preserve">
+    <value>Gecelik Fiyat</value>
+  </data>
+  <data name="FloorNumber" xml:space="preserve">
+    <value>Kat Numarası</value>
+  </data>
+  <data name="Available" xml:space="preserve">
+    <value>Müsait</value>
+  </data>
+  <data name="AddRoom" xml:space="preserve">
+    <value>Oda Ekle</value>
+  </data>
+  
+  <!-- Reservation -->
+  <data name="CheckIn" xml:space="preserve">
+    <value>Giriş</value>
+  </data>
+  <data name="CheckOut" xml:space="preserve">
+    <value>Çıkış</value>
+  </data>
+  <data name="CheckInDate" xml:space="preserve">
+    <value>Giriş Tarihi</value>
+  </data>
+  <data name="CheckOutDate" xml:space="preserve">
+    <value>Çıkış Tarihi</value>
+  </data>
+  <data name="Guests" xml:space="preserve">
+    <value>Misafir Sayısı</value>
+  </data>
+  <data name="TotalPrice" xml:space="preserve">
+    <value>Toplam Fiyat</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Durum</value>
+  </data>
+  <data name="BookNow" xml:space="preserve">
+    <value>Şimdi Rezerve Et</value>
+  </data>
+  
+  <!-- Footer -->
+  <data name="QuickLinks" xml:space="preserve">
+    <value>Hızlı Bağlantılar</value>
+  </data>
+  <data name="ContactUs" xml:space="preserve">
+    <value>İletişim</value>
+  </data>
+  <data name="FollowUs" xml:space="preserve">
+    <value>Bizi Takip Edin</value>
+  </data>
+  <data name="AllRightsReserved" xml:space="preserve">
+    <value>Tüm hakları saklıdır.</value>
+  </data>
+  
+  <!-- Features -->
+  <data name="LuxuryProperties" xml:space="preserve">
+    <value>Lüks Tesisler</value>
+  </data>
+  <data name="LuxuryPropertiesDesc" xml:space="preserve">
+    <value>Benzersiz lüks ve olağanüstü hizmet sunan özenle seçilmiş oteller</value>
+  </data>
+  <data name="Concierge247" xml:space="preserve">
+    <value>7/24 Konsiyerj</value>
+  </data>
+  <data name="Concierge247Desc" xml:space="preserve">
+    <value>Kesintisiz ve unutulmaz bir konaklama için 7/24 yardım</value>
+  </data>
+  <data name="SecureBooking" xml:space="preserve">
+    <value>Güvenli Rezervasyon</value>
+  </data>
+  <data name="SecureBookingDesc" xml:space="preserve">
+    <value>Gizliliğiniz ve güvenliğiniz bizim önceliğimiz</value>
+  </data>
+  <data name="ReadyToExperience" xml:space="preserve">
+    <value>Lüksü Deneyimlemeye Hazır Mısınız?</value>
+  </data>
+  <data name="JoinThousands" xml:space="preserve">
+    <value>ComfortStay'i evlerinden uzakta ev yapan binlerce memnun misafire katılın</value>
+  </data>
+  
+  <!-- Hotels Page -->
+  <data name="OurHotels" xml:space="preserve">
+    <value>Otellerimiz</value>
+  </data>
+  <data name="OurLuxuryHotels" xml:space="preserve">
+    <value>Lüks Otellerimiz</value>
+  </data>
+  <data name="DiscoverExceptional" xml:space="preserve">
+    <value>Dünya çapında olağanüstü konaklamaları keşfedin</value>
+  </data>
+  <data name="AddNewProperty" xml:space="preserve">
+    <value>Yeni Tesis Ekle</value>
+  </data>
+  <data name="TemporarilyClosed" xml:space="preserve">
+    <value>Geçici Olarak Kapalı</value>
+  </data>
+  <data name="NoHotelsAvailable" xml:space="preserve">
+    <value>Mevcut Otel Yok</value>
+  </data>
+  <data name="CheckBackSoon" xml:space="preserve">
+    <value>Yeni lüks tesisler için yakında tekrar kontrol edin</value>
+  </data>
+  <data name="AddFirstHotel" xml:space="preserve">
+    <value>İlk Oteli Ekle</value>
+  </data>
+  
+  <!-- Rooms Search -->
+  <data name="FindYourPerfectRoom" xml:space="preserve">
+    <value>Mükemmel Odanızı Bulun</value>
+  </data>
+  <data name="SearchLuxuryAccommodations" xml:space="preserve">
+    <value>Lüks konaklama yerlerimizi arayın</value>
+  </data>
+  <data name="CheckInDate" xml:space="preserve">
+    <value>Giriş Tarihi</value>
+  </data>
+  <data name="CheckOutDate" xml:space="preserve">
+    <value>Çıkış Tarihi</value>
+  </data>
+  <data name="MinPrice" xml:space="preserve">
+    <value>Min Fiyat</value>
+  </data>
+  <data name="MaxPrice" xml:space="preserve">
+    <value>Maks Fiyat</value>
+  </data>
+  <data name="AllTypes" xml:space="preserve">
+    <value>Tüm Tipler</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Sıfırla</value>
+  </data>
+  <data name="AvailableRooms" xml:space="preserve">
+    <value>Müsait Odalar</value>
+  </data>
+  <data name="RoomsFound" xml:space="preserve">
+    <value>oda bulundu</value>
+  </data>
+  <data name="Booked" xml:space="preserve">
+    <value>Dolu</value>
+  </data>
+  <data name="Floor" xml:space="preserve">
+    <value>Kat</value>
+  </data>
+  <data name="Room" xml:space="preserve">
+    <value>Oda</value>
+  </data>
+  <data name="Guests" xml:space="preserve">
+    <value>misafir</value>
+  </data>
+  <data name="Night" xml:space="preserve">
+    <value>gece</value>
+  </data>
+  <data name="ViewDetails" xml:space="preserve">
+    <value>Detayları Görüntüle</value>
+  </data>
+  <data name="LoginToBook" xml:space="preserve">
+    <value>Rezervasyon İçin Giriş Yapın</value>
+  </data>
+  <data name="NoRoomsFound" xml:space="preserve">
+    <value>Kriterlere uygun oda bulunamadı. Arama filtrelerinizi ayarlamayı deneyin.</value>
+  </data>
+  
+  <!-- Account -->
+  <data name="Password" xml:space="preserve">
+    <value>Şifre</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Şifre Tekrar</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>Ad</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Soyad</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Beni Hatırla</value>
+  </data>
+  <data name="DontHaveAccount" xml:space="preserve">
+    <value>Hesabınız yok mu?</value>
+  </data>
+  <data name="AlreadyHaveAccount" xml:space="preserve">
+    <value>Zaten hesabınız var mı?</value>
+  </data>
+</root>

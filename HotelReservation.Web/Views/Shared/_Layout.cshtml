@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - LuxeStay Hotels</title>
+    <title>@ViewData["Title"] - ComfortStay Hotels</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -16,7 +16,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark premium-nav shadow-lg">
             <div class="container">
                 <a class="navbar-brand premium-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                    <i class="fas fa-gem"></i> LuxeStay
+                    <i class="fas fa-home"></i> ComfortStay
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -25,20 +25,20 @@
                 <div class="navbar-collapse collapse d-lg-inline-flex justify-content-between">
                     <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link px-3" asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-home me-1"></i>Home</a>
+                            <a class="nav-link px-3" asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-home me-1"></i>@Localizer["Home"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link px-3" asp-area="" asp-controller="Hotels" asp-action="Index"><i class="fas fa-building me-1"></i>Hotels</a>
+                            <a class="nav-link px-3" asp-area="" asp-controller="Hotels" asp-action="Index"><i class="fas fa-building me-1"></i>@Localizer["Hotels"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link px-3" asp-area="" asp-controller="Rooms" asp-action="Search"><i class="fas fa-search me-1"></i>Search</a>
+                            <a class="nav-link px-3" asp-area="" asp-controller="Rooms" asp-action="Search"><i class="fas fa-search me-1"></i>@Localizer["Search"]</a>
                         </li>
                         @if (User.Identity?.IsAuthenticated ?? false)
                         {
                             @if (!User.IsInRole("Admin") && !User.IsInRole("Staff"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link px-3" asp-area="" asp-controller="Reservations" asp-action="MyReservations"><i class="fas fa-calendar-check me-1"></i>My Bookings</a>
+                                    <a class="nav-link px-3" asp-area="" asp-controller="Reservations" asp-action="MyReservations"><i class="fas fa-calendar-check me-1"></i>@Localizer["MyBookings"]</a>
                                 </li>
                             }
                         }
@@ -46,21 +46,43 @@
                         {
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle px-3" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fas fa-crown me-1"></i>Management
+                                    <i class="fas fa-crown me-1"></i>@Localizer["Management"]
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="adminDropdown">
-                                    <li><a class="dropdown-item" asp-controller="Reservations" asp-action="Index"><i class="fas fa-list me-2"></i>All Reservations</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Reservations" asp-action="Index"><i class="fas fa-list me-2"></i>@Localizer["Reservations"]</a></li>
                                     @if (User.IsInRole("Admin"))
                                     {
                                         <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item" asp-controller="Hotels" asp-action="Create"><i class="fas fa-plus-circle me-2"></i>Add Hotel</a></li>
-                                        <li><a class="dropdown-item" asp-controller="Rooms" asp-action="Create"><i class="fas fa-door-open me-2"></i>Add Room</a></li>
-                                        <li><a class="dropdown-item" asp-controller="Amenities" asp-action="Index"><i class="fas fa-cog me-2"></i>Manage Amenities</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Hotels" asp-action="Create"><i class="fas fa-plus-circle me-2"></i>@Localizer["AddHotel"]</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Rooms" asp-action="Create"><i class="fas fa-door-open me-2"></i>@Localizer["AddRoom"]</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Amenities" asp-action="Index"><i class="fas fa-cog me-2"></i>@Localizer["Amenities"]</a></li>
                                     }
                                 </ul>
                             </li>
                         }
                     </ul>
+                    <!-- Language Switcher -->
+                    <div class="d-flex align-items-center me-3">
+                        <form asp-controller="Language" asp-action="SetLanguage" method="post" id="languageForm">
+                            <input type="hidden" name="returnUrl" value="@Context.Request.Path@Context.Request.QueryString" />
+                            <select name="culture"
+                                    class="form-select form-select-sm bg-dark text-light border-gold"
+                                    onchange="document.getElementById('languageForm').submit();"
+                                    style="width: 120px;">
+                                @{
+                                    var currentCulture = System.Globalization.CultureInfo.CurrentUICulture.Name;
+                                    var englishOption = currentCulture == "en-US"
+                                        ? "<option value=\"en-US\" selected=\"selected\">🇬🇧 English</option>"
+                                        : "<option value=\"en-US\">🇬🇧 English</option>";
+                                    var turkishOption = currentCulture == "tr-TR"
+                                        ? "<option value=\"tr-TR\" selected=\"selected\">🇹🇷 Türkçe</option>"
+                                        : "<option value=\"tr-TR\">🇹🇷 Türkçe</option>";
+                                }
+                                @Html.Raw(englishOption)
+                                @Html.Raw(turkishOption)
+                            </select>
+                        </form>
+                    </div>
                     <partial name="_LoginPartial" />
                 </div>
             </div>
@@ -90,20 +112,20 @@
         <div class="container py-5">
             <div class="row">
                 <div class="col-md-4 mb-4">
-                    <h5 class="footer-brand mb-3"><i class="fas fa-gem"></i> LuxeStay</h5>
+                    <h5 class="footer-brand mb-3"><i class="fas fa-home"></i> ComfortStay</h5>
                     <p class="text-light opacity-75">Experience luxury and comfort in our world-class hotels. Your perfect stay awaits.</p>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <h6 class="mb-3">Quick Links</h6>
+                    <h6 class="mb-3">@Localizer["QuickLinks"]</h6>
                     <ul class="list-unstyled">
-                        <li><a asp-controller="Home" asp-action="Index" class="footer-link"><i class="fas fa-chevron-right me-2"></i>Home</a></li>
-                        <li><a asp-controller="Hotels" asp-action="Index" class="footer-link"><i class="fas fa-chevron-right me-2"></i>Hotels</a></li>
-                        <li><a asp-controller="Rooms" asp-action="Search" class="footer-link"><i class="fas fa-chevron-right me-2"></i>Search</a></li>
+                        <li><a asp-controller="Home" asp-action="Index" class="footer-link"><i class="fas fa-chevron-right me-2"></i>@Localizer["Home"]</a></li>
+                        <li><a asp-controller="Hotels" asp-action="Index" class="footer-link"><i class="fas fa-chevron-right me-2"></i>@Localizer["Hotels"]</a></li>
+                        <li><a asp-controller="Rooms" asp-action="Search" class="footer-link"><i class="fas fa-chevron-right me-2"></i>@Localizer["Search"]</a></li>
                         <li><a asp-controller="Home" asp-action="Privacy" class="footer-link"><i class="fas fa-chevron-right me-2"></i>Privacy</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <h6 class="mb-3">Connect With Us</h6>
+                    <h6 class="mb-3">@Localizer["FollowUs"]</h6>
                     <div class="social-icons">
                         <a href="#" class="footer-social-link me-3"><i class="fab fa-facebook fa-2x"></i></a>
                         <a href="#" class="footer-social-link me-3"><i class="fab fa-instagram fa-2x"></i></a>
@@ -114,7 +136,7 @@
             </div>
             <hr class="my-4 border-light opacity-25">
             <div class="text-center text-light opacity-75">
-                <p class="mb-0">&copy; 2025 LuxeStay Hotels. All rights reserved.</p>
+                <p class="mb-0">&copy; 2025 ComfortStay Hotels. @Localizer["AllRightsReserved"]</p>
             </div>
         </div>
     </footer>

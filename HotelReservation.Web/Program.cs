@@ -8,11 +8,33 @@ using HotelReservation.Services.Interfaces;
 using HotelReservation.Services.Mappings;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Configure Localization
+builder.Services.AddLocalization(options => options.ResourcesPath = string.Empty);
+
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+    .AddViewLocalization()
+    .AddDataAnnotationsLocalization();
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    var supportedCultures = new[]
+    {
+        new CultureInfo("en-US"),
+        new CultureInfo("tr-TR")
+    };
+    
+    options.DefaultRequestCulture = new RequestCulture("en-US");
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+    
+    // Add cookie provider to persist language choice
+    options.RequestCultureProviders.Insert(0, new CookieRequestCultureProvider());
+});
 
 // Configure DbContext
 var dbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "hotelreservation.db");
@@ -90,6 +112,10 @@ else
 {
     app.UseDeveloperExceptionPage();
 }
+
+// Add localization middleware with configured options
+var locOptions = app.Services.GetRequiredService<Microsoft.Extensions.Options.IOptions<RequestLocalizationOptions>>().Value;
+app.UseRequestLocalization(locOptions);
 
 // Remove HTTPS redirection for Railway deployment
 // app.UseHttpsRedirection();

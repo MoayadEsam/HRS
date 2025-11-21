@@ -1,15 +1,15 @@
 ﻿@model IEnumerable<HotelReservation.Core.DTOs.HotelListDto>
 @{
-    ViewData["Title"] = "Home";
+    ViewData["Title"] = Localizer["Home"];
 }
 
 <!-- Hero Section -->
 <div class="hero-section text-center mb-5">
     <div class="hero-content">
-        <h1 class="hero-title mb-3">Discover Your Perfect Escape</h1>
-        <p class="hero-subtitle mb-4">Experience luxury, comfort, and world-class hospitality at LuxeStay Hotels</p>
+        <h1 class="hero-title mb-3">@Localizer["FindYourPerfectStay"]</h1>
+        <p class="hero-subtitle mb-4">@Localizer["DiscoverLuxuryHotels"]</p>
         <a asp-controller="Rooms" asp-action="Search" class="btn btn-hero btn-lg px-5 py-3">
-            <i class="fas fa-search me-2"></i>Explore Our Collection
+            <i class="fas fa-search me-2"></i>@Localizer["SearchRooms"]
         </a>
     </div>
 </div>
@@ -22,8 +22,8 @@
                 <div class="feature-icon mb-3">
                     <i class="fas fa-crown fa-3x"></i>
                 </div>
-                <h4 class="feature-title">Luxury Properties</h4>
-                <p class="feature-text">Handpicked hotels offering unparalleled luxury and exceptional service</p>
+                <h4 class="feature-title">@Localizer["LuxuryProperties"]</h4>
+                <p class="feature-text">@Localizer["LuxuryPropertiesDesc"]</p>
             </div>
         </div>
         <div class="col-md-4">
@@ -31,8 +31,8 @@
                 <div class="feature-icon mb-3">
                     <i class="fas fa-concierge-bell fa-3x"></i>
                 </div>
-                <h4 class="feature-title">24/7 Concierge</h4>
-                <p class="feature-text">Round-the-clock assistance for a seamless and memorable stay</p>
+                <h4 class="feature-title">@Localizer["Concierge247"]</h4>
+                <p class="feature-text">@Localizer["Concierge247Desc"]</p>
             </div>
         </div>
         <div class="col-md-4">
@@ -40,8 +40,8 @@
                 <div class="feature-icon mb-3">
                     <i class="fas fa-shield-check fa-3x"></i>
                 </div>
-                <h4 class="feature-title">Secure Booking</h4>
-                <p class="feature-text">Your privacy and security are our top priorities</p>
+                <h4 class="feature-title">@Localizer["SecureBooking"]</h4>
+                <p class="feature-text">@Localizer["SecureBookingDesc"]</p>
             </div>
         </div>
     </div>
@@ -49,7 +49,7 @@
 
 <!-- Featured Hotels Section -->
 <div class="featured-section">
-    <h2 class="section-title text-center mb-5">Featured Destinations</h2>
+    <h2 class="section-title text-center mb-5">@Localizer["FeaturedHotels"]</h2>
     <div class="row g-4">
         @foreach (var hotel in Model)
         {
@@ -69,9 +69,9 @@
                             <i class="fas fa-map-marker-alt me-2"></i>@hotel.City, @hotel.Country
                         </p>
                         <div class="hotel-info d-flex justify-content-between align-items-center">
-                            <span class="room-count"><i class="fas fa-door-open me-2"></i>@hotel.RoomCount Rooms</span>
+                            <span class="room-count"><i class="fas fa-door-open me-2"></i>@hotel.RoomCount @Localizer["Rooms"]</span>
                             <a asp-controller="Hotels" asp-action="Details" asp-route-id="@hotel.Id" class="btn btn-premium">
-                                View Details <i class="fas fa-arrow-right ms-2"></i>
+                                @Localizer["ViewDetails"] <i class="fas fa-arrow-right ms-2"></i>
                             </a>
                         </div>
                     </div>
@@ -83,9 +83,9 @@
 
 <!-- CTA Section -->
 <div class="cta-section text-center py-5 mt-5">
-    <h2 class="cta-title mb-3">Ready to Experience Luxury?</h2>
-    <p class="cta-text mb-4">Join thousands of satisfied guests who have made LuxeStay their home away from home</p>
+    <h2 class="cta-title mb-3">@Localizer["ReadyToExperience"]</h2>
+    <p class="cta-text mb-4">@Localizer["JoinThousands"]</p>
     <a asp-controller="Hotels" asp-action="Index" class="btn btn-hero btn-lg px-5 py-3">
-        <i class="fas fa-hotel me-2"></i>Browse All Hotels
+        <i class="fas fa-hotel me-2"></i>@Localizer["Hotels"]
     </a>
 </div>

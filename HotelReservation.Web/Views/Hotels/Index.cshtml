@@ -1,18 +1,18 @@
 @model IEnumerable<HotelReservation.Core.DTOs.HotelListDto>
 @{
-    ViewData["Title"] = "Our Hotels";
+    ViewData["Title"] = Localizer["OurHotels"];
 }
 
 <div class="page-header text-center mb-5">
-    <h1 class="display-4 mb-3"><i class="fas fa-building me-3"></i>Our Luxury Hotels</h1>
-    <p class="lead text-muted">Discover exceptional accommodations around the world</p>
+    <h1 class="display-4 mb-3"><i class="fas fa-building me-3"></i>@Localizer["OurLuxuryHotels"]</h1>
+    <p class="lead text-muted">@Localizer["DiscoverExceptional"]</p>
 </div>
 
 @if (User.IsInRole("Admin"))
 {
     <div class="text-end mb-4">
         <a asp-action="Create" class="btn btn-hero btn-lg">
-            <i class="fas fa-plus-circle me-2"></i>Add New Property
+            <i class="fas fa-plus-circle me-2"></i>@Localizer["AddNewProperty"]
         </a>
     </div>
 }
@@ -32,7 +32,7 @@
                     @if (!hotel.IsActive)
                     {
                         <div class="position-absolute top-0 start-0 m-3">
-                            <span class="badge bg-danger">Temporarily Closed</span>
+                            <span class="badge bg-danger">@Localizer["TemporarilyClosed"]</span>
                         </div>
                     }
                 </div>
@@ -42,10 +42,10 @@
                         <i class="fas fa-map-marker-alt me-2"></i>@hotel.City, @hotel.Country
                     </p>
                     <div class="hotel-info d-flex justify-content-between align-items-center">
-                        <span class="room-count"><i class="fas fa-door-open me-2"></i>@hotel.RoomCount Rooms</span>
+                        <span class="room-count"><i class="fas fa-door-open me-2"></i>@hotel.RoomCount @Localizer["Rooms"]</span>
                         <div class="btn-group">
                             <a asp-action="Details" asp-route-id="@hotel.Id" class="btn btn-premium btn-sm">
-                                Details <i class="fas fa-arrow-right ms-1"></i>
+                                @Localizer["Details"] <i class="fas fa-arrow-right ms-1"></i>
                             </a>
                             @if (User.IsInRole("Admin"))
                             {
@@ -53,9 +53,9 @@
                                     <span class="visually-hidden">Toggle Dropdown</span>
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-end">
-                                    <li><a class="dropdown-item" asp-action="Edit" asp-route-id="@hotel.Id"><i class="fas fa-edit me-2"></i>Edit</a></li>
+                                    <li><a class="dropdown-item" asp-action="Edit" asp-route-id="@hotel.Id"><i class="fas fa-edit me-2"></i>@Localizer["Edit"]</a></li>
                                     <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item text-danger" asp-action="Delete" asp-route-id="@hotel.Id"><i class="fas fa-trash me-2"></i>Delete</a></li>
+                                    <li><a class="dropdown-item text-danger" asp-action="Delete" asp-route-id="@hotel.Id"><i class="fas fa-trash me-2"></i>@Localizer["Delete"]</a></li>
                                 </ul>
                             }
                         </div>
@@ -70,12 +70,12 @@
 {
     <div class="text-center py-5">
         <i class="fas fa-building fa-5x text-muted mb-4"></i>
-        <h3 class="text-muted">No Hotels Available</h3>
-        <p class="text-muted">Check back soon for new luxury properties</p>
+        <h3 class="text-muted">@Localizer["NoHotelsAvailable"]</h3>
+        <p class="text-muted">@Localizer["CheckBackSoon"]</p>
         @if (User.IsInRole("Admin"))
         {
             <a asp-action="Create" class="btn btn-hero btn-lg mt-3">
-                <i class="fas fa-plus-circle me-2"></i>Add First Hotel
+                <i class="fas fa-plus-circle me-2"></i>@Localizer["AddFirstHotel"]
             </a>
         }
     </div>

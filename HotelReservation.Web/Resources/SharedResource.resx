@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  
+  <!-- Navigation -->
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Hotels" xml:space="preserve">
+    <value>Hotels</value>
+  </data>
+  <data name="Rooms" xml:space="preserve">
+    <value>Rooms</value>
+  </data>
+  <data name="MyBookings" xml:space="preserve">
+    <value>My Bookings</value>
+  </data>
+  <data name="Management" xml:space="preserve">
+    <value>Management</value>
+  </data>
+  <data name="Amenities" xml:space="preserve">
+    <value>Amenities</value>
+  </data>
+  <data name="Reservations" xml:space="preserve">
+    <value>Reservations</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  
+  <!-- Common -->
+  <data name="Welcome" xml:space="preserve">
+    <value>Welcome</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="BackToList" xml:space="preserve">
+    <value>Back to List</value>
+  </data>
+  <data name="Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  
+  <!-- Home Page -->
+  <data name="FindYourPerfectStay" xml:space="preserve">
+    <value>Find Your Perfect Stay</value>
+  </data>
+  <data name="DiscoverLuxuryHotels" xml:space="preserve">
+    <value>Discover luxury hotels and exclusive experiences around the world</value>
+  </data>
+  <data name="SearchRooms" xml:space="preserve">
+    <value>Search Rooms</value>
+  </data>
+  <data name="FeaturedHotels" xml:space="preserve">
+    <value>Featured Hotels</value>
+  </data>
+  <data name="ExploreOurPremium" xml:space="preserve">
+    <value>Explore our premium selection of luxury accommodations</value>
+  </data>
+  <data name="ViewDetails" xml:space="preserve">
+    <value>View Details</value>
+  </data>
+  <data name="PerNight" xml:space="preserve">
+    <value>per night</value>
+  </data>
+  
+  <!-- Hotel -->
+  <data name="HotelName" xml:space="preserve">
+    <value>Hotel Name</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="StarRating" xml:space="preserve">
+    <value>Star Rating</value>
+  </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Phone Number</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="ImageUrl" xml:space="preserve">
+    <value>Image URL</value>
+  </data>
+  <data name="AddHotel" xml:space="preserve">
+    <value>Add Hotel</value>
+  </data>
+  
+  <!-- Room -->
+  <data name="RoomNumber" xml:space="preserve">
+    <value>Room Number</value>
+  </data>
+  <data name="RoomType" xml:space="preserve">
+    <value>Room Type</value>
+  </data>
+  <data name="Capacity" xml:space="preserve">
+    <value>Capacity</value>
+  </data>
+  <data name="PricePerNight" xml:space="preserve">
+    <value>Price Per Night</value>
+  </data>
+  <data name="FloorNumber" xml:space="preserve">
+    <value>Floor Number</value>
+  </data>
+  <data name="Available" xml:space="preserve">
+    <value>Available</value>
+  </data>
+  <data name="AddRoom" xml:space="preserve">
+    <value>Add Room</value>
+  </data>
+  
+  <!-- Reservation -->
+  <data name="CheckIn" xml:space="preserve">
+    <value>Check-In</value>
+  </data>
+  <data name="CheckOut" xml:space="preserve">
+    <value>Check-Out</value>
+  </data>
+  <data name="CheckInDate" xml:space="preserve">
+    <value>Check-In Date</value>
+  </data>
+  <data name="CheckOutDate" xml:space="preserve">
+    <value>Check-Out Date</value>
+  </data>
+  <data name="Guests" xml:space="preserve">
+    <value>Guests</value>
+  </data>
+  <data name="TotalPrice" xml:space="preserve">
+    <value>Total Price</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="BookNow" xml:space="preserve">
+    <value>Book Now</value>
+  </data>
+  
+  <!-- Footer -->
+  <data name="QuickLinks" xml:space="preserve">
+    <value>Quick Links</value>
+  </data>
+  <data name="ContactUs" xml:space="preserve">
+    <value>Contact Us</value>
+  </data>
+  <data name="FollowUs" xml:space="preserve">
+    <value>Follow Us</value>
+  </data>
+  <data name="AllRightsReserved" xml:space="preserve">
+    <value>All rights reserved.</value>
+  </data>
+  
+  <!-- Features -->
+  <data name="LuxuryProperties" xml:space="preserve">
+    <value>Luxury Properties</value>
+  </data>
+  <data name="LuxuryPropertiesDesc" xml:space="preserve">
+    <value>Handpicked hotels offering unparalleled luxury and exceptional service</value>
+  </data>
+  <data name="Concierge247" xml:space="preserve">
+    <value>24/7 Concierge</value>
+  </data>
+  <data name="Concierge247Desc" xml:space="preserve">
+    <value>Round-the-clock assistance for a seamless and memorable stay</value>
+  </data>
+  <data name="SecureBooking" xml:space="preserve">
+    <value>Secure Booking</value>
+  </data>
+  <data name="SecureBookingDesc" xml:space="preserve">
+    <value>Your privacy and security are our top priorities</value>
+  </data>
+  <data name="ReadyToExperience" xml:space="preserve">
+    <value>Ready to Experience Luxury?</value>
+  </data>
+  <data name="JoinThousands" xml:space="preserve">
+    <value>Join thousands of satisfied guests who have made ComfortStay their home away from home</value>
+  </data>
+  
+  <!-- Hotels Page -->
+  <data name="OurHotels" xml:space="preserve">
+    <value>Our Hotels</value>
+  </data>
+  <data name="OurLuxuryHotels" xml:space="preserve">
+    <value>Our Luxury Hotels</value>
+  </data>
+  <data name="DiscoverExceptional" xml:space="preserve">
+    <value>Discover exceptional accommodations around the world</value>
+  </data>
+  <data name="AddNewProperty" xml:space="preserve">
+    <value>Add New Property</value>
+  </data>
+  <data name="TemporarilyClosed" xml:space="preserve">
+    <value>Temporarily Closed</value>
+  </data>
+  <data name="NoHotelsAvailable" xml:space="preserve">
+    <value>No Hotels Available</value>
+  </data>
+  <data name="CheckBackSoon" xml:space="preserve">
+    <value>Check back soon for new luxury properties</value>
+  </data>
+  <data name="AddFirstHotel" xml:space="preserve">
+    <value>Add First Hotel</value>
+  </data>
+  
+  <!-- Rooms Search -->
+  <data name="FindYourPerfectRoom" xml:space="preserve">
+    <value>Find Your Perfect Room</value>
+  </data>
+  <data name="SearchLuxuryAccommodations" xml:space="preserve">
+    <value>Search through our luxury accommodations</value>
+  </data>
+  <data name="CheckInDate" xml:space="preserve">
+    <value>Check-In Date</value>
+  </data>
+  <data name="CheckOutDate" xml:space="preserve">
+    <value>Check-Out Date</value>
+  </data>
+  <data name="MinPrice" xml:space="preserve">
+    <value>Min Price</value>
+  </data>
+  <data name="MaxPrice" xml:space="preserve">
+    <value>Max Price</value>
+  </data>
+  <data name="AllTypes" xml:space="preserve">
+    <value>All Types</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="AvailableRooms" xml:space="preserve">
+    <value>Available Rooms</value>
+  </data>
+  <data name="RoomsFound" xml:space="preserve">
+    <value>rooms found</value>
+  </data>
+  <data name="Booked" xml:space="preserve">
+    <value>Booked</value>
+  </data>
+  <data name="Floor" xml:space="preserve">
+    <value>Floor</value>
+  </data>
+  <data name="Room" xml:space="preserve">
+    <value>Room</value>
+  </data>
+  <data name="Guests" xml:space="preserve">
+    <value>guests</value>
+  </data>
+  <data name="Night" xml:space="preserve">
+    <value>night</value>
+  </data>
+  <data name="ViewDetails" xml:space="preserve">
+    <value>View Details</value>
+  </data>
+  <data name="LoginToBook" xml:space="preserve">
+    <value>Login to Book</value>
+  </data>
+  <data name="NoRoomsFound" xml:space="preserve">
+    <value>No rooms found matching your criteria. Try adjusting your search filters.</value>
+  </data>
+  
+  <!-- Account -->
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirm Password</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Remember me</value>
+  </data>
+  <data name="DontHaveAccount" xml:space="preserve">
+    <value>Don't have an account?</value>
+  </data>
+  <data name="AlreadyHaveAccount" xml:space="preserve">
+    <value>Already have an account?</value>
+  </data>
+</root>
