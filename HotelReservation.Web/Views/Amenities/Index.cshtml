@@ -1,0 +1,61 @@
+@model IEnumerable<HotelReservation.Core.DTOs.AmenityListDto>
+@{
+    ViewData["Title"] = "Manage Amenities";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="fas fa-concierge-bell"></i> Manage Amenities</h2>
+    <a asp-action="Create" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Add New Amenity
+    </a>
+</div>
+
+@if (Model.Any())
+{
+    <div class="row">
+        @foreach (var amenity in Model)
+        {
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            @amenity.Name
+                            @if (!amenity.IsActive)
+                            {
+                                <span class="badge bg-danger float-end">Inactive</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-success float-end">Active</span>
+                            }
+                        </h5>
+                        @if (!string.IsNullOrEmpty(amenity.Description))
+                        {
+                            <p class="card-text">@amenity.Description</p>
+                        }
+                        @if (!string.IsNullOrEmpty(amenity.IconClass))
+                        {
+                            <p class="card-text"><i class="@amenity.IconClass"></i> @amenity.IconClass</p>
+                        }
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <div class="btn-group w-100" role="group">
+                            <a asp-action="Edit" asp-route-id="@amenity.Id" class="btn btn-outline-warning">
+                                <i class="fas fa-edit"></i> Edit
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@amenity.Id" class="btn btn-outline-danger">
+                                <i class="fas fa-trash"></i> Delete
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div class="alert alert-info">
+        <i class="fas fa-info-circle"></i> No amenities found. Add your first amenity to get started.
+    </div>
+}

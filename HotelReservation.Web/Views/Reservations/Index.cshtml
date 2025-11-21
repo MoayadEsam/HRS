@@ -1,0 +1,87 @@
+@model IEnumerable<HotelReservation.Core.DTOs.ReservationListDto>
+@using HotelReservation.Core.Enums
+@{
+    ViewData["Title"] = "All Reservations";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="fas fa-calendar-alt"></i> All Reservations</h2>
+    <div>
+        <a asp-controller="Export" asp-action="ReservationsCsv" class="btn btn-success">
+            <i class="fas fa-file-csv"></i> Export CSV
+        </a>
+    </div>
+</div>
+
+@if (Model.Any())
+{
+    <div class="card shadow">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Guest</th>
+                            <th>Hotel</th>
+                            <th>Room</th>
+                            <th>Check-In</th>
+                            <th>Check-Out</th>
+                            <th>Guests</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var reservation in Model.OrderByDescending(r => r.CreatedAt))
+                        {
+                            <tr>
+                                <td>@reservation.Id</td>
+                                <td>@reservation.UserName</td>
+                                <td>@reservation.HotelName</td>
+                                <td>@reservation.RoomNumber</td>
+                                <td>@reservation.CheckInDate.ToString("MMM dd, yyyy")</td>
+                                <td>@reservation.CheckOutDate.ToString("MMM dd, yyyy")</td>
+                                <td>@reservation.NumberOfGuests</td>
+                                <td class="text-success"><strong>$@reservation.TotalPrice</strong></td>
+                                <td>
+                                    <span class="badge 
+                                        @(reservation.Status == ReservationStatus.Confirmed ? "bg-success" : 
+                                          reservation.Status == ReservationStatus.Cancelled ? "bg-danger" : 
+                                          "bg-warning")">
+                                        @reservation.StatusName
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="btn-group btn-group-sm" role="group">
+                                        <a asp-action="Details" asp-route-id="@reservation.Id" 
+                                           class="btn btn-outline-primary" title="View Details">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        @if (reservation.Status == ReservationStatus.Confirmed && reservation.CheckInDate > DateTime.Now)
+                                        {
+                                            <form asp-action="Cancel" asp-route-id="@reservation.Id" method="post" 
+                                                  onsubmit="return confirm('Are you sure you want to cancel this reservation?');"
+                                                  style="display:inline;">
+                                                <button type="submit" class="btn btn-outline-danger btn-sm" title="Cancel">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </form>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="alert alert-info">
+        <i class="fas fa-info-circle"></i> No reservations found.
+    </div>
+}

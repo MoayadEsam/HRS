@@ -1,0 +1,112 @@
+@model HotelReservation.Core.DTOs.RoomCreateDto
+@using HotelReservation.Core.Enums
+@{
+    ViewData["Title"] = "Add New Room";
+    var hotels = ViewBag.Hotels as IEnumerable<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem>;
+    var amenities = ViewBag.Amenities as IEnumerable<HotelReservation.Core.DTOs.AmenityListDto>;
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-9">
+        <div class="card border-0 shadow-premium">
+            <div class="card-body p-5">
+                <div class="text-center mb-5">
+                    <div class="mb-3">
+                        <i class="fas fa-door-open fa-3x text-accent"></i>
+                    </div>
+                    <h2 class="mb-2">Add New Room</h2>
+                    <p class="text-muted">Create a new luxury accommodation</p>
+                </div>
+                <form asp-action="Create" method="post">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger rounded-3 mb-4"></div>
+                    
+                    <h5 class="text-accent mb-3"><i class="fas fa-hotel me-2"></i>Property Selection</h5>
+                    <div class="mb-4">
+                        <label asp-for="HotelId" class="form-label fw-semibold">Select Hotel</label>
+                        <select asp-for="HotelId" class="form-select form-select-lg" asp-items="hotels">
+                            <option value="">-- Choose a property --</option>
+                        </select>
+                        <span asp-validation-for="HotelId" class="text-danger small"></span>
+                    </div>
+                    
+                    <hr class="my-4">
+                    <h5 class="text-accent mb-3"><i class="fas fa-info-circle me-2"></i>Room Details</h5>
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <label asp-for="RoomNumber" class="form-label fw-semibold">Room Number</label>
+                            <input asp-for="RoomNumber" class="form-control form-control-lg" placeholder="101" />
+                            <span asp-validation-for="RoomNumber" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="FloorNumber" class="form-label fw-semibold">Floor Number</label>
+                            <input asp-for="FloorNumber" class="form-control form-control-lg" type="number" min="0" placeholder="1" />
+                            <span asp-validation-for="FloorNumber" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="PricePerNight" class="form-label fw-semibold">Price Per Night ($)</label>
+                            <input asp-for="PricePerNight" class="form-control form-control-lg" type="number" step="0.01" min="0.01" placeholder="199.99" />
+                            <span asp-validation-for="PricePerNight" class="text-danger small"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label asp-for="Type" class="form-label fw-semibold">Room Type</label>
+                            <select asp-for="Type" class="form-select form-select-lg">
+                                @foreach (RoomType type in Enum.GetValues(typeof(RoomType)))
+                                {
+                                    <option value="@type">@type</option>
+                                }
+                            </select>
+                            <span asp-validation-for="Type" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Capacity" class="form-label fw-semibold">Guest Capacity</label>
+                            <input asp-for="Capacity" class="form-control form-control-lg" type="number" min="1" max="10" placeholder="2" />
+                            <span asp-validation-for="Capacity" class="text-danger small"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label asp-for="Description" class="form-label fw-semibold">Description</label>
+                        <textarea asp-for="Description" class="form-control" rows="4" placeholder="Describe the room's luxury features and amenities..."></textarea>
+                        <span asp-validation-for="Description" class="text-danger small"></span>
+                    </div>
+                    
+                    @if (amenities != null && amenities.Any())
+                    {
+                        <hr class="my-4">
+                        <h5 class="text-accent mb-3"><i class="fas fa-concierge-bell me-2"></i>Amenities</h5>
+                        <div class="row mb-4">
+                            @foreach (var amenity in amenities.Where(a => a.IsActive))
+                            {
+                                <div class="col-md-6 col-lg-4 mb-3">
+                                    <div class="form-check form-check-lg">
+                                        <input type="checkbox" name="AmenityIds" value="@amenity.Id" 
+                                               class="form-check-input" id="amenity_@amenity.Id" />
+                                        <label class="form-check-label fw-semibold" for="amenity_@amenity.Id">
+                                            @amenity.Name
+                                        </label>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                    
+                    <div class="d-flex gap-3 justify-content-end mt-5">
+                        <a asp-action="Index" class="btn btn-outline-secondary btn-lg px-4">
+                            <i class="fas fa-times me-2"></i>Cancel
+                        </a>
+                        <button type="submit" class="btn btn-hero btn-lg px-5">
+                            <i class="fas fa-save me-2"></i>Create Room
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,116 @@
+@model HotelReservation.Core.DTOs.LoginDto
+@{
+    ViewData["Title"] = "Welcome Back";
+}
+
+<div class="row justify-content-center align-items-center" style="min-height: 70vh;">
+    <div class="col-lg-5 col-md-7">
+        <div class="card border-0 shadow-premium">
+            <div class="card-body p-5">
+                <div class="text-center mb-4">
+                    <div class="mb-3">
+                        <i class="fas fa-gem fa-3x text-accent"></i>
+                    </div>
+                    <h2 class="mb-2">Welcome Back</h2>
+                    <p class="text-muted">Sign in to your LuxeStay account</p>
+                </div>
+
+                <form asp-action="Login" method="post">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger rounded-3 mb-4"></div>
+                    
+                    <div class="mb-4">
+                        <label asp-for="Email" class="form-label fw-semibold">Email Address</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0">
+                                <i class="fas fa-envelope text-muted"></i>
+                            </span>
+                            <input asp-for="Email" class="form-control border-start-0 ps-0" type="email" placeholder="you@example.com" autofocus />
+                        </div>
+                        <span asp-validation-for="Email" class="text-danger small"></span>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label asp-for="Password" class="form-label fw-semibold">Password</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0">
+                                <i class="fas fa-lock text-muted"></i>
+                            </span>
+                            <input asp-for="Password" class="form-control border-start-0 ps-0" type="password" placeholder="Enter your password" />
+                        </div>
+                        <span asp-validation-for="Password" class="text-danger small"></span>
+                    </div>
+                    
+                    <div class="mb-4 form-check">
+                        <input asp-for="RememberMe" class="form-check-input" type="checkbox" />
+                        <label asp-for="RememberMe" class="form-check-label">Keep me signed in</label>
+                    </div>
+                    
+                    <div class="d-grid mb-4">
+                        <button type="submit" class="btn btn-hero btn-lg py-3">
+                            <i class="fas fa-sign-in-alt me-2"></i>Sign In
+                        </button>
+                    </div>
+                </form>
+                
+                <div class="demo-accounts p-4 rounded-3">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-info-circle text-accent me-2"></i>
+                        <h6 class="mb-0 fw-semibold">Demo Accounts</h6>
+                    </div>
+                    <div class="demo-account-item mb-2">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="badge bg-dark px-3 py-2"><i class="fas fa-crown me-1"></i>Admin</span>
+                            <small class="text-muted">admin@hotel.com / Admin123!</small>
+                        </div>
+                    </div>
+                    <div class="demo-account-item mb-2">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="badge bg-secondary px-3 py-2"><i class="fas fa-user-tie me-1"></i>Staff</span>
+                            <small class="text-muted">staff@hotel.com / Staff123!</small>
+                        </div>
+                    </div>
+                    <div class="demo-account-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="badge bg-info px-3 py-2"><i class="fas fa-user me-1"></i>Guest</span>
+                            <small class="text-muted">user@hotel.com / User123!</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-4">
+                    <p class="mb-0">New to LuxeStay? <a asp-action="Register" class="text-decoration-none fw-semibold text-accent">Create an account</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .demo-accounts {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border: 1px solid #dee2e6;
+    }
+    
+    .demo-account-item {
+        padding: 0.5rem;
+        border-radius: 8px;
+        transition: all 0.3s;
+    }
+    
+    .demo-account-item:hover {
+        background: white;
+        transform: translateX(5px);
+    }
+    
+    .input-group-text {
+        border: 1px solid #ced4da;
+    }
+    
+    .form-control {
+        border: 1px solid #ced4da;
+    }
+</style>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

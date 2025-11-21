@@ -1,0 +1,131 @@
+@model HotelReservation.Core.DTOs.ReservationDetailsDto
+@using HotelReservation.Core.Enums
+@{
+    ViewData["Title"] = "Reservation Details";
+    var isOwner = User.Identity?.Name == Model.UserEmail || User.IsInRole("Admin") || User.IsInRole("Staff");
+}
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card shadow-sm mb-4">
+            <div class="card-header 
+                @(Model.Status == ReservationStatus.Confirmed ? "bg-success text-white" : 
+                  Model.Status == ReservationStatus.Cancelled ? "bg-danger text-white" : 
+                  "bg-warning")">
+                <h3 class="mb-0">
+                    <i class="fas fa-receipt"></i> Reservation #@Model.Id
+                    <span class="badge bg-white text-dark float-end">@Model.StatusName</span>
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <h5><i class="fas fa-hotel"></i> Hotel Information</h5>
+                        <p>
+                            <strong>Name:</strong> @Model.HotelName<br />
+                            <strong>Address:</strong> @Model.HotelAddress
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <h5><i class="fas fa-door-open"></i> Room Information</h5>
+                        <p>
+                            <strong>Room Number:</strong> @Model.RoomNumber<br />
+                            <strong>Room Type:</strong> <span class="badge bg-primary">@Model.RoomType</span><br />
+                            <strong>Price per Night:</strong> $@Model.PricePerNight
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <h5><i class="fas fa-calendar"></i> Reservation Dates</h5>
+                        <p>
+                            <strong>Check-In:</strong> @Model.CheckInDate.ToString("dddd, MMMM dd, yyyy")<br />
+                            <strong>Check-Out:</strong> @Model.CheckOutDate.ToString("dddd, MMMM dd, yyyy")<br />
+                            <strong>Number of Nights:</strong> @Model.NumberOfNights<br />
+                            <strong>Number of Guests:</strong> @Model.NumberOfGuests
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <h5><i class="fas fa-dollar-sign"></i> Price Breakdown</h5>
+                        <p>
+                            $@Model.PricePerNight × @Model.NumberOfNights nights<br />
+                            <strong class="text-success fs-4">Total: $@Model.TotalPrice</strong>
+                        </p>
+                    </div>
+                </div>
+                
+                @if (!string.IsNullOrEmpty(Model.SpecialRequests))
+                {
+                    <div class="mb-4">
+                        <h5><i class="fas fa-comment"></i> Special Requests</h5>
+                        <p class="bg-light p-3 rounded">@Model.SpecialRequests</p>
+                    </div>
+                }
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5><i class="fas fa-user"></i> Guest Information</h5>
+                        <p>
+                            <strong>Name:</strong> @Model.UserName<br />
+                            <strong>Email:</strong> @Model.UserEmail
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <h5><i class="fas fa-clock"></i> Booking Information</h5>
+                        <p>
+                            <strong>Created:</strong> @Model.CreatedAt.ToString("MMM dd, yyyy HH:mm")<br />
+                            @if (Model.UpdatedAt.HasValue)
+                            {
+                                <strong>Last Updated:</strong> @Model.UpdatedAt.Value.ToString("MMM dd, yyyy HH:mm")
+                            }
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="card shadow-sm mb-3">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Actions</h5>
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-2">
+                    @if (isOwner && Model.Status == ReservationStatus.Confirmed && Model.CheckInDate > DateTime.Now)
+                    {
+                        <form asp-action="Cancel" asp-route-id="@Model.Id" method="post" 
+                              onsubmit="return confirm('Are you sure you want to cancel this reservation?');">
+                            <button type="submit" class="btn btn-danger w-100">
+                                <i class="fas fa-times"></i> Cancel Reservation
+                            </button>
+                        </form>
+                    }
+                    
+                    <a asp-controller="Export" asp-action="ReservationPdf" asp-route-id="@Model.Id" 
+                       class="btn btn-outline-primary" target="_blank">
+                        <i class="fas fa-file-pdf"></i> Download PDF
+                    </a>
+                    
+                    @if (User.IsInRole("Admin") || User.IsInRole("Staff"))
+                    {
+                        <a asp-action="Index" class="btn btn-secondary">
+                            <i class="fas fa-list"></i> All Reservations
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-action="MyReservations" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> My Reservations
+                        </a>
+                    }
+                    
+                    <a asp-controller="Hotels" asp-action="Details" asp-route-id="@Model.HotelId" class="btn btn-outline-info">
+                        <i class="fas fa-hotel"></i> View Hotel
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

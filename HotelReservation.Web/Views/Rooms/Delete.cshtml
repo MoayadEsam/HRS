@@ -1,0 +1,51 @@
+@model HotelReservation.Core.DTOs.RoomDetailsDto
+@{
+    ViewData["Title"] = "Delete Room";
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <div class="card shadow border-danger">
+            <div class="card-header bg-danger text-white">
+                <h3 class="mb-0"><i class="fas fa-exclamation-triangle"></i> Delete Room</h3>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-danger">
+                    <i class="fas fa-exclamation-circle"></i> Are you sure you want to delete this room?
+                </div>
+                
+                <dl class="row">
+                    <dt class="col-sm-4">Room Number:</dt>
+                    <dd class="col-sm-8">@Model.RoomNumber</dd>
+                    
+                    <dt class="col-sm-4">Hotel:</dt>
+                    <dd class="col-sm-8">@Model.HotelName</dd>
+                    
+                    <dt class="col-sm-4">Type:</dt>
+                    <dd class="col-sm-8"><span class="badge bg-primary">@Model.TypeName</span></dd>
+                    
+                    <dt class="col-sm-4">Price:</dt>
+                    <dd class="col-sm-8 text-success"><strong>$@Model.PricePerNight /night</strong></dd>
+                    
+                    <dt class="col-sm-4">Floor:</dt>
+                    <dd class="col-sm-8">@Model.FloorNumber</dd>
+                    
+                    <dt class="col-sm-4">Capacity:</dt>
+                    <dd class="col-sm-8">@Model.Capacity guests</dd>
+                </dl>
+                
+                <form asp-action="Delete" method="post">
+                    <input type="hidden" asp-for="Id" />
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-secondary">
+                            <i class="fas fa-times"></i> Cancel
+                        </a>
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fas fa-trash"></i> Confirm Delete
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

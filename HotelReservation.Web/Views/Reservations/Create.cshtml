@@ -1,0 +1,115 @@
+@model HotelReservation.Core.DTOs.ReservationCreateDto
+@{
+    ViewData["Title"] = "Create Reservation";
+    var roomNumber = ViewBag.RoomNumber as string;
+    var hotelName = ViewBag.HotelName as string;
+    var pricePerNight = ViewBag.PricePerNight as decimal?;
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card shadow">
+            <div class="card-header bg-success text-white">
+                <h3 class="mb-0"><i class="fas fa-calendar-check"></i> Create Reservation</h3>
+            </div>
+            <div class="card-body">
+                @if (roomNumber != null && hotelName != null)
+                {
+                    <div class="alert alert-info">
+                        <strong>Room:</strong> @roomNumber | <strong>Hotel:</strong> @hotelName
+                        @if (pricePerNight.HasValue)
+                        {
+                            <text><br /><strong>Price:</strong> $@(pricePerNight.Value) /night</text>
+                        }
+                    </div>
+                }
+                
+                <form asp-action="Create" method="post" id="reservationForm">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                    <input type="hidden" asp-for="RoomId" />
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label asp-for="CheckInDate" class="form-label"></label>
+                            <input asp-for="CheckInDate" class="form-control" type="date" id="checkInDate" />
+                            <span asp-validation-for="CheckInDate" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="CheckOutDate" class="form-label"></label>
+                            <input asp-for="CheckOutDate" class="form-control" type="date" id="checkOutDate" />
+                            <span asp-validation-for="CheckOutDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label asp-for="NumberOfGuests" class="form-label"></label>
+                        <input asp-for="NumberOfGuests" class="form-control" type="number" min="1" max="10" value="1" />
+                        <span asp-validation-for="NumberOfGuests" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label asp-for="SpecialRequests" class="form-label"></label>
+                        <textarea asp-for="SpecialRequests" class="form-control" rows="3" placeholder="Any special requests or requirements..."></textarea>
+                        <span asp-validation-for="SpecialRequests" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="card bg-light mb-3" id="priceCalculation" style="display:none;">
+                        <div class="card-body">
+                            <h5>Price Summary</h5>
+                            <p>
+                                <strong>Number of Nights:</strong> <span id="numberOfNights">0</span><br />
+                                <strong>Price per Night:</strong> $<span id="pricePerNight">@pricePerNight</span><br />
+                                <strong class="text-success fs-4">Total Price:</strong> <strong class="text-success fs-4">$<span id="totalPrice">0</span></strong>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a asp-controller="Rooms" asp-action="Search" class="btn btn-secondary">
+                            <i class="fas fa-times"></i> Cancel
+                        </a>
+                        <button type="submit" class="btn btn-success btn-lg">
+                            <i class="fas fa-calendar-check"></i> Confirm Reservation
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function() {
+            const pricePerNight = @(pricePerNight ?? 0);
+            
+            // Set minimum dates
+            const today = new Date().toISOString().split('T')[0];
+            $('#checkInDate').attr('min', today);
+            $('#checkOutDate').attr('min', today);
+            
+            function calculatePrice() {
+                const checkIn = new Date($('#checkInDate').val());
+                const checkOut = new Date($('#checkOutDate').val());
+                
+                if (checkIn && checkOut && checkOut > checkIn) {
+                    const nights = Math.ceil((checkOut - checkIn) / (1000 * 60 * 60 * 24));
+                    const total = nights * pricePerNight;
+                    
+                    $('#numberOfNights').text(nights);
+                    $('#totalPrice').text(total.toFixed(2));
+                    $('#priceCalculation').show();
+                } else {
+                    $('#priceCalculation').hide();
+                }
+            }
+            
+            $('#checkInDate, #checkOutDate').on('change', calculatePrice);
+            
+            $('#checkInDate').on('change', function() {
+                $('#checkOutDate').attr('min', $(this).val());
+            });
+        });
+    </script>
+}

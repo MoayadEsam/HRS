@@ -1,0 +1,338 @@
+Perfect — since Claude **inside VS Code** can *create files, edit folders, scaffold projects, write code, delete files, rename*, etc., the prompt should be written specifically for that environment.
+
+Here is a **clean, powerful, VS-Code-optimized prompt** you can paste into Claude. It tells Claude exactly *how* to behave, *how* to create the project, *how* to structure files*,* and what to generate step-by-step.
+
+This is the best version for high accuracy.
+
+---
+
+# ✅ **FINAL PROMPT FOR CLAUDE (VS CODE PROJECT CREATOR MODE)**
+
+Copy-paste everything below into Claude:
+
+---
+
+**You are my senior full-stack developer assistant.
+You have full access to the VS Code workspace.
+Your job is to create an entire ASP.NET MVC hotel reservation system project step-by-step, writing all files in the correct folders, following SOLID, and fulfilling all assignment requirements.**
+
+## 🎯 **Your Task**
+
+Create a complete **Hotel Reservation System** using:
+
+* **ASP.NET Core MVC**
+* **Entity Framework Core**
+* **SQLite database** (local, embedded)
+* **HTML + CSS + JavaScript + Bootstrap**
+* **Layered Architecture**
+* **SOLID Principles**
+
+Act like you are coding the entire project from scratch in this VS Code workspace.
+
+---
+
+# 🧱 **ARCHITECTURE REQUIREMENTS**
+
+Follow this exact structure:
+
+```
+HotelReservation/
+  HotelReservation.Web/        → MVC project (Controllers / Views / wwwroot)
+  HotelReservation.Core/       → Domain Models / DTOs
+  HotelReservation.Data/       → DbContext / Repositories / EF migrations
+  HotelReservation.Services/   → Business logic services
+  HotelReservation.Tests/      → xUnit tests
+```
+
+Use:
+
+* Controllers → call → Services → call → Repositories → call → DbContext
+* Use **DTOs** (never pass EF entities to views)
+* Use **AutoMapper** in the Service layer
+* Use **dependency injection** everywhere
+
+---
+
+# 🔐 **AUTHENTICATION & AUTHORIZATION**
+
+Implement **ASP.NET Identity** with cookie auth.
+
+Seed default roles and users:
+
+```
+Admin:    admin@example.com / Admin123!
+Staff:    staff@example.com / Staff123!
+User:     user@example.com / User123!
+```
+
+Roles:
+
+* Admin
+* Staff
+* User
+
+Permissions:
+
+* Admin → full CRUD on hotels, rooms, amenities
+* Staff → manage reservations
+* User → create reservations only
+
+---
+
+# 🗄️ **DATABASE SCHEMA**
+
+Create models inside **HotelReservation.Core**:
+
+### Hotel
+
+1 — N Rooms
+
+### Room
+
+N — N Amenities
+1 — N Reservations
+
+### Reservation (linked to User + Room)
+
+### Amenity
+
+Join table: RoomAmenity(RoomId, AmenityId)
+
+---
+
+# 🧩 **FEATURE REQUIREMENTS**
+
+Claude must create these features:
+
+### CRUD Pages
+
+* Hotels
+* Rooms
+* Amenities
+* Reservations
+
+### Search & Filtering
+
+* Room filtering by:
+
+  * hotel
+  * date availability
+  * price range
+  * type
+  * capacity
+
+### Reporting (Export)
+
+Create **1 CSV export** and **1 PDF export** page:
+
+* Export reservations to CSV
+* Export rooms or reservations to PDF
+
+### Validation
+
+Use:
+
+* DataAnnotations
+* Client-side validation (unobtrusive)
+
+### Logging (Optional but recommended)
+
+Create a table **AuditLogs** or log using ILogger.
+Log: user, action, timestamp, entity.
+
+---
+
+# 📑 **WHAT YOU MUST DO IN ORDER, STEP-BY-STEP**
+
+Claude, follow this sequence and do NOT skip steps:
+
+---
+
+## **STEP 1 — Scaffold full solution**
+
+Create all folders + `.sln` + all projects.
+Set references between projects.
+
+---
+
+## **STEP 2 — Install all dependencies**
+
+* EF Core
+* EF Core SQLite
+* ASP.NET Identity
+* AutoMapper
+* QuestPDF or DinkToPdf
+* xUnit + Moq
+
+Claude must add all package references into each `.csproj`.
+
+---
+
+## **STEP 3 — Create all domain models**
+
+Inside `HotelReservation.Core/Models/`
+Create models:
+
+* Hotel
+* Room
+* Amenity
+* RoomAmenity
+* Reservation
+* ApplicationUser
+
+Also create:
+
+* Enums
+* DTOs (Create / Update / List types)
+
+---
+
+## **STEP 4 — Create DbContext**
+
+Inside `HotelReservation.Data`:
+
+* Create `ApplicationDbContext`
+* Configure all relations with Fluent API
+* Seed data (hotels, rooms, amenities)
+
+Add `DbInitializer` to create roles + seed users.
+
+---
+
+## **STEP 5 — Repository Layer**
+
+Implement:
+
+* `IGenericRepository<T>`
+* `IHotelRepository`, `IRoomRepository`, etc.
+* Use async EF methods
+* Add Unit of Work if necessary
+
+---
+
+## **STEP 6 — Service Layer**
+
+Create:
+
+* hotel service
+* room service
+* reservation service
+* amenity service
+* user service
+
+Add room availability algorithm:
+
+```
+room is unavailable if existing reservation overlaps
+NOT (existing.End <= start OR existing.Start >= end)
+```
+
+---
+
+## **STEP 7 — Controllers**
+
+Create fully working controllers with actions:
+
+### HotelsController
+
+(Admin only)
+
+### RoomsController
+
+(Admin create/edit/delete)
+(User → only view/booking)
+
+### ReservationsController
+
+(User: create/cancel)
+(Admin/Staff: manage)
+
+### AccountController
+
+(register/login/logout)
+
+Use DTOs + mapping.
+
+---
+
+## **STEP 8 — Views (Razor)**
+
+Create these pages with Bootstrap:
+
+* Hotels: List, Create, Edit, Delete
+* Rooms: List, Details, Filter UI
+* Reservations: Create, List, Details
+* Account: Register, Login
+* Shared: Layout, NavBar (shows role-based links)
+
+---
+
+## **STEP 9 — Export (CSV + PDF)**
+
+Implement:
+
+### CSV:
+
+* Return file with "text/csv"
+
+### PDF:
+
+* Using QuestPDF or DinkToPdf
+* Export reservation report
+
+Claude must create:
+
+* PDF template view
+* PDF generator service
+
+---
+
+## **STEP 10 — Validation & Error Handling**
+
+Add DataAnnotations + custom validation attributes.
+
+Add global exception handler middleware.
+
+---
+
+## **STEP 11 — Unit Tests**
+
+Using xUnit + Moq:
+
+* Test room availability
+* Test price calculation
+* Test reservation creation logic
+
+---
+
+## **STEP 12 — Final README.md**
+
+Claude must generate a full README with:
+
+* Setup instructions
+* How to run
+* Migration commands
+* Default login credentials
+* Project description
+* ERD
+* Folder structure
+
+---
+
+# 🧨 **RULES FOR CLAUDE**
+
+Claude must follow these rules:
+
+1. **Always create/edit files directly inside VS Code using file operations.**
+2. **Never output incomplete code** — always full files.
+3. **Ask before overwriting existing files.**
+4. **For every step, create ALL required files.**
+5. **Do not skip to next step until previous is fully implemented.**
+6. **Explain what you created after each step.**
+
+---
+
+# 🚀 **START NOW**
+
+
+?

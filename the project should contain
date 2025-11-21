@@ -1,0 +1,19 @@
+
+
+Proje içerisinde dikkat edeceğimiz hususlar;
+
+    Authentication & Authorization
+    Kullanıcı kayıt, giriş, çıkış (Session veya JWT vs.).
+    Kullanıcı rolleri (Admin, User, belki Staff).
+    Yetkiye göre sayfa/görev kısıtlaması.
+    CRUD İşlemleri (Create, Read, Update, Delete işlemleri.)
+    Validation & Error Handling
+    Form girişlerinde zorunlu alan, e-mail formatı, tarih kontrolleri vb.
+    Hatalı girişlerde kullanıcıya uygun hata mesajı.
+    Arama / Filtreleme / Listeleme
+    Listeleme sayfalarında arama kutusu veya filtre (tarihe, kategoriye göre).
+    Raporlama / Export (En az 1 ekran çıktısının PDF, Excel veya CSV alınabilmesi gibi)
+    Responsive Arayüz (Bootstrap veya benzeri ile mobil/tablet uyumlu olması.)
+    Database İlişkileri (En az 2-3 tablo arası ilişki (1-N, N-N))
+    Logging / History (opsiyonel ama olsa iyi olur)
+

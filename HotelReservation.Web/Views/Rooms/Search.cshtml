@@ -1,0 +1,127 @@
+@model IEnumerable<HotelReservation.Core.DTOs.RoomListDto>
+@using HotelReservation.Core.Enums
+@{
+    ViewData["Title"] = "Find Your Perfect Room";
+}
+
+<div class="page-header text-center mb-5">
+    <h1 class="display-4 mb-3"><i class="fas fa-search me-3"></i>Find Your Perfect Room</h1>
+    <p class="lead text-muted">Search through our luxury accommodations</p>
+</div>
+
+<div class="card border-0 shadow-premium mb-5">
+    <div class="card-body p-4">
+        <form asp-action="Search" method="get">
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <label class="form-label">Check-In Date</label>
+                    <input type="date" name="CheckInDate" class="form-control" value="@ViewBag.CheckInDate" />
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Check-Out Date</label>
+                    <input type="date" name="CheckOutDate" class="form-control" value="@ViewBag.CheckOutDate" />
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Min Price</label>
+                    <input type="number" name="MinPrice" class="form-control" placeholder="0" step="0.01" value="@ViewBag.MinPrice" />
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Max Price</label>
+                    <input type="number" name="MaxPrice" class="form-control" placeholder="1000" step="0.01" value="@ViewBag.MaxPrice" />
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Room Type</label>
+                    <select name="Type" class="form-select">
+                        <option value="">All Types</option>
+                        @foreach (RoomType type in Enum.GetValues(typeof(RoomType)))
+                        {
+                            <option value="@type">@type</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-12 d-flex gap-2">
+                    <button type="submit" class="btn btn-hero px-4 py-2">
+                        <i class="fas fa-search me-2"></i>Search
+                    </button>
+                    <a asp-action="Search" class="btn btn-outline-secondary px-4 py-2">
+                        <i class="fas fa-redo me-2"></i>Reset
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@if (Model != null && Model.Any())
+{
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="mb-0">Available Rooms</h3>
+        <span class="badge bg-accent text-dark fs-6 px-3 py-2">@Model.Count() rooms found</span>
+    </div>
+    <div class="row g-4">
+        @foreach (var room in Model)
+        {
+            <div class="col-lg-4 col-md-6">
+                <div class="hotel-card">
+                    <div class="hotel-card-image" style="background: linear-gradient(135deg, rgba(26, 26, 46, 0.7), rgba(22, 33, 62, 0.7)), url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80') center/cover;">
+                        <div class="hotel-badge">
+                            @if (room.IsAvailable)
+                            {
+                                <text><i class="fas fa-check-circle me-1"></i>Available</text>
+                            }
+                            else
+                            {
+                                <text><i class="fas fa-times-circle me-1"></i>Booked</text>
+                            }
+                        </div>
+                    </div>
+                    <div class="hotel-card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h5 class="hotel-card-title mb-0">Room @room.RoomNumber</h5>
+                            <span class="badge bg-dark">Floor @room.FloorNumber</span>
+                        </div>
+                        <p class="hotel-location mb-2">
+                            <i class="fas fa-building me-2"></i>@room.HotelName
+                        </p>
+                        <div class="mb-3">
+                            <span class="badge bg-primary me-1"><i class="fas fa-bed me-1"></i>@room.TypeName</span>
+                            <span class="badge bg-info"><i class="fas fa-users me-1"></i>@room.Capacity guests</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div>
+                                <span class="text-accent fw-bold fs-4">$@room.PricePerNight</span>
+                                <small class="text-muted">/night</small>
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <a asp-action="Details" asp-route-id="@room.Id" class="btn btn-premium btn-sm">
+                                View Details <i class="fas fa-arrow-right ms-2"></i>
+                            </a>
+                            @if (User.Identity?.IsAuthenticated ?? false)
+                            {
+                                @if (room.IsAvailable)
+                                {
+                                    <a asp-controller="Reservations" asp-action="Create" asp-route-roomId="@room.Id" class="btn btn-hero btn-sm">
+                                        <i class="fas fa-calendar-check me-2"></i>Book Now
+                                    </a>
+                                }
+                            }
+                            else
+                            {
+                                <a asp-controller="Account" asp-action="Login" class="btn btn-outline-dark btn-sm">
+                                    <i class="fas fa-sign-in-alt me-2"></i>Login to Book
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else if (ViewBag.Searched == true)
+{
+    <div class="alert alert-info">
+        <i class="fas fa-info-circle"></i> No rooms found matching your criteria. Try adjusting your search filters.
+    </div>
+}

@@ -1,0 +1,120 @@
+@model HotelReservation.Core.DTOs.HotelDetailsDto
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">
+                    <i class="fas fa-hotel"></i> @Model.Name
+                    <span class="text-warning float-end">
+                        @for (int i = 0; i < Model.StarRating; i++)
+                        {
+                            <i class="fas fa-star"></i>
+                        }
+                    </span>
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <p><strong><i class="fas fa-map-marker-alt text-danger"></i> Address:</strong><br />@Model.Address</p>
+                        <p><strong><i class="fas fa-city"></i> City:</strong> @Model.City</p>
+                        <p><strong><i class="fas fa-flag"></i> Country:</strong> @Model.Country</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong><i class="fas fa-phone"></i> Phone:</strong> @Model.PhoneNumber</p>
+                        <p><strong><i class="fas fa-envelope"></i> Email:</strong> @Model.Email</p>
+                        <p><strong><i class="fas fa-bed"></i> Total Rooms:</strong> @Model.Rooms.Count</p>
+                    </div>
+                </div>
+                
+                @if (!string.IsNullOrEmpty(Model.Description))
+                {
+                    <div class="mt-3">
+                        <h5>About</h5>
+                        <p>@Model.Description</p>
+                    </div>
+                }
+            </div>
+        </div>
+
+        @if (Model.Rooms != null && Model.Rooms.Any())
+        {
+            <div class="card shadow-sm">
+                <div class="card-header bg-secondary text-white">
+                    <h4 class="mb-0"><i class="fas fa-door-open"></i> Available Rooms</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        @foreach (var room in Model.Rooms)
+                        {
+                            <div class="col-md-6 mb-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Room @room.RoomNumber</h6>
+                                        <p class="card-text">
+                                            <span class="badge bg-primary">@room.TypeName</span>
+                                            <span class="badge bg-info text-dark">Capacity: @room.Capacity</span><br />
+                                            <strong class="text-success">$@room.PricePerNight / night</strong>
+                                        </p>
+                                        <a asp-controller="Rooms" asp-action="Details" asp-route-id="@room.Id" class="btn btn-sm btn-primary">
+                                            View Details
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="col-lg-4">
+        <div class="card shadow-sm mb-3">
+            <div class="card-body text-center">
+                <a asp-controller="Rooms" asp-action="Search" class="btn btn-success btn-lg w-100">
+                    <i class="fas fa-search"></i> Search Available Rooms
+                </a>
+            </div>
+        </div>
+
+        @if (User.IsInRole("Admin"))
+        {
+            <div class="card shadow-sm">
+                <div class="card-header bg-warning">
+                    <h5 class="mb-0">Admin Actions</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+                            <i class="fas fa-edit"></i> Edit Hotel
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">
+                            <i class="fas fa-trash"></i> Delete Hotel
+                        </a>
+                        <a asp-controller="Rooms" asp-action="Create" asp-route-hotelId="@Model.Id" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Add Room
+                        </a>
+                        <a asp-action="Index" class="btn btn-secondary">
+                            <i class="fas fa-list"></i> Back to List
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <a asp-action="Index" class="btn btn-secondary w-100">
+                        <i class="fas fa-arrow-left"></i> Back to Hotels
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+</div>

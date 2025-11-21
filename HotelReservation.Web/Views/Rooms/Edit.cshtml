@@ -1,0 +1,118 @@
+@model HotelReservation.Core.DTOs.RoomUpdateDto
+@using HotelReservation.Core.Enums
+@{
+    ViewData["Title"] = "Edit Room";
+    var hotels = ViewBag.Hotels as IEnumerable<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem>;
+    var amenities = ViewBag.Amenities as IEnumerable<HotelReservation.Core.DTOs.AmenityListDto>;
+    var selectedAmenityIds = ViewBag.SelectedAmenityIds as List<int>;
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card shadow">
+            <div class="card-header bg-warning">
+                <h3 class="mb-0"><i class="fas fa-edit"></i> Edit Room</h3>
+            </div>
+            <div class="card-body">
+                <form asp-action="Edit" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                    <input type="hidden" asp-for="Id" />
+                    
+                    <div class="mb-3">
+                        <label asp-for="HotelId" class="form-label"></label>
+                        <select asp-for="HotelId" class="form-select" asp-items="hotels">
+                            <option value="">-- Select Hotel --</option>
+                        </select>
+                        <span asp-validation-for="HotelId" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label asp-for="RoomNumber" class="form-label"></label>
+                            <input asp-for="RoomNumber" class="form-control" />
+                            <span asp-validation-for="RoomNumber" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="FloorNumber" class="form-label"></label>
+                            <input asp-for="FloorNumber" class="form-control" type="number" min="0" />
+                            <span asp-validation-for="FloorNumber" class="text-danger"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label asp-for="Type" class="form-label"></label>
+                            <select asp-for="Type" class="form-select">
+                                @foreach (RoomType type in Enum.GetValues(typeof(RoomType)))
+                                {
+                                    <option value="@type">@type</option>
+                                }
+                            </select>
+                            <span asp-validation-for="Type" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Capacity" class="form-label"></label>
+                            <input asp-for="Capacity" class="form-control" type="number" min="1" max="10" />
+                            <span asp-validation-for="Capacity" class="text-danger"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label asp-for="PricePerNight" class="form-label"></label>
+                            <input asp-for="PricePerNight" class="form-control" type="number" step="0.01" min="0.01" />
+                            <span asp-validation-for="PricePerNight" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check mt-4">
+                                <input asp-for="IsAvailable" class="form-check-input" />
+                                <label asp-for="IsAvailable" class="form-check-label"></label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label asp-for="Description" class="form-label"></label>
+                        <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    
+                    @if (amenities != null && amenities.Any())
+                    {
+                        <div class="mb-3">
+                            <label class="form-label">Amenities</label>
+                            <div class="row">
+                                @foreach (var amenity in amenities.Where(a => a.IsActive))
+                                {
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input type="checkbox" name="AmenityIds" value="@amenity.Id" 
+                                                   class="form-check-input" id="amenity_@amenity.Id"
+                                                   @(selectedAmenityIds != null && selectedAmenityIds.Contains(amenity.Id) ? "checked" : "") />
+                                            <label class="form-check-label" for="amenity_@amenity.Id">
+                                                @amenity.Name
+                                            </label>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-secondary">
+                            <i class="fas fa-times"></i> Cancel
+                        </a>
+                        <button type="submit" class="btn btn-warning">
+                            <i class="fas fa-save"></i> Save Changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

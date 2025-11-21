@@ -1,0 +1,138 @@
+@model HotelReservation.Core.DTOs.RoomDetailsDto
+@{
+    ViewData["Title"] = "Room Details";
+}
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">
+                    <i class="fas fa-door-open"></i> Room @Model.RoomNumber
+                    @if (Model.IsAvailable)
+                    {
+                        <span class="badge bg-success float-end">Available</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger float-end">Booked</span>
+                    }
+                </h3>
+            </div>
+            <div class="card-body">
+                <h5 class="text-muted mb-3">
+                    <i class="fas fa-hotel"></i> @Model.HotelName
+                </h5>
+                
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <p><strong>Room Type:</strong> <span class="badge bg-primary">@Model.TypeName</span></p>
+                        <p><strong>Capacity:</strong> <span class="badge bg-info text-dark"><i class="fas fa-users"></i> @Model.Capacity guests</span></p>
+                        <p><strong>Floor:</strong> Floor @Model.FloorNumber</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Price Per Night:</strong></p>
+                        <h2 class="text-success">$@Model.PricePerNight</h2>
+                    </div>
+                </div>
+                
+                @if (!string.IsNullOrEmpty(Model.Description))
+                {
+                    <div class="mb-4">
+                        <h5>Description</h5>
+                        <p>@Model.Description</p>
+                    </div>
+                }
+                
+                @if (Model.Amenities != null && Model.Amenities.Any())
+                {
+                    <div>
+                        <h5><i class="fas fa-concierge-bell"></i> Amenities</h5>
+                        <div class="row">
+                            @foreach (var amenity in Model.Amenities)
+                            {
+                                <div class="col-md-6 mb-2">
+                                    <span class="badge bg-secondary">
+                                        @amenity.Name
+                                    </span>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        @if (Model.IsAvailable && (User.Identity?.IsAuthenticated ?? false))
+        {
+            <div class="card shadow-sm mb-3">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Book This Room</h5>
+                </div>
+                <div class="card-body">
+                    <form asp-controller="Reservations" asp-action="Create" method="get">
+                        <input type="hidden" name="roomId" value="@Model.Id" />
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success btn-lg">
+                                <i class="fas fa-calendar-check"></i> Book Now
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        }
+        else if (!Model.IsAvailable)
+        {
+            <div class="alert alert-warning">
+                <i class="fas fa-exclamation-triangle"></i> This room is currently booked.
+            </div>
+        }
+        else
+        {
+            <div class="card shadow-sm mb-3">
+                <div class="card-body">
+                    <a asp-controller="Account" asp-action="Login" class="btn btn-primary btn-lg w-100">
+                        <i class="fas fa-sign-in-alt"></i> Login to Book
+                    </a>
+                </div>
+            </div>
+        }
+
+        @if (User.IsInRole("Admin"))
+        {
+            <div class="card shadow-sm">
+                <div class="card-header bg-warning">
+                    <h5 class="mb-0">Admin Actions</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+                            <i class="fas fa-edit"></i> Edit Room
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">
+                            <i class="fas fa-trash"></i> Delete Room
+                        </a>
+                        <a asp-controller="Hotels" asp-action="Details" asp-route-id="@Model.HotelId" class="btn btn-secondary">
+                            <i class="fas fa-hotel"></i> View Hotel
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <a asp-action="Search" class="btn btn-secondary w-100 mb-2">
+                        <i class="fas fa-search"></i> Back to Search
+                    </a>
+                    <a asp-controller="Hotels" asp-action="Details" asp-route-id="@Model.HotelId" class="btn btn-outline-primary w-100">
+                        <i class="fas fa-hotel"></i> View Hotel
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+</div>

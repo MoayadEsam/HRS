@@ -1,0 +1,15 @@
+C:\Users\Administrator\HRS\HotelReservation.Data\bin\Debug\net9.0\HotelReservation.Data.deps.json
+C:\Users\Administrator\HRS\HotelReservation.Data\bin\Debug\net9.0\HotelReservation.Data.dll
+C:\Users\Administrator\HRS\HotelReservation.Data\bin\Debug\net9.0\HotelReservation.Data.pdb
+C:\Users\Administrator\HRS\HotelReservation.Data\bin\Debug\net9.0\HotelReservation.Core.dll
+C:\Users\Administrator\HRS\HotelReservation.Data\bin\Debug\net9.0\HotelReservation.Core.pdb
+C:\Users\Administrator\HRS\HotelReservation.Data\obj\Debug\net9.0\HotelReservation.Data.csproj.AssemblyReference.cache
+C:\Users\Administrator\HRS\HotelReservation.Data\obj\Debug\net9.0\HotelReservation.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Administrator\HRS\HotelReservation.Data\obj\Debug\net9.0\HotelReservation.Data.AssemblyInfoInputs.cache
+C:\Users\Administrator\HRS\HotelReservation.Data\obj\Debug\net9.0\HotelReservation.Data.AssemblyInfo.cs
+C:\Users\Administrator\HRS\HotelReservation.Data\obj\Debug\net9.0\HotelReservation.Data.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\HRS\HotelReservation.Data\obj\Debug\net9.0\HotelRes.CD0F44D3.Up2Date
+C:\Users\Administrator\HRS\HotelReservation.Data\obj\Debug\net9.0\HotelReservation.Data.dll
+C:\Users\Administrator\HRS\HotelReservation.Data\obj\Debug\net9.0\refint\HotelReservation.Data.dll
+C:\Users\Administrator\HRS\HotelReservation.Data\obj\Debug\net9.0\HotelReservation.Data.pdb
+C:\Users\Administrator\HRS\HotelReservation.Data\obj\Debug\net9.0\ref\HotelReservation.Data.dll
