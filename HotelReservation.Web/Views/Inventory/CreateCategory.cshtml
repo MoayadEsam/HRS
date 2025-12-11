@@ -1,0 +1,50 @@
+@model HotelReservation.Core.DTOs.InventoryCategoryCreateDto
+@inject IStringLocalizer<SharedResource> Localizer
+
+@{
+    ViewData["Title"] = Localizer["AddCategory"];
+}
+
+<div class="container-fluid py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-plus-circle me-2"></i>@Localizer["AddCategory"]
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="CreateCategory" method="post">
+                        @Html.AntiForgeryToken()
+                        
+                        <div class="mb-3">
+                            <label asp-for="Name" class="form-label">@Localizer["Name"] <span class="text-danger">*</span></label>
+                            <input asp-for="Name" class="form-control" placeholder="@Localizer["EnterCategoryName"]" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label asp-for="Description" class="form-label">@Localizer["Description"]</label>
+                            <textarea asp-for="Description" class="form-control" rows="3" placeholder="@Localizer["EnterDescription"]"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between mt-4">
+                            <a asp-action="Categories" class="btn btn-outline-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>@Localizer["Cancel"]
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-2"></i>@Localizer["Save"]
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

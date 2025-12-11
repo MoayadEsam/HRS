@@ -1,0 +1,28 @@
+@inject IStringLocalizer<SharedResource> Localizer
+
+@{
+    ViewData["Title"] = Localizer["AccountNotLinked"];
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow text-center">
+                <div class="card-body p-5">
+                    <i class="fas fa-user-slash fa-5x text-warning mb-4"></i>
+                    <h2 class="card-title mb-3">@Localizer["AccountNotLinked"]</h2>
+                    <p class="text-muted mb-4">
+                        @Localizer["AccountNotLinkedMessage"]
+                    </p>
+                    <hr class="my-4">
+                    <p class="text-muted small">
+                        @Localizer["ContactAdminMessage"]
+                    </p>
+                    <a asp-controller="Home" asp-action="Index" class="btn btn-primary mt-3">
+                        <i class="fas fa-home me-2"></i>@Localizer["BackToHome"]
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

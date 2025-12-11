@@ -11,6 +11,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
 
+// Enable legacy timestamp behavior for Npgsql to handle DateTime with Local kind
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Configure Localization
@@ -36,11 +39,9 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     options.RequestCultureProviders.Insert(0, new CookieRequestCultureProvider());
 });
 
-// Configure DbContext
-var dbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "hotelreservation.db");
+// Configure DbContext with PostgreSQL
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection") 
-        ?? $"Data Source={dbPath}"));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Configure Identity
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
@@ -76,6 +77,28 @@ builder.Services.AddScoped<IHotelService, HotelService>();
 builder.Services.AddScoped<IRoomService, RoomService>();
 builder.Services.AddScoped<IAmenityService, AmenityService>();
 builder.Services.AddScoped<IReservationService, ReservationService>();
+
+// Register Staff Services
+builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+builder.Services.AddScoped<ISalaryService, SalaryService>();
+builder.Services.AddScoped<IAttendanceService, AttendanceService>();
+
+// Register Finance Services
+builder.Services.AddScoped<IExpenseCategoryService, ExpenseCategoryService>();
+builder.Services.AddScoped<IExpenseService, ExpenseService>();
+builder.Services.AddScoped<IIncomeService, IncomeService>();
+builder.Services.AddScoped<IFinancialReportService, FinancialReportService>();
+
+// Register Inventory Services
+builder.Services.AddScoped<IInventoryCategoryService, InventoryCategoryService>();
+builder.Services.AddScoped<IInventoryService, InventoryItemService>();
+
+// Register Memory Cache for Dashboard Performance
+builder.Services.AddMemoryCache();
+
+// Register Dashboard Service
+builder.Services.AddScoped<IDashboardService, DashboardService>();
 
 // Configure QuestPDF License
 QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;

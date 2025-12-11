@@ -1,0 +1,60 @@
+@model HotelReservation.Core.DTOs.ExpenseCategoryCreateDto
+@inject IStringLocalizer<SharedResource> Localizer
+
+@{
+    ViewData["Title"] = Localizer["AddExpenseCategory"];
+}
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-plus me-2"></i>@Localizer["AddExpenseCategory"]
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="CreateExpenseCategory" method="post">
+                        @Html.AntiForgeryToken()
+
+                        <div class="mb-3">
+                            <label asp-for="Name" class="form-label">@Localizer["CategoryName"] <span class="text-danger">*</span></label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Description" class="form-label">@Localizer["Description"]</label>
+                            <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Budget" class="form-label">@Localizer["MonthlyBudget"]</label>
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input asp-for="Budget" class="form-control" type="number" step="0.01" value="0" />
+                            </div>
+                            <small class="text-muted">@Localizer["BudgetHelp"]</small>
+                            <span asp-validation-for="Budget" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a asp-action="ExpenseCategories" class="btn btn-outline-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>@Localizer["Cancel"]
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-2"></i>@Localizer["Save"]
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,650 @@
+@{
+    ViewData["Title"] = Localizer["Management"];
+}
+
+@inject IStringLocalizer<SharedResource> Localizer
+
+<div class="management-hub">
+    <!-- Page Header -->
+    <div class="management-header text-center">
+        <div class="container">
+            <h1 class="management-title">
+                <i class="fas fa-crown"></i>
+                @Localizer["Management"]
+            </h1>
+            <p class="management-subtitle">@Localizer["ManagementHubDescription", "Access all management features from one place"]</p>
+        </div>
+    </div>
+
+    <div class="container py-5">
+        <!-- Quick Access Cards -->
+        <div class="row g-4 mb-5">
+            @if (User.IsInRole("Admin"))
+            {
+                <!-- Dashboard Card -->
+                <div class="col-md-6">
+                    <a asp-controller="AdminDashboard" asp-action="Index" class="management-card-link">
+                        <div class="quick-access-card dashboard-card">
+                            <div class="quick-access-icon">
+                                <i class="fas fa-tachometer-alt"></i>
+                            </div>
+                            <div class="quick-access-content">
+                                <h3>@Localizer["Dashboard"]</h3>
+                                <p>@Localizer["DashboardDescription", "View analytics, statistics and reports"]</p>
+                            </div>
+                            <div class="quick-access-arrow">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+
+            <!-- Reservations Card -->
+            <div class="col-md-6">
+                <a asp-controller="Reservations" asp-action="Index" class="management-card-link">
+                    <div class="quick-access-card reservations-card">
+                        <div class="quick-access-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="quick-access-content">
+                            <h3>@Localizer["Reservations"]</h3>
+                            <p>@Localizer["ReservationsDescription", "Manage bookings, check-ins and check-outs"]</p>
+                        </div>
+                        <div class="quick-access-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        @if (User.IsInRole("Admin"))
+        {
+            <!-- Hotel Management Section -->
+            <div class="management-section">
+                <div class="section-header-modern">
+                    <div class="section-icon hotel-icon">
+                        <i class="fas fa-hotel"></i>
+                    </div>
+                    <h2>@Localizer["HotelManagement"]</h2>
+                </div>
+                
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4">
+                        <a asp-controller="Hotels" asp-action="Create" class="management-card-link">
+                            <div class="feature-management-card">
+                                <div class="feature-icon-wrapper blue">
+                                    <i class="fas fa-plus-circle"></i>
+                                </div>
+                                <h4>@Localizer["AddHotel"]</h4>
+                                <p>@Localizer["AddHotelDescription", "Add a new hotel property"]</p>
+                                <span class="card-action">@Localizer["GoTo", "Go"] <i class="fas fa-chevron-right"></i></span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4">
+                        <a asp-controller="Rooms" asp-action="Create" class="management-card-link">
+                            <div class="feature-management-card">
+                                <div class="feature-icon-wrapper teal">
+                                    <i class="fas fa-door-open"></i>
+                                </div>
+                                <h4>@Localizer["AddRoom"]</h4>
+                                <p>@Localizer["AddRoomDescription", "Add rooms to hotels"]</p>
+                                <span class="card-action">@Localizer["GoTo", "Go"] <i class="fas fa-chevron-right"></i></span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4">
+                        <a asp-controller="Amenities" asp-action="Index" class="management-card-link">
+                            <div class="feature-management-card">
+                                <div class="feature-icon-wrapper indigo">
+                                    <i class="fas fa-concierge-bell"></i>
+                                </div>
+                                <h4>@Localizer["Amenities"]</h4>
+                                <p>@Localizer["AmenitiesDescription", "Manage room amenities"]</p>
+                                <span class="card-action">@Localizer["GoTo", "Go"] <i class="fas fa-chevron-right"></i></span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Staff Management Section -->
+            <div class="management-section">
+                <div class="section-header-modern">
+                    <div class="section-icon staff-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h2>@Localizer["StaffManagement"]</h2>
+                </div>
+                
+                <div class="row g-4">
+                    <div class="col-6 col-lg-3">
+                        <a asp-controller="Staff" asp-action="Departments" class="management-card-link">
+                            <div class="feature-management-card compact">
+                                <div class="feature-icon-wrapper orange">
+                                    <i class="fas fa-building"></i>
+                                </div>
+                                <h4>@Localizer["Departments"]</h4>
+                                <p>@Localizer["DepartmentsDescription", "Manage departments"]</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-6 col-lg-3">
+                        <a asp-controller="Staff" asp-action="Employees" class="management-card-link">
+                            <div class="feature-management-card compact">
+                                <div class="feature-icon-wrapper amber">
+                                    <i class="fas fa-user-tie"></i>
+                                </div>
+                                <h4>@Localizer["Employees"]</h4>
+                                <p>@Localizer["EmployeesDescription", "Manage staff members"]</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-6 col-lg-3">
+                        <a asp-controller="Staff" asp-action="Salaries" class="management-card-link">
+                            <div class="feature-management-card compact">
+                                <div class="feature-icon-wrapper green">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                </div>
+                                <h4>@Localizer["Salaries"]</h4>
+                                <p>@Localizer["SalariesDescription", "Process payroll"]</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-6 col-lg-3">
+                        <a asp-controller="Staff" asp-action="Attendance" class="management-card-link">
+                            <div class="feature-management-card compact">
+                                <div class="feature-icon-wrapper rose">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <h4>@Localizer["Attendance"]</h4>
+                                <p>@Localizer["AttendanceDescription", "Track attendance"]</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Finance Management Section -->
+            <div class="management-section">
+                <div class="section-header-modern">
+                    <div class="section-icon finance-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h2>@Localizer["FinanceManagement"]</h2>
+                </div>
+                
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4">
+                        <a asp-controller="Finance" asp-action="Expenses" class="management-card-link">
+                            <div class="feature-management-card">
+                                <div class="feature-icon-wrapper red">
+                                    <i class="fas fa-file-invoice-dollar"></i>
+                                </div>
+                                <h4>@Localizer["Expenses"]</h4>
+                                <p>@Localizer["ExpensesDescription", "Track expenses"]</p>
+                                <span class="card-action">@Localizer["GoTo", "Go"] <i class="fas fa-chevron-right"></i></span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4">
+                        <a asp-controller="Finance" asp-action="Income" class="management-card-link">
+                            <div class="feature-management-card">
+                                <div class="feature-icon-wrapper emerald">
+                                    <i class="fas fa-hand-holding-usd"></i>
+                                </div>
+                                <h4>@Localizer["Incomes"]</h4>
+                                <p>@Localizer["IncomesDescription", "Track revenue"]</p>
+                                <span class="card-action">@Localizer["GoTo", "Go"] <i class="fas fa-chevron-right"></i></span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4">
+                        <a asp-controller="Finance" asp-action="Reports" class="management-card-link">
+                            <div class="feature-management-card">
+                                <div class="feature-icon-wrapper purple">
+                                    <i class="fas fa-chart-pie"></i>
+                                </div>
+                                <h4>@Localizer["FinancialReports"]</h4>
+                                <p>@Localizer["FinancialReportsDescription", "View financial reports"]</p>
+                                <span class="card-action">@Localizer["GoTo", "Go"] <i class="fas fa-chevron-right"></i></span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inventory Management Section -->
+            <div class="management-section">
+                <div class="section-header-modern">
+                    <div class="section-icon inventory-icon">
+                        <i class="fas fa-boxes"></i>
+                    </div>
+                    <h2>@Localizer["InventoryManagement"]</h2>
+                </div>
+                
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4">
+                        <a asp-controller="Inventory" asp-action="Categories" class="management-card-link">
+                            <div class="feature-management-card">
+                                <div class="feature-icon-wrapper violet">
+                                    <i class="fas fa-tags"></i>
+                                </div>
+                                <h4>@Localizer["Categories"]</h4>
+                                <p>@Localizer["CategoriesDescription", "Manage categories"]</p>
+                                <span class="card-action">@Localizer["GoTo", "Go"] <i class="fas fa-chevron-right"></i></span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4">
+                        <a asp-controller="Inventory" asp-action="Items" class="management-card-link">
+                            <div class="feature-management-card">
+                                <div class="feature-icon-wrapper fuchsia">
+                                    <i class="fas fa-box"></i>
+                                </div>
+                                <h4>@Localizer["InventoryItems"]</h4>
+                                <p>@Localizer["InventoryItemsDescription", "Manage inventory"]</p>
+                                <span class="card-action">@Localizer["GoTo", "Go"] <i class="fas fa-chevron-right"></i></span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4">
+                        <a asp-controller="Inventory" asp-action="Transactions" class="management-card-link">
+                            <div class="feature-management-card">
+                                <div class="feature-icon-wrapper cyan">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </div>
+                                <h4>@Localizer["Transactions"]</h4>
+                                <p>@Localizer["TransactionsDescription", "View stock movements"]</p>
+                                <span class="card-action">@Localizer["GoTo", "Go"] <i class="fas fa-chevron-right"></i></span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Styles {
+<style>
+    /* Management Hub Styles */
+    .management-hub {
+        background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+        min-height: calc(100vh - 60px);
+    }
+    
+    .management-header {
+        background: linear-gradient(135deg, #0c1929 0%, #1a365d 100%);
+        padding: 3.5rem 1rem;
+        margin-bottom: 0;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .management-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(ellipse at 30% 50%, rgba(201, 162, 39, 0.15) 0%, transparent 60%);
+    }
+    
+    .management-header::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #c9a227, #ddb82f, #c9a227);
+    }
+    
+    .management-title {
+        color: #fff;
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 0.75rem;
+        position: relative;
+        z-index: 1;
+    }
+    
+    .management-title i {
+        color: #c9a227;
+        margin-right: 0.75rem;
+    }
+    
+    .management-subtitle {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 1.1rem;
+        margin: 0;
+        position: relative;
+        z-index: 1;
+    }
+    
+    /* Quick Access Cards */
+    .management-card-link {
+        text-decoration: none;
+        display: block;
+    }
+    
+    .quick-access-card {
+        background: #fff;
+        border-radius: 20px;
+        padding: 1.75rem;
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        border: 1px solid rgba(0, 0, 0, 0.04);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .quick-access-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        transition: all 0.3s ease;
+    }
+    
+    .quick-access-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+    }
+    
+    .quick-access-card:hover::before {
+        width: 6px;
+    }
+    
+    .dashboard-card::before { background: linear-gradient(180deg, #c9a227, #f0c850); }
+    .reservations-card::before { background: linear-gradient(180deg, #10b981, #34d399); }
+    
+    .quick-access-icon {
+        width: 72px;
+        height: 72px;
+        border-radius: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+    
+    .quick-access-icon i {
+        font-size: 1.75rem;
+    }
+    
+    .dashboard-card .quick-access-icon {
+        background: linear-gradient(135deg, rgba(201, 162, 39, 0.15), rgba(201, 162, 39, 0.05));
+    }
+    
+    .dashboard-card .quick-access-icon i { color: #c9a227; }
+    
+    .reservations-card .quick-access-icon {
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.05));
+    }
+    
+    .reservations-card .quick-access-icon i { color: #10b981; }
+    
+    .quick-access-content {
+        flex-grow: 1;
+    }
+    
+    .quick-access-content h3 {
+        color: #0f172a;
+        font-size: 1.35rem;
+        font-weight: 700;
+        margin-bottom: 0.35rem;
+    }
+    
+    .quick-access-content p {
+        color: #64748b;
+        font-size: 0.95rem;
+        margin: 0;
+    }
+    
+    .quick-access-arrow {
+        color: #cbd5e1;
+        font-size: 1.25rem;
+        transition: all 0.3s ease;
+    }
+    
+    .quick-access-card:hover .quick-access-arrow {
+        color: #c9a227;
+        transform: translateX(4px);
+    }
+    
+    /* Section Headers */
+    .management-section {
+        margin-bottom: 3rem;
+    }
+    
+    .section-header-modern {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid #e2e8f0;
+    }
+    
+    .section-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .section-icon i {
+        font-size: 1.25rem;
+        color: #fff;
+    }
+    
+    .hotel-icon { background: linear-gradient(135deg, #3b82f6, #60a5fa); }
+    .staff-icon { background: linear-gradient(135deg, #f59e0b, #fbbf24); }
+    .finance-icon { background: linear-gradient(135deg, #10b981, #34d399); }
+    .inventory-icon { background: linear-gradient(135deg, #8b5cf6, #a78bfa); }
+    
+    .section-header-modern h2 {
+        color: #1e293b;
+        font-size: 1.35rem;
+        font-weight: 700;
+        margin: 0;
+    }
+    
+    /* Feature Management Cards */
+    .feature-management-card {
+        background: #fff;
+        border-radius: 16px;
+        padding: 1.75rem;
+        height: 100%;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+        border: 1px solid rgba(0, 0, 0, 0.04);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .feature-management-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #c9a227, #ddb82f);
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+        transform-origin: left;
+    }
+    
+    .feature-management-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+    }
+    
+    .feature-management-card:hover::before {
+        transform: scaleX(1);
+    }
+    
+    .feature-management-card.compact {
+        padding: 1.25rem;
+        text-align: center;
+    }
+    
+    .feature-management-card.compact .feature-icon-wrapper {
+        margin: 0 auto 1rem;
+    }
+    
+    .feature-icon-wrapper {
+        width: 56px;
+        height: 56px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.25rem;
+    }
+    
+    .feature-icon-wrapper i {
+        font-size: 1.35rem;
+        color: #fff;
+    }
+    
+    /* Icon Colors */
+    .feature-icon-wrapper.blue { background: linear-gradient(135deg, #3b82f6, #60a5fa); }
+    .feature-icon-wrapper.teal { background: linear-gradient(135deg, #14b8a6, #2dd4bf); }
+    .feature-icon-wrapper.indigo { background: linear-gradient(135deg, #6366f1, #818cf8); }
+    .feature-icon-wrapper.orange { background: linear-gradient(135deg, #f97316, #fb923c); }
+    .feature-icon-wrapper.amber { background: linear-gradient(135deg, #f59e0b, #fbbf24); }
+    .feature-icon-wrapper.green { background: linear-gradient(135deg, #22c55e, #4ade80); }
+    .feature-icon-wrapper.rose { background: linear-gradient(135deg, #f43f5e, #fb7185); }
+    .feature-icon-wrapper.red { background: linear-gradient(135deg, #ef4444, #f87171); }
+    .feature-icon-wrapper.emerald { background: linear-gradient(135deg, #10b981, #34d399); }
+    .feature-icon-wrapper.purple { background: linear-gradient(135deg, #a855f7, #c084fc); }
+    .feature-icon-wrapper.violet { background: linear-gradient(135deg, #8b5cf6, #a78bfa); }
+    .feature-icon-wrapper.fuchsia { background: linear-gradient(135deg, #d946ef, #e879f9); }
+    .feature-icon-wrapper.cyan { background: linear-gradient(135deg, #06b6d4, #22d3ee); }
+    
+    .feature-management-card h4 {
+        color: #1e293b;
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+    
+    .feature-management-card.compact h4 {
+        font-size: 1rem;
+        margin-bottom: 0.35rem;
+    }
+    
+    .feature-management-card p {
+        color: #64748b;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        line-height: 1.5;
+    }
+    
+    .feature-management-card.compact p {
+        font-size: 0.8rem;
+        margin-bottom: 0;
+    }
+    
+    .card-action {
+        color: #94a3b8;
+        font-size: 0.85rem;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+        transition: all 0.3s ease;
+    }
+    
+    .card-action i {
+        font-size: 0.7rem;
+        transition: transform 0.3s ease;
+    }
+    
+    .feature-management-card:hover .card-action {
+        color: #c9a227;
+    }
+    
+    .feature-management-card:hover .card-action i {
+        transform: translateX(4px);
+    }
+    
+    /* Responsive */
+    @@media (max-width: 768px) {
+        .management-header {
+            padding: 2.5rem 1rem;
+        }
+        
+        .management-title {
+            font-size: 1.75rem;
+        }
+        
+        .management-subtitle {
+            font-size: 1rem;
+        }
+        
+        .quick-access-card {
+            padding: 1.25rem;
+            gap: 1rem;
+        }
+        
+        .quick-access-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+        }
+        
+        .quick-access-icon i {
+            font-size: 1.35rem;
+        }
+        
+        .quick-access-content h3 {
+            font-size: 1.1rem;
+        }
+        
+        .quick-access-content p {
+            font-size: 0.85rem;
+        }
+        
+        .quick-access-arrow {
+            display: none;
+        }
+        
+        .feature-management-card {
+            padding: 1.25rem;
+        }
+        
+        .feature-icon-wrapper {
+            width: 48px;
+            height: 48px;
+        }
+        
+        .feature-icon-wrapper i {
+            font-size: 1.15rem;
+        }
+    }
+</style>
+}

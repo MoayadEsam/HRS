@@ -11,11 +11,13 @@ public class ReservationService : IReservationService
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
+    private readonly IIncomeService _incomeService;
 
-    public ReservationService(IUnitOfWork unitOfWork, IMapper mapper)
+    public ReservationService(IUnitOfWork unitOfWork, IMapper mapper, IIncomeService incomeService)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
+        _incomeService = incomeService;
     }
 
     public async Task<IEnumerable<ReservationListDto>> GetAllReservationsAsync()
@@ -86,6 +88,9 @@ public class ReservationService : IReservationService
 
         await _unitOfWork.Reservations.AddAsync(reservation);
         await _unitOfWork.SaveChangesAsync();
+
+        // Automatically create income record for the reservation
+        await _incomeService.CreateIncomeFromReservationAsync(reservation.Id, totalPrice, userId);
 
         return reservation.Id;
     }

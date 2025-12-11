@@ -1,23 +1,24 @@
-﻿@{
-    ViewData["Title"] = "Privacy Policy";
+﻿@inject IStringLocalizer<HotelReservation.Web.SharedResource> Localizer
+@{
+    ViewData["Title"] = Localizer["PrivacyPolicy"];
 }
 
 <h1>@ViewData["Title"]</h1>
 
-<p>This is a demo Hotel Reservation System. Your privacy is important to us.</p>
+<p>@Localizer["PrivacyPolicyIntro"]</p>
 
-<h3>Data Collection</h3>
-<p>We collect personal information that you provide when creating an account or making a reservation, including:</p>
+<h3>@Localizer["DataCollection"]</h3>
+<p>@Localizer["DataCollectionDesc"]</p>
 <ul>
-    <li>Name and contact information</li>
-    <li>Email address</li>
-    <li>Phone number</li>
-    <li>Reservation details</li>
+    <li>@Localizer["NameAndContact"]</li>
+    <li>@Localizer["EmailAddress"]</li>
+    <li>@Localizer["PhoneNumber"]</li>
+    <li>@Localizer["ReservationDetails"]</li>
 </ul>
 
-<h3>Data Usage</h3>
-<p>Your information is used solely for the purpose of managing your hotel reservations and account.</p>
+<h3>@Localizer["DataUsage"]</h3>
+<p>@Localizer["DataUsageDesc"]</p>
 
-<h3>Contact</h3>
-<p>For any privacy-related questions, please contact us at privacy@hotelreservation.com</p>
+<h3>@Localizer["Contact"]</h3>
+<p>@Localizer["ContactDesc"]</p>
 

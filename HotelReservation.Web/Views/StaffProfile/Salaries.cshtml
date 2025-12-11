@@ -1,0 +1,159 @@
+@model List<HotelReservation.Core.Models.Salary>
+@inject IStringLocalizer<SharedResource> Localizer
+
+@{
+    ViewData["Title"] = Localizer["MySalaries"];
+    var employee = ViewBag.Employee as HotelReservation.Core.Models.Employee;
+}
+
+<div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fas fa-money-bill-wave text-primary me-2"></i>@Localizer["MySalaries"]</h2>
+        <a asp-action="Index" class="btn btn-outline-primary">
+            <i class="fas fa-arrow-left me-2"></i>@Localizer["BackToProfile"]
+        </a>
+    </div>
+
+    <!-- Summary Cards -->
+    @if (Model != null && Model.Any())
+    {
+        var totalEarned = Model.Where(s => s.Status == HotelReservation.Core.Models.SalaryStatus.Paid).Sum(s => s.NetSalary);
+        var pendingAmount = Model.Where(s => s.Status == HotelReservation.Core.Models.SalaryStatus.Pending).Sum(s => s.NetSalary);
+        
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="card bg-success text-white shadow">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h6 class="text-uppercase opacity-75">@Localizer["TotalEarned"]</h6>
+                                <h3 class="mb-0">$@totalEarned.ToString("N2")</h3>
+                            </div>
+                            <div class="opacity-50">
+                                <i class="fas fa-wallet fa-3x"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card bg-warning text-white shadow">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h6 class="text-uppercase opacity-75">@Localizer["Pending"]</h6>
+                                <h3 class="mb-0">$@pendingAmount.ToString("N2")</h3>
+                            </div>
+                            <div class="opacity-50">
+                                <i class="fas fa-hourglass-half fa-3x"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card bg-primary text-white shadow">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h6 class="text-uppercase opacity-75">@Localizer["BaseSalary"]</h6>
+                                <h3 class="mb-0">$@(employee?.BaseSalary.ToString("N2") ?? "0.00")</h3>
+                            </div>
+                            <div class="opacity-50">
+                                <i class="fas fa-money-check-alt fa-3x"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="card shadow">
+        <div class="card-body">
+            @if (Model != null && Model.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th>@Localizer["Period"]</th>
+                                <th class="text-end">@Localizer["BaseSalary"]</th>
+                                <th class="text-end">@Localizer["Overtime"]</th>
+                                <th class="text-end">@Localizer["Bonus"]</th>
+                                <th class="text-end">@Localizer["Deductions"]</th>
+                                <th class="text-end">@Localizer["NetSalary"]</th>
+                                <th class="text-center">@Localizer["Status"]</th>
+                                <th>@Localizer["PaymentDate"]</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var salary in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <strong>
+                                            <i class="fas fa-calendar me-1 text-muted"></i>
+                                            @(new DateTime(salary.Year, salary.Month, 1).ToString("MMMM yyyy"))
+                                        </strong>
+                                    </td>
+                                    <td class="text-end">$@salary.BaseSalary.ToString("N2")</td>
+                                    <td class="text-end text-info">+$@salary.Overtime.ToString("N2")</td>
+                                    <td class="text-end text-success">+$@salary.Bonus.ToString("N2")</td>
+                                    <td class="text-end text-danger">-$@salary.Deductions.ToString("N2")</td>
+                                    <td class="text-end fw-bold fs-5">$@salary.NetSalary.ToString("N2")</td>
+                                    <td class="text-center">
+                                        @switch (salary.Status)
+                                        {
+                                            case HotelReservation.Core.Models.SalaryStatus.Paid:
+                                                <span class="badge bg-success">
+                                                    <i class="fas fa-check me-1"></i>@Localizer["Paid"]
+                                                </span>
+                                                break;
+                                            case HotelReservation.Core.Models.SalaryStatus.Pending:
+                                                <span class="badge bg-warning">
+                                                    <i class="fas fa-clock me-1"></i>@Localizer["Pending"]
+                                                </span>
+                                                break;
+                                            case HotelReservation.Core.Models.SalaryStatus.Approved:
+                                                <span class="badge bg-info">
+                                                    <i class="fas fa-check-circle me-1"></i>@Localizer["Approved"]
+                                                </span>
+                                                break;
+                                            case HotelReservation.Core.Models.SalaryStatus.Cancelled:
+                                                <span class="badge bg-danger">
+                                                    <i class="fas fa-times-circle me-1"></i>@Localizer["Cancelled"]
+                                                </span>
+                                                break;
+                                            default:
+                                                <span class="badge bg-secondary">@salary.Status</span>
+                                                break;
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (salary.PaidDate.HasValue)
+                                        {
+                                            <i class="fas fa-calendar-check me-1 text-success"></i>
+                                            @salary.PaidDate.Value.ToString("MMM dd, yyyy")
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">-</span>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="text-center py-5">
+                    <i class="fas fa-file-invoice-dollar fa-4x text-muted mb-3"></i>
+                    <p class="text-muted">@Localizer["NoSalaryRecords"]</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>

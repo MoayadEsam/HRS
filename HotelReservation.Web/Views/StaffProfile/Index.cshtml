@@ -1,0 +1,309 @@
+@model HotelReservation.Core.Models.Employee
+@inject IStringLocalizer<SharedResource> Localizer
+
+@{
+    ViewData["Title"] = Localizer["MyProfile"];
+    var employee = ViewBag.Employee as HotelReservation.Core.Models.Employee;
+    var todayAttendance = ViewBag.TodayAttendance as HotelReservation.Core.Models.Attendance;
+    var recentSalaries = ViewBag.RecentSalaries as List<HotelReservation.Core.Models.Salary>;
+}
+
+<div class="container-fluid py-4">
+    <!-- Welcome Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card bg-gradient-primary text-white shadow">
+                <div class="card-body p-4">
+                    <div class="row align-items-center">
+                        <div class="col-auto">
+                            <div class="avatar avatar-xl bg-white text-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                                <i class="fas fa-user-tie fa-2x"></i>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <h2 class="mb-1">@Localizer["Welcome"], @Model.FullName!</h2>
+                            <p class="mb-0 opacity-75">
+                                <i class="fas fa-briefcase me-2"></i>@Model.Position
+                                <span class="mx-2">|</span>
+                                <i class="fas fa-building me-2"></i>@Model.Department?.Name
+                            </p>
+                        </div>
+                        <div class="col-auto">
+                            <span class="badge bg-light text-primary fs-6">
+                                <i class="fas fa-id-badge me-1"></i>@(Model.EmployeeCode ?? $"EMP-{Model.Id:D4}")
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Today's Attendance Card -->
+        <div class="col-lg-4 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-header bg-white py-3">
+                    <h5 class="mb-0"><i class="fas fa-clock text-primary me-2"></i>@Localizer["TodaysAttendance"]</h5>
+                </div>
+                <div class="card-body text-center">
+                    @if (todayAttendance == null)
+                    {
+                        <div class="py-4">
+                            <i class="fas fa-sign-in-alt fa-4x text-muted mb-3"></i>
+                            <p class="text-muted">@Localizer["NotCheckedInYet"]</p>
+                            <form asp-action="CheckIn" method="post">
+                                <button type="submit" class="btn btn-success btn-lg">
+                                    <i class="fas fa-sign-in-alt me-2"></i>@Localizer["CheckIn"]
+                                </button>
+                            </form>
+                        </div>
+                    }
+                    else if (!todayAttendance.CheckOutTime.HasValue)
+                    {
+                        <div class="py-4">
+                            <i class="fas fa-check-circle fa-4x text-success mb-3"></i>
+                            <p class="text-success fw-bold">@Localizer["CheckedIn"]</p>
+                            <p class="text-muted">
+                                <i class="fas fa-clock me-1"></i>@todayAttendance.CheckInTime?.ToString("hh:mm tt")
+                            </p>
+                            <form asp-action="CheckOut" method="post">
+                                <button type="submit" class="btn btn-warning btn-lg">
+                                    <i class="fas fa-sign-out-alt me-2"></i>@Localizer["CheckOut"]
+                                </button>
+                            </form>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="py-4">
+                            <i class="fas fa-calendar-check fa-4x text-primary mb-3"></i>
+                            <p class="text-primary fw-bold">@Localizer["DayComplete"]</p>
+                            <p class="text-muted mb-1">
+                                <i class="fas fa-sign-in-alt me-1"></i>@Localizer["In"]: @todayAttendance.CheckInTime?.ToString("hh:mm tt")
+                            </p>
+                            <p class="text-muted">
+                                <i class="fas fa-sign-out-alt me-1"></i>@Localizer["Out"]: @todayAttendance.CheckOutTime?.ToString("hh:mm tt")
+                            </p>
+                            @if (todayAttendance.CheckInTime.HasValue && todayAttendance.CheckOutTime.HasValue)
+                            {
+                                var hours = (todayAttendance.CheckOutTime.Value - todayAttendance.CheckInTime.Value).TotalHours;
+                                <span class="badge bg-info">@hours.ToString("F1") @Localizer["Hours"]</span>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Monthly Attendance Summary -->
+        <div class="col-lg-4 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0"><i class="fas fa-calendar-alt text-primary me-2"></i>@Localizer["ThisMonth"]</h5>
+                    <a asp-action="Attendance" class="btn btn-sm btn-outline-primary">@Localizer["ViewAll"]</a>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-6 mb-3">
+                            <div class="border rounded p-3 bg-success bg-opacity-10">
+                                <h3 class="text-success mb-0">@ViewBag.PresentDays</h3>
+                                <small class="text-muted">@Localizer["Present"]</small>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <div class="border rounded p-3 bg-danger bg-opacity-10">
+                                <h3 class="text-danger mb-0">@ViewBag.AbsentDays</h3>
+                                <small class="text-muted">@Localizer["Absent"]</small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="border rounded p-3 bg-warning bg-opacity-10">
+                                <h3 class="text-warning mb-0">@ViewBag.LateDays</h3>
+                                <small class="text-muted">@Localizer["Late"]</small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="border rounded p-3 bg-info bg-opacity-10">
+                                <h3 class="text-info mb-0">@ViewBag.LeaveDays</h3>
+                                <small class="text-muted">@Localizer["OnLeave"]</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="col-lg-4 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-header bg-white py-3">
+                    <h5 class="mb-0"><i class="fas fa-chart-bar text-primary me-2"></i>@Localizer["QuickStats"]</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3 pb-3 border-bottom">
+                        <div class="flex-shrink-0">
+                            <div class="bg-primary bg-opacity-10 rounded-circle p-3">
+                                <i class="fas fa-calendar-check text-primary"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h6 class="mb-0">@Localizer["UpcomingReservations"]</h6>
+                            <small class="text-muted">@Localizer["Next7Days"]</small>
+                        </div>
+                        <div class="flex-shrink-0">
+                            <span class="badge bg-primary fs-5">@ViewBag.UpcomingReservations</span>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center mb-3 pb-3 border-bottom">
+                        <div class="flex-shrink-0">
+                            <div class="bg-success bg-opacity-10 rounded-circle p-3">
+                                <i class="fas fa-calendar text-success"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h6 class="mb-0">@Localizer["HireDate"]</h6>
+                            <small class="text-muted">@Model.HireDate.ToString("MMM dd, yyyy")</small>
+                        </div>
+                        <div class="flex-shrink-0">
+                            @{
+                                var tenure = (DateTime.Today - Model.HireDate).Days / 365;
+                            }
+                            <span class="badge bg-success">@tenure @Localizer["Years"]</span>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <div class="bg-info bg-opacity-10 rounded-circle p-3">
+                                <i class="fas fa-user-tag text-info"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h6 class="mb-0">@Localizer["Status"]</h6>
+                            <small class="text-muted">@Localizer["EmploymentStatus"]</small>
+                        </div>
+                        <div class="flex-shrink-0">
+                            @if (Model.IsActive)
+                            {
+                                <span class="badge bg-success">@Localizer["Active"]</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger">@Localizer["Inactive"]</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Salaries -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow">
+                <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0"><i class="fas fa-money-bill-wave text-primary me-2"></i>@Localizer["RecentSalaries"]</h5>
+                    <a asp-action="Salaries" class="btn btn-sm btn-outline-primary">@Localizer["ViewAll"]</a>
+                </div>
+                <div class="card-body">
+                    @if (recentSalaries != null && recentSalaries.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>@Localizer["Period"]</th>
+                                        <th class="text-end">@Localizer["BaseSalary"]</th>
+                                        <th class="text-end">@Localizer["Bonus"]</th>
+                                        <th class="text-end">@Localizer["Deductions"]</th>
+                                        <th class="text-end">@Localizer["NetSalary"]</th>
+                                        <th class="text-center">@Localizer["Status"]</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var salary in recentSalaries)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <i class="fas fa-calendar me-1 text-muted"></i>
+                                                @(new DateTime(salary.Year, salary.Month, 1).ToString("MMMM yyyy"))
+                                            </td>
+                                            <td class="text-end">$@salary.BaseSalary.ToString("N2")</td>
+                                            <td class="text-end text-success">+$@salary.Bonus.ToString("N2")</td>
+                                            <td class="text-end text-danger">-$@salary.Deductions.ToString("N2")</td>
+                                            <td class="text-end fw-bold">$@salary.NetSalary.ToString("N2")</td>
+                                            <td class="text-center">
+                                                @if (salary.Status == HotelReservation.Core.Models.SalaryStatus.Paid)
+                                                {
+                                                    <span class="badge bg-success">@Localizer["Paid"]</span>
+                                                }
+                                                else if (salary.Status == HotelReservation.Core.Models.SalaryStatus.Pending)
+                                                {
+                                                    <span class="badge bg-warning">@Localizer["Pending"]</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-secondary">@salary.Status</span>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-center py-4">
+                            <i class="fas fa-file-invoice-dollar fa-3x text-muted mb-3"></i>
+                            <p class="text-muted">@Localizer["NoSalaryRecords"]</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Personal Information -->
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-white py-3">
+                    <h5 class="mb-0"><i class="fas fa-user text-primary me-2"></i>@Localizer["PersonalInfo"]</h5>
+                </div>
+                <div class="card-body">
+                    <dl class="row mb-0">
+                        <dt class="col-sm-4">@Localizer["Email"]</dt>
+                        <dd class="col-sm-8">@Model.Email</dd>
+                        
+                        <dt class="col-sm-4">@Localizer["Phone"]</dt>
+                        <dd class="col-sm-8">@(Model.Phone ?? "-")</dd>
+                        
+                        <dt class="col-sm-4">@Localizer["DateOfBirth"]</dt>
+                        <dd class="col-sm-8">@Model.DateOfBirth.ToString("MMM dd, yyyy")</dd>
+                        
+                        <dt class="col-sm-4">@Localizer["Address"]</dt>
+                        <dd class="col-sm-8">@(Model.Address ?? "-")</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-white py-3">
+                    <h5 class="mb-0"><i class="fas fa-phone-alt text-primary me-2"></i>@Localizer["EmergencyContact"]</h5>
+                </div>
+                <div class="card-body">
+                    <dl class="row mb-0">
+                        <dt class="col-sm-4">@Localizer["ContactName"]</dt>
+                        <dd class="col-sm-8">@(Model.EmergencyContact ?? "-")</dd>
+                        
+                        <dt class="col-sm-4">@Localizer["ContactPhone"]</dt>
+                        <dd class="col-sm-8">@(Model.EmergencyPhone ?? "-")</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

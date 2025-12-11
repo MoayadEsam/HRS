@@ -1,9 +1,11 @@
 using HotelReservation.Core.DTOs;
 using HotelReservation.Core.Models;
+using HotelReservation.Data.Context;
 using HotelReservation.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace HotelReservation.Web.Controllers;
 
@@ -11,15 +13,18 @@ public class AccountController : Controller
 {
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
+    private readonly ApplicationDbContext _context;
     private readonly ILogger<AccountController> _logger;
 
     public AccountController(
         UserManager<ApplicationUser> userManager,
         SignInManager<ApplicationUser> signInManager,
+        ApplicationDbContext context,
         ILogger<AccountController> logger)
     {
         _userManager = userManager;
         _signInManager = signInManager;
+        _context = context;
         _logger = logger;
     }
 
@@ -120,5 +125,75 @@ public class AccountController : Controller
     public IActionResult AccessDenied()
     {
         return View();
+    }
+
+    [HttpGet]
+    public IActionResult StaffRegister()
+    {
+        if (User.Identity?.IsAuthenticated ?? false)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+        return View();
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> StaffRegister(StaffRegistrationDto model)
+    {
+        if (ModelState.IsValid)
+        {
+            // Find employee by code and email
+            var employee = await _context.Employees
+                .FirstOrDefaultAsync(e => e.EmployeeCode == model.EmployeeCode && 
+                                          e.Email.ToLower() == model.Email.ToLower() &&
+                                          e.IsActive);
+
+            if (employee == null)
+            {
+                ModelState.AddModelError(string.Empty, "Invalid employee code or email. Please contact your administrator.");
+                return View(model);
+            }
+
+            if (!string.IsNullOrEmpty(employee.UserId))
+            {
+                ModelState.AddModelError(string.Empty, "This employee already has an account. Please login instead.");
+                return View(model);
+            }
+
+            // Create user account
+            var user = new ApplicationUser
+            {
+                UserName = employee.Email,
+                Email = employee.Email,
+                FirstName = employee.FirstName,
+                LastName = employee.LastName,
+                EmailConfirmed = true
+            };
+
+            var result = await _userManager.CreateAsync(user, model.Password);
+
+            if (result.Succeeded)
+            {
+                // Assign Staff role
+                await _userManager.AddToRoleAsync(user, "Staff");
+
+                // Link employee to user
+                employee.UserId = user.Id;
+                await _context.SaveChangesAsync();
+
+                await _signInManager.SignInAsync(user, isPersistent: false);
+                _logger.LogInformation("Staff member registered and logged in: {Email}", user.Email);
+                TempData["Success"] = "Registration successful! Welcome to the team.";
+                return RedirectToAction("Index", "StaffProfile");
+            }
+
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+        }
+
+        return View(model);
     }
 }

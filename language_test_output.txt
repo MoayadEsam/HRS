@@ -1,0 +1,2 @@
+﻿Found heading: Ana Sayfa
+CultureCookie=c%3Dtr-TR%7Cuic%3Dtr-TR | Path=/

@@ -1,0 +1,341 @@
+@model HotelReservation.Core.DTOs.FinancialReportDto
+@inject IStringLocalizer<SharedResource> Localizer
+
+@{
+    ViewData["Title"] = Localizer["FinancialReports"];
+}
+
+<div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>
+            <i class="fas fa-chart-line me-2"></i>@Localizer["FinancialReports"]
+        </h2>
+    </div>
+
+    <!-- Report Generator Card -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">
+                <i class="fas fa-cog me-2"></i>@Localizer["GenerateReport"]
+            </h5>
+        </div>
+        <div class="card-body">
+            <form asp-action="Reports" method="get" class="row g-3">
+                <div class="col-md-3">
+                    <label class="form-label">@Localizer["ReportType"]</label>
+                    <select name="reportType" class="form-select">
+                        <option value="Monthly" selected="@(ViewBag.ReportType == "Monthly")">@Localizer["Monthly"]</option>
+                        <option value="Quarterly" selected="@(ViewBag.ReportType == "Quarterly")">@Localizer["Quarterly"]</option>
+                        <option value="Yearly" selected="@(ViewBag.ReportType == "Yearly")">@Localizer["Yearly"]</option>
+                        <option value="Custom" selected="@(ViewBag.ReportType == "Custom")">@Localizer["Custom"]</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">@Localizer["StartDate"]</label>
+                    <input type="date" name="startDate" class="form-control" value="@(ViewBag.StartDate?.ToString("yyyy-MM-dd") ?? DateTime.Today.AddMonths(-1).ToString("yyyy-MM-dd"))" />
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">@Localizer["EndDate"]</label>
+                    <input type="date" name="endDate" class="form-control" value="@(ViewBag.EndDate?.ToString("yyyy-MM-dd") ?? DateTime.Today.ToString("yyyy-MM-dd"))" />
+                </div>
+                <div class="col-md-3 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary me-2">
+                        <i class="fas fa-sync-alt me-1"></i>@Localizer["Generate"]
+                    </button>
+                    <button type="button" class="btn btn-success" onclick="window.print()">
+                        <i class="fas fa-print me-1"></i>@Localizer["Print"]
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @if (Model != null)
+    {
+        <!-- Report Header -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-body text-center py-4">
+                <h3 class="mb-1">@Localizer["FinancialReport"]</h3>
+                <p class="text-muted mb-0">
+                    @Model.StartDate.ToString("d") - @Model.EndDate.ToString("d")
+                </p>
+            </div>
+        </div>
+
+        <!-- Summary Cards -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card bg-success text-white shadow-sm h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h6 class="text-white-50">@Localizer["TotalIncome"]</h6>
+                                <h2 class="mb-0">@Model.TotalIncome.ToString("C")</h2>
+                            </div>
+                            <div class="opacity-50">
+                                <i class="fas fa-arrow-up fa-2x"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-danger text-white shadow-sm h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h6 class="text-white-50">@Localizer["TotalExpenses"]</h6>
+                                <h2 class="mb-0">@Model.TotalExpenses.ToString("C")</h2>
+                            </div>
+                            <div class="opacity-50">
+                                <i class="fas fa-arrow-down fa-2x"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card @(Model.NetProfit >= 0 ? "bg-primary" : "bg-warning") text-white shadow-sm h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h6 class="text-white-50">@Localizer["NetProfit"]</h6>
+                                <h2 class="mb-0">@Model.NetProfit.ToString("C")</h2>
+                            </div>
+                            <div class="opacity-50">
+                                <i class="fas fa-balance-scale fa-2x"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-info text-white shadow-sm h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h6 class="text-white-50">@Localizer["ProfitMargin"]</h6>
+                                <h2 class="mb-0">@((Model.TotalIncome > 0 ? (Model.NetProfit / Model.TotalIncome * 100) : 0).ToString("F1"))%</h2>
+                            </div>
+                            <div class="opacity-50">
+                                <i class="fas fa-percentage fa-2x"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Income Breakdown -->
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0">
+                            <i class="fas fa-hand-holding-usd me-2"></i>@Localizer["IncomeBreakdown"]
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="incomeChart" height="250"></canvas>
+                        <hr />
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>@Localizer["Source"]</th>
+                                        <th class="text-end">@Localizer["Amount"]</th>
+                                        <th class="text-end">%</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.IncomeBySource != null)
+                                    {
+                                        @foreach (var item in Model.IncomeBySource)
+                                        {
+                                            <tr>
+                                                <td>@Localizer[item.Key]</td>
+                                                <td class="text-end text-success">@item.Value.ToString("C")</td>
+                                                <td class="text-end">@((Model.TotalIncome > 0 ? item.Value / Model.TotalIncome * 100 : 0).ToString("F1"))%</td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr class="fw-bold">
+                                        <td>@Localizer["Total"]</td>
+                                        <td class="text-end text-success">@Model.TotalIncome.ToString("C")</td>
+                                        <td class="text-end">100%</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Expense Breakdown -->
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header bg-danger text-white">
+                        <h5 class="mb-0">
+                            <i class="fas fa-file-invoice-dollar me-2"></i>@Localizer["ExpenseBreakdown"]
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="expenseChart" height="250"></canvas>
+                        <hr />
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>@Localizer["Category"]</th>
+                                        <th class="text-end">@Localizer["Amount"]</th>
+                                        <th class="text-end">%</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.ExpensesByCategory != null)
+                                    {
+                                        @foreach (var item in Model.ExpensesByCategory)
+                                        {
+                                            <tr>
+                                                <td>@item.Key</td>
+                                                <td class="text-end text-danger">@item.Value.ToString("C")</td>
+                                                <td class="text-end">@((Model.TotalExpenses > 0 ? item.Value / Model.TotalExpenses * 100 : 0).ToString("F1"))%</td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr class="fw-bold">
+                                        <td>@Localizer["Total"]</td>
+                                        <td class="text-end text-danger">@Model.TotalExpenses.ToString("C")</td>
+                                        <td class="text-end">100%</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Monthly Trend Chart -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-chart-line me-2"></i>@Localizer["MonthlyTrend"]
+                </h5>
+            </div>
+            <div class="card-body">
+                <canvas id="trendChart" height="100"></canvas>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            <i class="fas fa-info-circle me-2"></i>
+            @Localizer["SelectDateRangeToGenerateReport"]
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    @if (Model != null)
+    {
+        <script>
+            // Income Chart
+            var incomeCtx = document.getElementById('incomeChart').getContext('2d');
+            new Chart(incomeCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: [@Html.Raw(string.Join(",", Model.IncomeBySource?.Keys.Select(k => $"'{k}'") ?? Enumerable.Empty<string>()))],
+                    datasets: [{
+                        data: [@Html.Raw(string.Join(",", Model.IncomeBySource?.Values.Select(v => v.ToString(System.Globalization.CultureInfo.InvariantCulture)) ?? Enumerable.Empty<string>()))],
+                        backgroundColor: ['#198754', '#0d6efd', '#6f42c1', '#fd7e14', '#20c997', '#6c757d']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+
+            // Expense Chart
+            var expenseCtx = document.getElementById('expenseChart').getContext('2d');
+            new Chart(expenseCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: [@Html.Raw(string.Join(",", Model.ExpensesByCategory?.Keys.Select(k => $"'{k}'") ?? Enumerable.Empty<string>()))],
+                    datasets: [{
+                        data: [@Html.Raw(string.Join(",", Model.ExpensesByCategory?.Values.Select(v => v.ToString(System.Globalization.CultureInfo.InvariantCulture)) ?? Enumerable.Empty<string>()))],
+                        backgroundColor: ['#dc3545', '#ffc107', '#0dcaf0', '#6610f2', '#d63384', '#fd7e14']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+
+            // Trend Chart
+            var trendCtx = document.getElementById('trendChart').getContext('2d');
+            new Chart(trendCtx, {
+                type: 'line',
+                data: {
+                    labels: [@Html.Raw(string.Join(",", Model.MonthlyData?.Keys.Select(k => $"'{k}'") ?? new List<string>()))],
+                    datasets: [{
+                        label: '@Localizer["Income"]',
+                        data: [@Html.Raw(string.Join(",", Model.MonthlyData?.Values.Select(v => v.Income) ?? new List<decimal>()))],
+                        borderColor: '#198754',
+                        backgroundColor: 'rgba(25, 135, 84, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }, {
+                        label: '@Localizer["Expenses"]',
+                        data: [@Html.Raw(string.Join(",", Model.MonthlyData?.Values.Select(v => v.Expenses) ?? new List<decimal>()))],
+                        borderColor: '#dc3545',
+                        backgroundColor: 'rgba(220, 53, 69, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
+    }
+}
+
+<style>
+    @@media print {
+        .btn, form, .card-header {
+            display: none !important;
+        }
+        .card {
+            border: none !important;
+            box-shadow: none !important;
+        }
+    }
+</style>

@@ -1,4 +1,5 @@
 using System.Text;
+using System.Security.Claims;
 using HotelReservation.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +9,7 @@ using QuestPDF.Infrastructure;
 
 namespace HotelReservation.Web.Controllers;
 
-[Authorize(Roles = "Admin,Staff")]
+[Authorize]
 public class ExportController : Controller
 {
     private readonly IReservationService _reservationService;
@@ -21,6 +22,7 @@ public class ExportController : Controller
     }
 
     [HttpGet]
+    [Authorize(Roles = "Admin,Staff")]
     public async Task<IActionResult> ReservationsCsv()
     {
         try
@@ -64,6 +66,16 @@ public class ExportController : Controller
             if (reservation == null)
             {
                 return NotFound();
+            }
+
+            // Check if user is authorized to download this reservation's PDF
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var isAdminOrStaff = User.IsInRole("Admin") || User.IsInRole("Staff");
+            
+            // Users can only download PDFs for their own reservations (unless Admin/Staff)
+            if (!isAdminOrStaff && reservation.UserId != userId)
+            {
+                return Forbid();
             }
 
             var document = Document.Create(container =>

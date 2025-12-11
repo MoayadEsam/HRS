@@ -1,13 +1,14 @@
 @model HotelReservation.Core.DTOs.HotelUpdateDto
+@inject IStringLocalizer<HotelReservation.Web.SharedResource> Localizer
 @{
-    ViewData["Title"] = "Edit Hotel";
+    ViewData["Title"] = Localizer["EditHotel"];
 }
 
 <div class="row justify-content-center">
     <div class="col-lg-8">
         <div class="card shadow">
             <div class="card-header bg-warning">
-                <h3 class="mb-0"><i class="fas fa-edit"></i> Edit Hotel</h3>
+                <h3 class="mb-0"><i class="fas fa-edit"></i> @Localizer["EditHotel"]</h3>
             </div>
             <div class="card-body">
                 <form asp-action="Edit" method="post">
@@ -15,35 +16,35 @@
                     <input type="hidden" asp-for="Id" />
                     
                     <div class="mb-3">
-                        <label asp-for="Name" class="form-label"></label>
+                        <label asp-for="Name" class="form-label">@Localizer["HotelName"]</label>
                         <input asp-for="Name" class="form-control" />
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                     
                     <div class="mb-3">
-                        <label asp-for="Description" class="form-label"></label>
+                        <label asp-for="Description" class="form-label">@Localizer["Description"]</label>
                         <textarea asp-for="Description" class="form-control" rows="3"></textarea>
                         <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
                     
                     <div class="mb-3">
-                        <label asp-for="ImageUrl" class="form-label">Hotel Image URL</label>
+                        <label asp-for="ImageUrl" class="form-label">@Localizer["HotelImageUrl"]</label>
                         <input asp-for="ImageUrl" class="form-control" placeholder="https://example.com/hotel-image.jpg" />
                         <div class="form-text">
                             <i class="fas fa-info-circle me-1"></i>
-                            Enter a URL to an image for this hotel
+                            @Localizer["EnterImageUrl"]
                         </div>
                         <span asp-validation-for="ImageUrl" class="text-danger"></span>
                     </div>
                     
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <label asp-for="Address" class="form-label"></label>
+                            <label asp-for="Address" class="form-label">@Localizer["Address"]</label>
                             <input asp-for="Address" class="form-control" />
                             <span asp-validation-for="Address" class="text-danger"></span>
                         </div>
                         <div class="col-md-6">
-                            <label asp-for="City" class="form-label"></label>
+                            <label asp-for="City" class="form-label">@Localizer["City"]</label>
                             <input asp-for="City" class="form-control" />
                             <span asp-validation-for="City" class="text-danger"></span>
                         </div>
@@ -51,12 +52,12 @@
                     
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <label asp-for="Country" class="form-label"></label>
+                            <label asp-for="Country" class="form-label">@Localizer["Country"]</label>
                             <input asp-for="Country" class="form-control" />
                             <span asp-validation-for="Country" class="text-danger"></span>
                         </div>
                         <div class="col-md-6">
-                            <label asp-for="PostalCode" class="form-label"></label>
+                            <label asp-for="PostalCode" class="form-label">@Localizer["PostalCode"]</label>
                             <input asp-for="PostalCode" class="form-control" />
                             <span asp-validation-for="PostalCode" class="text-danger"></span>
                         </div>
@@ -64,12 +65,12 @@
                     
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <label asp-for="PhoneNumber" class="form-label"></label>
+                            <label asp-for="PhoneNumber" class="form-label">@Localizer["PhoneNumber"]</label>
                             <input asp-for="PhoneNumber" class="form-control" />
                             <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                         </div>
                         <div class="col-md-6">
-                            <label asp-for="Email" class="form-label"></label>
+                            <label asp-for="Email" class="form-label">@Localizer["Email"]</label>
                             <input asp-for="Email" class="form-control" type="email" />
                             <span asp-validation-for="Email" class="text-danger"></span>
                         </div>
@@ -77,30 +78,30 @@
                     
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <label asp-for="StarRating" class="form-label"></label>
+                            <label asp-for="StarRating" class="form-label">@Localizer["StarRating"]</label>
                             <select asp-for="StarRating" class="form-select">
-                                <option value="1">1 Star</option>
-                                <option value="2">2 Stars</option>
-                                <option value="3">3 Stars</option>
-                                <option value="4">4 Stars</option>
-                                <option value="5">5 Stars</option>
+                                <option value="1">1 @Localizer["Star"]</option>
+                                <option value="2">2 @Localizer["Stars"]</option>
+                                <option value="3">3 @Localizer["Stars"]</option>
+                                <option value="4">4 @Localizer["Stars"]</option>
+                                <option value="5">5 @Localizer["Stars"]</option>
                             </select>
                             <span asp-validation-for="StarRating" class="text-danger"></span>
                         </div>
                         <div class="col-md-6">
                             <div class="form-check mt-4">
                                 <input asp-for="IsActive" class="form-check-input" />
-                                <label asp-for="IsActive" class="form-check-label"></label>
+                                <label asp-for="IsActive" class="form-check-label">@Localizer["IsActive"]</label>
                             </div>
                         </div>
                     </div>
                     
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-secondary">
-                            <i class="fas fa-times"></i> Cancel
+                            <i class="fas fa-times"></i> @Localizer["Cancel"]
                         </a>
                         <button type="submit" class="btn btn-warning">
-                            <i class="fas fa-save"></i> Save Changes
+                            <i class="fas fa-save"></i> @Localizer["SaveChanges"]
                         </button>
                     </div>
                 </form>

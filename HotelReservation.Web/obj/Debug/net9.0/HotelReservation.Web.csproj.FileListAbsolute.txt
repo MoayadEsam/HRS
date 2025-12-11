@@ -26,6 +26,7 @@ C:\Users\Administrator\HRS\HotelReservation.Web\bin\Debug\net9.0\HotelReservatio
 C:\Users\Administrator\HRS\HotelReservation.Web\bin\Debug\net9.0\HotelReservation.Web.runtimeconfig.json
 C:\Users\Administrator\HRS\HotelReservation.Web\bin\Debug\net9.0\HotelReservation.Web.dll
 C:\Users\Administrator\HRS\HotelReservation.Web\bin\Debug\net9.0\HotelReservation.Web.pdb
+C:\Users\Administrator\HRS\HotelReservation.Web\bin\Debug\net9.0\tr-TR\HotelReservation.Web.resources.dll
 C:\Users\Administrator\HRS\HotelReservation.Web\bin\Debug\net9.0\AutoMapper.dll
 C:\Users\Administrator\HRS\HotelReservation.Web\bin\Debug\net9.0\Humanizer.dll
 C:\Users\Administrator\HRS\HotelReservation.Web\bin\Debug\net9.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
@@ -43,8 +44,19 @@ C:\Users\Administrator\HRS\HotelReservation.Web\bin\Debug\net9.0\Microsoft.Entit
 C:\Users\Administrator\HRS\HotelReservation.Web\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\Administrator\HRS\HotelReservation.Web\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Relational.dll
 C:\Users\Administrator\HRS\HotelReservation.Web\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Sqlite.dll
+C:\Users\Administrator\HRS\HotelReservation.Web\bin\Debug\net9.0\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\Administrator\HRS\HotelReservation.Web\bin\Debug\net9.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\Administrator\HRS\HotelReservation.Web\bin\Debug\net9.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\Administrator\HRS\HotelReservation.Web\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Administrator\HRS\HotelReservation.Web\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 C:\Users\Administrator\HRS\HotelReservation.Web\bin\Debug\net9.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Administrator\HRS\HotelReservation.Web\bin\Debug\net9.0\Microsoft.Extensions.Logging.dll
+C:\Users\Administrator\HRS\HotelReservation.Web\bin\Debug\net9.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Administrator\HRS\HotelReservation.Web\bin\Debug\net9.0\Microsoft.Extensions.Options.dll
+C:\Users\Administrator\HRS\HotelReservation.Web\bin\Debug\net9.0\Microsoft.Extensions.Primitives.dll
 C:\Users\Administrator\HRS\HotelReservation.Web\bin\Debug\net9.0\Mono.TextTemplating.dll
+C:\Users\Administrator\HRS\HotelReservation.Web\bin\Debug\net9.0\Npgsql.dll
+C:\Users\Administrator\HRS\HotelReservation.Web\bin\Debug\net9.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 C:\Users\Administrator\HRS\HotelReservation.Web\bin\Debug\net9.0\QuestPDF.dll
 C:\Users\Administrator\HRS\HotelReservation.Web\bin\Debug\net9.0\SQLitePCLRaw.batteries_v2.dll
 C:\Users\Administrator\HRS\HotelReservation.Web\bin\Debug\net9.0\SQLitePCLRaw.core.dll
@@ -156,6 +168,9 @@ C:\Users\Administrator\HRS\HotelReservation.Web\bin\Debug\net9.0\HotelReservatio
 C:\Users\Administrator\HRS\HotelReservation.Web\bin\Debug\net9.0\HotelReservation.Data.pdb
 C:\Users\Administrator\HRS\HotelReservation.Web\obj\Debug\net9.0\HotelReservation.Web.csproj.AssemblyReference.cache
 C:\Users\Administrator\HRS\HotelReservation.Web\obj\Debug\net9.0\rpswa.dswa.cache.json
+C:\Users\Administrator\HRS\HotelReservation.Web\obj\Debug\net9.0\HotelReservation.Web.SharedResource.resources
+C:\Users\Administrator\HRS\HotelReservation.Web\obj\Debug\net9.0\HotelReservation.Web.SharedResource.tr-TR.resources
+C:\Users\Administrator\HRS\HotelReservation.Web\obj\Debug\net9.0\HotelReservation.Web.csproj.GenerateResource.cache
 C:\Users\Administrator\HRS\HotelReservation.Web\obj\Debug\net9.0\HotelReservation.Web.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Administrator\HRS\HotelReservation.Web\obj\Debug\net9.0\HotelReservation.Web.AssemblyInfoInputs.cache
 C:\Users\Administrator\HRS\HotelReservation.Web\obj\Debug\net9.0\HotelReservation.Web.AssemblyInfo.cs
@@ -163,6 +178,9 @@ C:\Users\Administrator\HRS\HotelReservation.Web\obj\Debug\net9.0\HotelReservatio
 C:\Users\Administrator\HRS\HotelReservation.Web\obj\Debug\net9.0\HotelReservation.Web.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Administrator\HRS\HotelReservation.Web\obj\Debug\net9.0\HotelReservation.Web.RazorAssemblyInfo.cache
 C:\Users\Administrator\HRS\HotelReservation.Web\obj\Debug\net9.0\HotelReservation.Web.RazorAssemblyInfo.cs
+C:\Users\Administrator\HRS\HotelReservation.Web\obj\Debug\net9.0\HotelReservation.Web.sourcelink.json
+C:\Users\Administrator\HRS\HotelReservation.Web\obj\Debug\net9.0\tr-TR\HotelReservation.Web.resources.cs
+C:\Users\Administrator\HRS\HotelReservation.Web\obj\Debug\net9.0\tr-TR\HotelReservation.Web.resources.dll
 C:\Users\Administrator\HRS\HotelReservation.Web\obj\Debug\net9.0\rjimswa.dswa.cache.json
 C:\Users\Administrator\HRS\HotelReservation.Web\obj\Debug\net9.0\rjsmrazor.dswa.cache.json
 C:\Users\Administrator\HRS\HotelReservation.Web\obj\Debug\net9.0\rjsmcshtml.dswa.cache.json
@@ -230,8 +248,8 @@ C:\Users\Administrator\HRS\HotelReservation.Web\obj\Debug\net9.0\compressed\xtan
 C:\Users\Administrator\HRS\HotelReservation.Web\obj\Debug\net9.0\compressed\1mbtf800mg-muycvpuwrr.gz
 C:\Users\Administrator\HRS\HotelReservation.Web\obj\Debug\net9.0\compressed\8jbu5la18y-87fc7y1x7t.gz
 C:\Users\Administrator\HRS\HotelReservation.Web\obj\Debug\net9.0\compressed\hofz786qyh-mlv21k5csn.gz
-C:\Users\Administrator\HRS\HotelReservation.Web\obj\Debug\net9.0\compressed\frp2ovwdru-7bn0kfohgc.gz
-C:\Users\Administrator\HRS\HotelReservation.Web\obj\Debug\net9.0\compressed\f8bxu04p80-7bn0kfohgc.gz
+C:\Users\Administrator\HRS\HotelReservation.Web\obj\Debug\net9.0\compressed\frp2ovwdru-sxbt6tcsgq.gz
+C:\Users\Administrator\HRS\HotelReservation.Web\obj\Debug\net9.0\compressed\f8bxu04p80-sxbt6tcsgq.gz
 C:\Users\Administrator\HRS\HotelReservation.Web\obj\Debug\net9.0\staticwebassets.build.json
 C:\Users\Administrator\HRS\HotelReservation.Web\obj\Debug\net9.0\staticwebassets.build.json.cache
 C:\Users\Administrator\HRS\HotelReservation.Web\obj\Debug\net9.0\staticwebassets.development.json
@@ -242,4 +260,4 @@ C:\Users\Administrator\HRS\HotelReservation.Web\obj\Debug\net9.0\refint\HotelRes
 C:\Users\Administrator\HRS\HotelReservation.Web\obj\Debug\net9.0\HotelReservation.Web.pdb
 C:\Users\Administrator\HRS\HotelReservation.Web\obj\Debug\net9.0\HotelReservation.Web.genruntimeconfig.cache
 C:\Users\Administrator\HRS\HotelReservation.Web\obj\Debug\net9.0\ref\HotelReservation.Web.dll
-C:\Users\Administrator\HRS\HotelReservation.Web\obj\Debug\net9.0\compressed\8dhkzgv7ol-9age1sii9c.gz
+C:\Users\Administrator\HRS\HotelReservation.Web\obj\Debug\net9.0\compressed\8dhkzgv7ol-k3w7g9he4t.gz

@@ -1,48 +1,83 @@
 @model IEnumerable<HotelReservation.Core.DTOs.ReservationListDto>
 @using HotelReservation.Core.Enums
+@inject IStringLocalizer<HotelReservation.Web.SharedResource> Localizer
 @{
-    ViewData["Title"] = "My Reservations";
+    ViewData["Title"] = Localizer["MyReservations"];
 }
 
-<h2 class="mb-4"><i class="fas fa-calendar-alt"></i> My Reservations</h2>
+<div class="page-header text-center mb-5">
+    <h1 class="display-5 mb-3"><i class="fas fa-calendar-alt me-3 text-accent"></i>@Localizer["MyReservations"]</h1>
+    <p class="lead text-muted">@Localizer["ViewAndManageBookings"]</p>
+</div>
 
 @if (Model.Any())
 {
-    <div class="row">
+    <div class="row g-4">
         @foreach (var reservation in Model.OrderByDescending(r => r.CreatedAt))
         {
-            <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card h-100 shadow-sm">
-                    <div class="card-header 
+            <div class="col-md-6 col-lg-4">
+                <div class="reservation-card">
+                    <div class="reservation-card-header 
                         @(reservation.Status == ReservationStatus.Confirmed ? "bg-success text-white" : 
                           reservation.Status == ReservationStatus.Cancelled ? "bg-danger text-white" : 
-                          "bg-warning")">
-                        <h5 class="mb-0">
-                            <span class="badge bg-white text-dark">@reservation.StatusName</span>
-                        </h5>
+                          "bg-warning text-dark")">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="fw-semibold">@Localizer["Reservation"] #@reservation.Id</span>
+                            <span class="badge bg-white text-dark">@Localizer[reservation.StatusName]</span>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <h6 class="card-subtitle mb-2 text-muted">@reservation.HotelName</h6>
-                        <p class="card-text">
-                            <strong>Room:</strong> @reservation.RoomNumber<br />
-                            <strong>Check-In:</strong> @reservation.CheckInDate.ToString("MMM dd, yyyy")<br />
-                            <strong>Check-Out:</strong> @reservation.CheckOutDate.ToString("MMM dd, yyyy")<br />
-                            <strong>Guests:</strong> @reservation.NumberOfGuests<br />
-                            <strong class="text-success">Total:</strong> <strong class="text-success">$@reservation.TotalPrice</strong>
-                        </p>
-                        <small class="text-muted">Booked: @reservation.CreatedAt.ToString("MMM dd, yyyy")</small>
+                    <div class="reservation-card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="feature-icon me-3" style="width: 45px; height: 45px;">
+                                <i class="fas fa-hotel"></i>
+                            </div>
+                            <div>
+                                <small class="text-muted d-block">@Localizer["Hotel"]</small>
+                                <strong>@reservation.HotelName</strong>
+                            </div>
+                        </div>
+                        
+                        <div class="row g-3 mb-3">
+                            <div class="col-6">
+                                <small class="text-muted d-block"><i class="fas fa-door-open me-1"></i>@Localizer["Room"]</small>
+                                <strong>@reservation.RoomNumber</strong>
+                            </div>
+                            <div class="col-6">
+                                <small class="text-muted d-block"><i class="fas fa-users me-1"></i>@Localizer["Guests"]</small>
+                                <strong>@reservation.NumberOfGuests</strong>
+                            </div>
+                        </div>
+                        
+                        <div class="row g-3 mb-3">
+                            <div class="col-6">
+                                <small class="text-muted d-block"><i class="fas fa-calendar-check me-1"></i>@Localizer["CheckIn"]</small>
+                                <strong>@reservation.CheckInDate.ToString("MMM dd, yyyy")</strong>
+                            </div>
+                            <div class="col-6">
+                                <small class="text-muted d-block"><i class="fas fa-calendar-times me-1"></i>@Localizer["CheckOut"]</small>
+                                <strong>@reservation.CheckOutDate.ToString("MMM dd, yyyy")</strong>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between align-items-center pt-3 border-top">
+                            <div>
+                                <small class="text-muted d-block">@Localizer["TotalPrice"]</small>
+                                <span class="price-display" style="font-size: 1.5rem;">$@reservation.TotalPrice</span>
+                            </div>
+                            <small class="text-muted">@Localizer["Booked"]: @reservation.CreatedAt.ToString("MMM dd, yyyy")</small>
+                        </div>
                     </div>
-                    <div class="card-footer bg-transparent">
+                    <div class="reservation-card-footer">
                         <div class="d-grid gap-2">
-                            <a asp-action="Details" asp-route-id="@reservation.Id" class="btn btn-outline-primary btn-sm">
-                                <i class="fas fa-info-circle"></i> View Details
+                            <a asp-action="Details" asp-route-id="@reservation.Id" class="btn btn-premium btn-sm">
+                                <i class="fas fa-info-circle me-1"></i>@Localizer["ViewDetails"]
                             </a>
                             @if (reservation.Status == ReservationStatus.Confirmed && reservation.CheckInDate > DateTime.Now)
                             {
                                 <form asp-action="Cancel" asp-route-id="@reservation.Id" method="post" 
-                                      onsubmit="return confirm('Are you sure you want to cancel this reservation?');">
-                                    <button type="submit" class="btn btn-danger btn-sm w-100">
-                                        <i class="fas fa-times"></i> Cancel Reservation
+                                      onsubmit="return confirm('@Localizer["CancelConfirmation"]');">
+                                    <button type="submit" class="btn btn-outline-danger btn-sm w-100">
+                                        <i class="fas fa-times me-1"></i>@Localizer["CancelReservation"]
                                     </button>
                                 </form>
                             }
@@ -55,8 +90,14 @@
 }
 else
 {
-    <div class="alert alert-info">
-        <i class="fas fa-info-circle"></i> You don't have any reservations yet.
-        <a asp-controller="Rooms" asp-action="Search" class="alert-link">Search for available rooms</a>.
+    <div class="text-center py-5">
+        <div class="feature-icon mx-auto mb-4" style="width: 100px; height: 100px;">
+            <i class="fas fa-calendar-alt fa-3x"></i>
+        </div>
+        <h3 class="text-muted mb-3">@Localizer["NoReservationsYet"]</h3>
+        <p class="text-muted mb-4">@Localizer["StartSearchingRooms"]</p>
+        <a asp-controller="Rooms" asp-action="Search" class="btn btn-hero btn-lg px-5">
+            <i class="fas fa-search me-2"></i>@Localizer["SearchRooms"]
+        </a>
     </div>
 }

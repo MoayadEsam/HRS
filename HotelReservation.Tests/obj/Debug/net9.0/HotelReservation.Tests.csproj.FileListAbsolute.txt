@@ -41,6 +41,8 @@ C:\Users\Administrator\HRS\HotelReservation.Tests\bin\Debug\net9.0\Microsoft.Tes
 C:\Users\Administrator\HRS\HotelReservation.Tests\bin\Debug\net9.0\Microsoft.VisualStudio.TestPlatform.Common.dll
 C:\Users\Administrator\HRS\HotelReservation.Tests\bin\Debug\net9.0\Moq.dll
 C:\Users\Administrator\HRS\HotelReservation.Tests\bin\Debug\net9.0\Newtonsoft.Json.dll
+C:\Users\Administrator\HRS\HotelReservation.Tests\bin\Debug\net9.0\Npgsql.dll
+C:\Users\Administrator\HRS\HotelReservation.Tests\bin\Debug\net9.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 C:\Users\Administrator\HRS\HotelReservation.Tests\bin\Debug\net9.0\SQLitePCLRaw.batteries_v2.dll
 C:\Users\Administrator\HRS\HotelReservation.Tests\bin\Debug\net9.0\SQLitePCLRaw.core.dll
 C:\Users\Administrator\HRS\HotelReservation.Tests\bin\Debug\net9.0\SQLitePCLRaw.provider.e_sqlite3.dll
@@ -148,6 +150,7 @@ C:\Users\Administrator\HRS\HotelReservation.Tests\obj\Debug\net9.0\HotelReservat
 C:\Users\Administrator\HRS\HotelReservation.Tests\obj\Debug\net9.0\HotelReservation.Tests.AssemblyInfoInputs.cache
 C:\Users\Administrator\HRS\HotelReservation.Tests\obj\Debug\net9.0\HotelReservation.Tests.AssemblyInfo.cs
 C:\Users\Administrator\HRS\HotelReservation.Tests\obj\Debug\net9.0\HotelReservation.Tests.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\HRS\HotelReservation.Tests\obj\Debug\net9.0\HotelReservation.Tests.sourcelink.json
 C:\Users\Administrator\HRS\HotelReservation.Tests\obj\Debug\net9.0\HotelRes.FD8A16F8.Up2Date
 C:\Users\Administrator\HRS\HotelReservation.Tests\obj\Debug\net9.0\HotelReservation.Tests.dll
 C:\Users\Administrator\HRS\HotelReservation.Tests\obj\Debug\net9.0\refint\HotelReservation.Tests.dll

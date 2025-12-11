@@ -52,5 +52,92 @@ public class MappingProfile : Profile
         // User mappings
         CreateMap<ApplicationUser, UserDto>()
             .ForMember(dest => dest.Roles, opt => opt.Ignore());
+
+        // Department mappings
+        CreateMap<Department, DepartmentListDto>()
+            .ForMember(dest => dest.EmployeeCount, opt => opt.MapFrom(src => src.Employees.Count));
+        CreateMap<DepartmentCreateDto, Department>();
+        CreateMap<DepartmentUpdateDto, Department>();
+
+        // Employee mappings
+        CreateMap<Employee, EmployeeListDto>()
+            .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => $"{src.FirstName} {src.LastName}"))
+            .ForMember(dest => dest.DepartmentName, opt => opt.MapFrom(src => src.Department.Name));
+        CreateMap<Employee, EmployeeDetailsDto>()
+            .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => $"{src.FirstName} {src.LastName}"))
+            .ForMember(dest => dest.DepartmentName, opt => opt.MapFrom(src => src.Department.Name));
+        CreateMap<EmployeeCreateDto, Employee>();
+        CreateMap<EmployeeUpdateDto, Employee>();
+
+        // Salary mappings
+        CreateMap<Salary, SalaryListDto>()
+            .ForMember(dest => dest.EmployeeName, opt => opt.MapFrom(src => $"{src.Employee.FirstName} {src.Employee.LastName}"))
+            .ForMember(dest => dest.DepartmentName, opt => opt.MapFrom(src => src.Employee.Department.Name))
+            .ForMember(dest => dest.StatusName, opt => opt.MapFrom(src => src.Status.ToString()));
+        CreateMap<SalaryCreateDto, Salary>();
+        CreateMap<SalaryUpdateDto, Salary>();
+
+        // Attendance mappings
+        CreateMap<Attendance, AttendanceListDto>()
+            .ForMember(dest => dest.EmployeeName, opt => opt.MapFrom(src => $"{src.Employee.FirstName} {src.Employee.LastName}"))
+            .ForMember(dest => dest.StatusName, opt => opt.MapFrom(src => src.Status.ToString()));
+        CreateMap<AttendanceCreateDto, Attendance>();
+
+        // Expense Category mappings
+        CreateMap<ExpenseCategory, ExpenseCategoryListDto>()
+            .ForMember(dest => dest.ExpenseCount, opt => opt.MapFrom(src => src.Expenses.Count))
+            .ForMember(dest => dest.TotalAmount, opt => opt.MapFrom(src => src.Expenses.Sum(e => e.Amount)));
+        CreateMap<ExpenseCategoryCreateDto, ExpenseCategory>();
+        CreateMap<ExpenseCategoryUpdateDto, ExpenseCategory>();
+
+        // Expense mappings
+        CreateMap<Expense, ExpenseListDto>()
+            .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.Name))
+            .ForMember(dest => dest.PaymentMethodName, opt => opt.MapFrom(src => src.PaymentMethod.ToString()))
+            .ForMember(dest => dest.StatusName, opt => opt.MapFrom(src => src.Status.ToString()));
+        CreateMap<Expense, ExpenseDetailsDto>()
+            .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.Name))
+            .ForMember(dest => dest.PaymentMethodName, opt => opt.MapFrom(src => src.PaymentMethod.ToString()))
+            .ForMember(dest => dest.StatusName, opt => opt.MapFrom(src => src.Status.ToString()));
+        CreateMap<ExpenseCreateDto, Expense>();
+        CreateMap<ExpenseUpdateDto, Expense>();
+
+        // Income mappings
+        CreateMap<Income, IncomeListDto>()
+            .ForMember(dest => dest.TypeName, opt => opt.MapFrom(src => src.Type.ToString()))
+            .ForMember(dest => dest.PaymentMethodName, opt => opt.MapFrom(src => src.PaymentMethod.ToString()));
+        CreateMap<Income, IncomeDetailsDto>()
+            .ForMember(dest => dest.TypeName, opt => opt.MapFrom(src => src.Type.ToString()))
+            .ForMember(dest => dest.PaymentMethodName, opt => opt.MapFrom(src => src.PaymentMethod.ToString()));
+        CreateMap<IncomeCreateDto, Income>();
+        CreateMap<IncomeUpdateDto, Income>();
+
+        // Inventory Category mappings
+        CreateMap<InventoryCategory, InventoryCategoryListDto>()
+            .ForMember(dest => dest.ItemCount, opt => opt.MapFrom(src => src.Items.Count))
+            .ForMember(dest => dest.TotalValue, opt => opt.MapFrom(src => src.Items.Sum(i => i.Quantity * i.UnitPrice)));
+        CreateMap<InventoryCategoryCreateDto, InventoryCategory>();
+        CreateMap<InventoryCategoryUpdateDto, InventoryCategory>();
+
+        // Inventory Item mappings
+        CreateMap<InventoryItem, InventoryItemListDto>()
+            .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.Name))
+            .ForMember(dest => dest.TotalValue, opt => opt.MapFrom(src => src.Quantity * src.UnitPrice))
+            .ForMember(dest => dest.IsLowStock, opt => opt.MapFrom(src => src.Quantity <= src.ReorderLevel));
+        CreateMap<InventoryItem, InventoryItemDetailsDto>()
+            .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.Name))
+            .ForMember(dest => dest.TotalValue, opt => opt.MapFrom(src => src.Quantity * src.UnitPrice))
+            .ForMember(dest => dest.IsLowStock, opt => opt.MapFrom(src => src.Quantity <= src.ReorderLevel))
+            .ForMember(dest => dest.LastUpdated, opt => opt.MapFrom(src => src.UpdatedAt ?? src.CreatedAt));
+        CreateMap<InventoryItemCreateDto, InventoryItem>();
+        CreateMap<InventoryItemUpdateDto, InventoryItem>();
+
+        // Inventory Transaction mappings
+        CreateMap<InventoryTransaction, InventoryTransactionDto>()
+            .ForMember(dest => dest.ItemName, opt => opt.MapFrom(src => src.Item.Name))
+            .ForMember(dest => dest.TypeName, opt => opt.MapFrom(src => src.Type.ToString()));
+        CreateMap<InventoryTransaction, InventoryTransactionListDto>()
+            .ForMember(dest => dest.ItemName, opt => opt.MapFrom(src => src.Item.Name))
+            .ForMember(dest => dest.TypeName, opt => opt.MapFrom(src => src.Type.ToString()));
     }
 }

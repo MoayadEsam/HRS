@@ -125,6 +125,9 @@
   <data name="Actions" xml:space="preserve">
     <value>Actions</value>
   </data>
+  <data name="GoTo" xml:space="preserve">
+    <value>Go</value>
+  </data>
   
   <!-- Home Page -->
   <data name="FindYourPerfectStay" xml:space="preserve">
@@ -373,5 +376,935 @@
   </data>
   <data name="AlreadyHaveAccount" xml:space="preserve">
     <value>Already have an account?</value>
+  </data>
+  <data name="WelcomeBack" xml:space="preserve">
+    <value>Welcome Back</value>
+  </data>
+  <data name="SignInToAccount" xml:space="preserve">
+    <value>Sign in to your LuxeStay account</value>
+  </data>
+  <data name="EmailAddress" xml:space="preserve">
+    <value>Email Address</value>
+  </data>
+  <data name="KeepMeSignedIn" xml:space="preserve">
+    <value>Keep me signed in</value>
+  </data>
+  <data name="SignIn" xml:space="preserve">
+    <value>Sign In</value>
+  </data>
+  <data name="DemoAccounts" xml:space="preserve">
+    <value>Demo Accounts</value>
+  </data>
+  <data name="NewToLuxeStay" xml:space="preserve">
+    <value>New to LuxeStay?</value>
+  </data>
+  <data name="CreateAnAccount" xml:space="preserve">
+    <value>Create an account</value>
+  </data>
+  <data name="JoinLuxeStay" xml:space="preserve">
+    <value>Join LuxeStay</value>
+  </data>
+  <data name="CreateAccountAndStart" xml:space="preserve">
+    <value>Create your account and start your journey</value>
+  </data>
+  <data name="CreateAccount" xml:space="preserve">
+    <value>Create Account</value>
+  </data>
+  <data name="SignInHere" xml:space="preserve">
+    <value>Sign in here</value>
+  </data>
+  <data name="AccessDenied" xml:space="preserve">
+    <value>Access Denied</value>
+  </data>
+  <data name="NoPermission" xml:space="preserve">
+    <value>You do not have permission to access this resource.</value>
+  </data>
+  <data name="ReturnToHome" xml:space="preserve">
+    <value>Return to Home</value>
+  </data>
+  
+  <!-- Hotels -->
+  <data name="AddNewProperty" xml:space="preserve">
+    <value>Add New Property</value>
+  </data>
+  <data name="CreateNewLuxuryHotel" xml:space="preserve">
+    <value>Create a new luxury hotel in your portfolio</value>
+  </data>
+  <data name="BasicInformation" xml:space="preserve">
+    <value>Basic Information</value>
+  </data>
+  <data name="PropertyName" xml:space="preserve">
+    <value>Property Name</value>
+  </data>
+  <data name="LocationDetails" xml:space="preserve">
+    <value>Location Details</value>
+  </data>
+  <data name="StreetAddress" xml:space="preserve">
+    <value>Street Address</value>
+  </data>
+  <data name="PostalCode" xml:space="preserve">
+    <value>Postal Code</value>
+  </data>
+  <data name="ContactInformation" xml:space="preserve">
+    <value>Contact Information</value>
+  </data>
+  <data name="CreateProperty" xml:space="preserve">
+    <value>Create Property</value>
+  </data>
+  <data name="EditHotel" xml:space="preserve">
+    <value>Edit Hotel</value>
+  </data>
+  <data name="SaveChanges" xml:space="preserve">
+    <value>Save Changes</value>
+  </data>
+  <data name="DeleteHotel" xml:space="preserve">
+    <value>Delete Hotel</value>
+  </data>
+  <data name="ConfirmDeleteHotel" xml:space="preserve">
+    <value>Are you sure you want to delete this hotel?</value>
+  </data>
+  <data name="ConfirmDelete" xml:space="preserve">
+    <value>Confirm Delete</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="Rating" xml:space="preserve">
+    <value>Rating</value>
+  </data>
+  <data name="TotalRooms" xml:space="preserve">
+    <value>Total Rooms</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="AvailableRoomsInHotel" xml:space="preserve">
+    <value>Available Rooms</value>
+  </data>
+  <data name="SearchAvailableRooms" xml:space="preserve">
+    <value>Search Available Rooms</value>
+  </data>
+  <data name="AdminActions" xml:space="preserve">
+    <value>Admin Actions</value>
+  </data>
+  <data name="BackToHotels" xml:space="preserve">
+    <value>Back to Hotels</value>
+  </data>
+  <data name="Star" xml:space="preserve">
+    <value>Star</value>
+  </data>
+  <data name="Stars" xml:space="preserve">
+    <value>Stars</value>
+  </data>
+  <data name="HotelImageUrl" xml:space="preserve">
+    <value>Hotel Image URL</value>
+  </data>
+  <data name="EnterImageUrl" xml:space="preserve">
+    <value>Enter a URL to an image for this hotel</value>
+  </data>
+  <data name="IsActive" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  
+  <!-- Rooms -->
+  <data name="AddNewRoom" xml:space="preserve">
+    <value>Add New Room</value>
+  </data>
+  <data name="CreateNewLuxuryRoom" xml:space="preserve">
+    <value>Create a new luxury accommodation</value>
+  </data>
+  <data name="PropertySelection" xml:space="preserve">
+    <value>Property Selection</value>
+  </data>
+  <data name="SelectHotel" xml:space="preserve">
+    <value>Select Hotel</value>
+  </data>
+  <data name="ChooseProperty" xml:space="preserve">
+    <value>-- Choose a property --</value>
+  </data>
+  <data name="RoomDetails" xml:space="preserve">
+    <value>Room Details</value>
+  </data>
+  <data name="GuestCapacity" xml:space="preserve">
+    <value>Guest Capacity</value>
+  </data>
+  <data name="CreateRoom" xml:space="preserve">
+    <value>Create Room</value>
+  </data>
+  <data name="EditRoom" xml:space="preserve">
+    <value>Edit Room</value>
+  </data>
+  <data name="DeleteRoom" xml:space="preserve">
+    <value>Delete Room</value>
+  </data>
+  <data name="ConfirmDeleteRoom" xml:space="preserve">
+    <value>Are you sure you want to delete this room?</value>
+  </data>
+  <data name="Hotel" xml:space="preserve">
+    <value>Hotel</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="ManageRooms" xml:space="preserve">
+    <value>Manage Rooms</value>
+  </data>
+  <data name="NoRoomsFoundAdmin" xml:space="preserve">
+    <value>No rooms found.</value>
+  </data>
+  <data name="BookThisRoom" xml:space="preserve">
+    <value>Book This Room</value>
+  </data>
+  <data name="RoomCurrentlyBooked" xml:space="preserve">
+    <value>This room is currently booked.</value>
+  </data>
+  <data name="ViewHotel" xml:space="preserve">
+    <value>View Hotel</value>
+  </data>
+  <data name="BackToSearch" xml:space="preserve">
+    <value>Back to Search</value>
+  </data>
+  <data name="IsAvailable" xml:space="preserve">
+    <value>Available</value>
+  </data>
+  
+  <!-- Reservations -->
+  <data name="AllReservations" xml:space="preserve">
+    <value>All Reservations</value>
+  </data>
+  <data name="ExportCSV" xml:space="preserve">
+    <value>Export CSV</value>
+  </data>
+  <data name="Guest" xml:space="preserve">
+    <value>Guest</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="NoReservationsFound" xml:space="preserve">
+    <value>No reservations found.</value>
+  </data>
+  <data name="CreateReservation" xml:space="preserve">
+    <value>Create Reservation</value>
+  </data>
+  <data name="NumberOfGuests" xml:space="preserve">
+    <value>Number of Guests</value>
+  </data>
+  <data name="SpecialRequests" xml:space="preserve">
+    <value>Special Requests</value>
+  </data>
+  <data name="PriceSummary" xml:space="preserve">
+    <value>Price Summary</value>
+  </data>
+  <data name="NumberOfNights" xml:space="preserve">
+    <value>Number of Nights</value>
+  </data>
+  <data name="ConfirmReservation" xml:space="preserve">
+    <value>Confirm Reservation</value>
+  </data>
+  <data name="MyReservations" xml:space="preserve">
+    <value>My Reservations</value>
+  </data>
+  <data name="Booked" xml:space="preserve">
+    <value>Booked</value>
+  </data>
+  <data name="NoReservationsYet" xml:space="preserve">
+    <value>You don't have any reservations yet.</value>
+  </data>
+  <data name="SearchForRooms" xml:space="preserve">
+    <value>Search for available rooms</value>
+  </data>
+  <data name="CancelReservation" xml:space="preserve">
+    <value>Cancel Reservation</value>
+  </data>
+  <data name="ConfirmCancelReservation" xml:space="preserve">
+    <value>Are you sure you want to cancel this reservation?</value>
+  </data>
+  <data name="ReservationDetails" xml:space="preserve">
+    <value>Reservation Details</value>
+  </data>
+  <data name="HotelInformation" xml:space="preserve">
+    <value>Hotel Information</value>
+  </data>
+  <data name="RoomInformation" xml:space="preserve">
+    <value>Room Information</value>
+  </data>
+  <data name="ReservationDates" xml:space="preserve">
+    <value>Reservation Dates</value>
+  </data>
+  <data name="PriceBreakdown" xml:space="preserve">
+    <value>Price Breakdown</value>
+  </data>
+  <data name="GuestInformation" xml:space="preserve">
+    <value>Guest Information</value>
+  </data>
+  <data name="BookingInformation" xml:space="preserve">
+    <value>Booking Information</value>
+  </data>
+  <data name="Created" xml:space="preserve">
+    <value>Created</value>
+  </data>
+  <data name="LastUpdated" xml:space="preserve">
+    <value>Last Updated</value>
+  </data>
+  <data name="DownloadPDF" xml:space="preserve">
+    <value>Download PDF</value>
+  </data>
+  
+  <!-- Amenities -->
+  <data name="ManageAmenities" xml:space="preserve">
+    <value>Manage Amenities</value>
+  </data>
+  <data name="AddNewAmenity" xml:space="preserve">
+    <value>Add New Amenity</value>
+  </data>
+  <data name="CreateNewAmenity" xml:space="preserve">
+    <value>Create New Amenity</value>
+  </data>
+  <data name="CreateAmenity" xml:space="preserve">
+    <value>Create Amenity</value>
+  </data>
+  <data name="EditAmenity" xml:space="preserve">
+    <value>Edit Amenity</value>
+  </data>
+  <data name="DeleteAmenity" xml:space="preserve">
+    <value>Delete Amenity</value>
+  </data>
+  <data name="ConfirmDeleteAmenity" xml:space="preserve">
+    <value>Are you sure you want to delete this amenity?</value>
+  </data>
+  <data name="IconClass" xml:space="preserve">
+    <value>Icon Class</value>
+  </data>
+  <data name="FontAwesomeIconHint" xml:space="preserve">
+    <value>Font Awesome icon class (e.g., "fas fa-wifi", "fas fa-swimming-pool")</value>
+  </data>
+  <data name="NoAmenitiesFound" xml:space="preserve">
+    <value>No amenities found. Add your first amenity to get started.</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="Inactive" xml:space="preserve">
+    <value>Inactive</value>
+  </data>
+  <data name="Icon" xml:space="preserve">
+    <value>Icon</value>
+  </data>
+  
+  <!-- Privacy & Error -->
+  <data name="PrivacyPolicy" xml:space="preserve">
+    <value>Privacy Policy</value>
+  </data>
+  <data name="PrivacyIntro" xml:space="preserve">
+    <value>This is a demo Hotel Reservation System. Your privacy is important to us.</value>
+  </data>
+  <data name="DataCollection" xml:space="preserve">
+    <value>Data Collection</value>
+  </data>
+  <data name="DataCollectionDesc" xml:space="preserve">
+    <value>We collect personal information that you provide when creating an account or making a reservation, including:</value>
+  </data>
+  <data name="NameAndContact" xml:space="preserve">
+    <value>Name and contact information</value>
+  </data>
+  <data name="ReservationDetailsPrivacy" xml:space="preserve">
+    <value>Reservation details</value>
+  </data>
+  <data name="DataUsage" xml:space="preserve">
+    <value>Data Usage</value>
+  </data>
+  <data name="DataUsageDesc" xml:space="preserve">
+    <value>Your information is used solely for the purpose of managing your hotel reservations and account.</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="PrivacyContact" xml:space="preserve">
+    <value>For any privacy-related questions, please contact us at privacy@hotelreservation.com</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="ErrorOccurred" xml:space="preserve">
+    <value>An error occurred while processing your request.</value>
+  </data>
+  <data name="RequestId" xml:space="preserve">
+    <value>Request ID</value>
+  </data>
+  <data name="DevelopmentMode" xml:space="preserve">
+    <value>Development Mode</value>
+  </data>
+  
+  <!-- Room Types -->
+  <data name="Single" xml:space="preserve">
+    <value>Single</value>
+  </data>
+  <data name="Double" xml:space="preserve">
+    <value>Double</value>
+  </data>
+  <data name="Suite" xml:space="preserve">
+    <value>Suite</value>
+  </data>
+  <data name="Deluxe" xml:space="preserve">
+    <value>Deluxe</value>
+  </data>
+  
+  <!-- Reservation Status -->
+  <data name="Pending" xml:space="preserve">
+    <value>Pending</value>
+  </data>
+  <data name="Confirmed" xml:space="preserve">
+    <value>Confirmed</value>
+  </data>
+  <data name="Cancelled" xml:space="preserve">
+    <value>Cancelled</value>
+  </data>
+  <data name="Completed" xml:space="preserve">
+    <value>Completed</value>
+  </data>
+  
+  <!-- Additional Missing Keys -->
+  <data name="ExportCsv" xml:space="preserve">
+    <value>Export CSV</value>
+  </data>
+  <data name="Reservation" xml:space="preserve">
+    <value>Reservation</value>
+  </data>
+  <data name="Nights" xml:space="preserve">
+    <value>nights</value>
+  </data>
+  <data name="DownloadPdf" xml:space="preserve">
+    <value>Download PDF</value>
+  </data>
+  <data name="SpecialRequestsPlaceholder" xml:space="preserve">
+    <value>Any special requests or requirements...</value>
+  </data>
+  <data name="SearchForAvailableRooms" xml:space="preserve">
+    <value>Search for available rooms</value>
+  </data>
+  <data name="IconClassHelp" xml:space="preserve">
+    <value>Font Awesome icon class (e.g., "fas fa-wifi", "fas fa-swimming-pool")</value>
+  </data>
+  <data name="PrivacyPolicyIntro" xml:space="preserve">
+    <value>This is a demo Hotel Reservation System. Your privacy is important to us.</value>
+  </data>
+  <data name="ReservationDetails" xml:space="preserve">
+    <value>Reservation details</value>
+  </data>
+  <data name="ContactDesc" xml:space="preserve">
+    <value>For any privacy-related questions, please contact us at privacy@hotelreservation.com</value>
+  </data>
+  <data name="DevelopmentModeDesc" xml:space="preserve">
+    <value>Swapping to Development environment will display more detailed information about the error that occurred.</value>
+  </data>
+  <data name="DevelopmentWarning" xml:space="preserve">
+    <value>The Development environment shouldn't be enabled for deployed applications.</value>
+  </data>
+
+  <!-- Management Page -->
+  <data name="ManagementHubDescription" xml:space="preserve">
+    <value>Access all management features from one place</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="DashboardDescription" xml:space="preserve">
+    <value>View analytics, statistics and reports</value>
+  </data>
+  <data name="ReservationsDescription" xml:space="preserve">
+    <value>Manage bookings, check-ins and check-outs</value>
+  </data>
+  <data name="HotelManagement" xml:space="preserve">
+    <value>Hotel Management</value>
+  </data>
+  <data name="AddHotelDescription" xml:space="preserve">
+    <value>Add a new hotel property</value>
+  </data>
+  <data name="AddRoomDescription" xml:space="preserve">
+    <value>Add rooms to hotels</value>
+  </data>
+  <data name="AmenitiesDescription" xml:space="preserve">
+    <value>Manage room amenities</value>
+  </data>
+  <data name="StaffManagement" xml:space="preserve">
+    <value>Staff Management</value>
+  </data>
+  <data name="Departments" xml:space="preserve">
+    <value>Departments</value>
+  </data>
+  <data name="DepartmentsDescription" xml:space="preserve">
+    <value>Manage departments</value>
+  </data>
+  <data name="Employees" xml:space="preserve">
+    <value>Employees</value>
+  </data>
+  <data name="EmployeesDescription" xml:space="preserve">
+    <value>Manage staff members</value>
+  </data>
+  <data name="Salaries" xml:space="preserve">
+    <value>Salaries</value>
+  </data>
+  <data name="SalariesDescription" xml:space="preserve">
+    <value>Process payroll</value>
+  </data>
+  <data name="Attendance" xml:space="preserve">
+    <value>Attendance</value>
+  </data>
+  <data name="AttendanceDescription" xml:space="preserve">
+    <value>Track attendance</value>
+  </data>
+  <data name="FinanceManagement" xml:space="preserve">
+    <value>Finance Management</value>
+  </data>
+  <data name="Expenses" xml:space="preserve">
+    <value>Expenses</value>
+  </data>
+  <data name="ExpensesDescription" xml:space="preserve">
+    <value>Track expenses</value>
+  </data>
+  <data name="Incomes" xml:space="preserve">
+    <value>Incomes</value>
+  </data>
+  <data name="IncomesDescription" xml:space="preserve">
+    <value>Track revenue</value>
+  </data>
+  <data name="FinancialReports" xml:space="preserve">
+    <value>Financial Reports</value>
+  </data>
+  <data name="FinancialReportsDescription" xml:space="preserve">
+    <value>View financial reports</value>
+  </data>
+  <data name="InventoryManagement" xml:space="preserve">
+    <value>Inventory Management</value>
+  </data>
+  <data name="Categories" xml:space="preserve">
+    <value>Categories</value>
+  </data>
+  <data name="CategoriesDescription" xml:space="preserve">
+    <value>Manage categories</value>
+  </data>
+  <data name="InventoryItems" xml:space="preserve">
+    <value>Inventory Items</value>
+  </data>
+  <data name="InventoryItemsDescription" xml:space="preserve">
+    <value>Manage inventory</value>
+  </data>
+  <data name="Transactions" xml:space="preserve">
+    <value>Transactions</value>
+  </data>
+  <data name="TransactionsDescription" xml:space="preserve">
+    <value>View stock movements</value>
+  </data>
+
+  <!-- Admin Dashboard -->
+  <data name="AdminDashboard" xml:space="preserve">
+    <value>Admin Dashboard</value>
+  </data>
+  <data name="TodayReservations" xml:space="preserve">
+    <value>Today's Reservations</value>
+  </data>
+  <data name="CheckOuts" xml:space="preserve">
+    <value>Check-outs</value>
+  </data>
+  <data name="OccupancyRate" xml:space="preserve">
+    <value>Occupancy Rate</value>
+  </data>
+  <data name="Occupied" xml:space="preserve">
+    <value>Occupied</value>
+  </data>
+  <data name="ActiveStaff" xml:space="preserve">
+    <value>Active Staff</value>
+  </data>
+  <data name="PresentToday" xml:space="preserve">
+    <value>Present Today</value>
+  </data>
+  <data name="MonthlyIncome" xml:space="preserve">
+    <value>Monthly Income</value>
+  </data>
+  <data name="MonthlyExpenses" xml:space="preserve">
+    <value>Monthly Expenses</value>
+  </data>
+  <data name="NetProfit" xml:space="preserve">
+    <value>Net Profit</value>
+  </data>
+  <data name="FinancialOverview" xml:space="preserve">
+    <value>Financial Overview</value>
+  </data>
+  <data name="ViewReports" xml:space="preserve">
+    <value>View Reports</value>
+  </data>
+  <data name="RoomOccupancy" xml:space="preserve">
+    <value>Room Occupancy</value>
+  </data>
+  <data name="PendingTasks" xml:space="preserve">
+    <value>Pending Tasks</value>
+  </data>
+  <data name="PendingReservations" xml:space="preserve">
+    <value>Pending Reservations</value>
+  </data>
+  <data name="PendingExpenses" xml:space="preserve">
+    <value>Pending Expenses</value>
+  </data>
+  <data name="PendingSalaries" xml:space="preserve">
+    <value>Pending Salaries</value>
+  </data>
+  <data name="LowStockItems" xml:space="preserve">
+    <value>Low Stock Items</value>
+  </data>
+  <data name="RecentReservations" xml:space="preserve">
+    <value>Recent Reservations</value>
+  </data>
+  <data name="ViewAll" xml:space="preserve">
+    <value>View All</value>
+  </data>
+  <data name="NoRecentReservations" xml:space="preserve">
+    <value>No recent reservations</value>
+  </data>
+  <data name="QuickActions" xml:space="preserve">
+    <value>Quick Actions</value>
+  </data>
+  <data name="NewReservation" xml:space="preserve">
+    <value>New Reservation</value>
+  </data>
+  <data name="RecordExpense" xml:space="preserve">
+    <value>Record Expense</value>
+  </data>
+  <data name="RecordIncome" xml:space="preserve">
+    <value>Record Income</value>
+  </data>
+  <data name="RecordAttendance" xml:space="preserve">
+    <value>Record Attendance</value>
+  </data>
+  <data name="ManageInventory" xml:space="preserve">
+    <value>Manage Inventory</value>
+  </data>
+
+  <!-- Staff Management -->
+  <data name="AddDepartment" xml:space="preserve">
+    <value>Add Department</value>
+  </data>
+  <data name="ViewEmployees" xml:space="preserve">
+    <value>View Employees</value>
+  </data>
+  <data name="AddEmployee" xml:space="preserve">
+    <value>Add Employee</value>
+  </data>
+  <data name="FilterByDepartment" xml:space="preserve">
+    <value>Filter by Department</value>
+  </data>
+  <data name="AllDepartments" xml:space="preserve">
+    <value>All Departments</value>
+  </data>
+  <data name="Position" xml:space="preserve">
+    <value>Position</value>
+  </data>
+  <data name="Department" xml:space="preserve">
+    <value>Department</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="Salary" xml:space="preserve">
+    <value>Salary</value>
+  </data>
+  <data name="HiredOn" xml:space="preserve">
+    <value>Hired on</value>
+  </data>
+  <data name="SalaryManagement" xml:space="preserve">
+    <value>Salary Management</value>
+  </data>
+  <data name="ProcessSalaries" xml:space="preserve">
+    <value>Process Salaries</value>
+  </data>
+  <data name="AllEmployees" xml:space="preserve">
+    <value>All Employees</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>Month</value>
+  </data>
+  <data name="AllMonths" xml:space="preserve">
+    <value>All Months</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="Paid" xml:space="preserve">
+    <value>Paid</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="TotalSalaries" xml:space="preserve">
+    <value>Total Salaries</value>
+  </data>
+  <data name="TotalRecords" xml:space="preserve">
+    <value>Total Records</value>
+  </data>
+  <data name="Period" xml:space="preserve">
+    <value>Period</value>
+  </data>
+  <data name="GrossAmount" xml:space="preserve">
+    <value>Gross Amount</value>
+  </data>
+  <data name="Deductions" xml:space="preserve">
+    <value>Deductions</value>
+  </data>
+  <data name="Bonus" xml:space="preserve">
+    <value>Bonus</value>
+  </data>
+  <data name="NetAmount" xml:space="preserve">
+    <value>Net Amount</value>
+  </data>
+  <data name="PaymentDate" xml:space="preserve">
+    <value>Payment Date</value>
+  </data>
+  <data name="MarkAsPaid" xml:space="preserve">
+    <value>Mark as Paid</value>
+  </data>
+  <data name="ProcessSalariesDescription" xml:space="preserve">
+    <value>Generate salary records for all employees for the selected month.</value>
+  </data>
+  <data name="ProcessSalariesWarning" xml:space="preserve">
+    <value>This will create salary records based on each employee's base salary. Existing records for this period will not be duplicated.</value>
+  </data>
+  <data name="Process" xml:space="preserve">
+    <value>Process</value>
+  </data>
+  <data name="Show" xml:space="preserve">
+    <value>Show</value>
+  </data>
+  <data name="Entries" xml:space="preserve">
+    <value>entries</value>
+  </data>
+  <data name="NoDataAvailable" xml:space="preserve">
+    <value>No data available in table</value>
+  </data>
+  <data name="Showing" xml:space="preserve">
+    <value>Showing</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>to</value>
+  </data>
+  <data name="Of" xml:space="preserve">
+    <value>of</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+
+  <!-- Finance Management -->
+  <data name="ExpenseManagement" xml:space="preserve">
+    <value>Expense Management</value>
+  </data>
+  <data name="AddExpense" xml:space="preserve">
+    <value>Add Expense</value>
+  </data>
+  <data name="AllCategories" xml:space="preserve">
+    <value>All Categories</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>Start Date</value>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>End Date</value>
+  </data>
+  <data name="Approved" xml:space="preserve">
+    <value>Approved</value>
+  </data>
+  <data name="TotalExpenses" xml:space="preserve">
+    <value>Total Expenses</value>
+  </data>
+  <data name="IncomeManagement" xml:space="preserve">
+    <value>Income Management</value>
+  </data>
+  <data name="AddIncome" xml:space="preserve">
+    <value>Add Income</value>
+  </data>
+  <data name="Source" xml:space="preserve">
+    <value>Source</value>
+  </data>
+  <data name="AllSources" xml:space="preserve">
+    <value>All Sources</value>
+  </data>
+  <data name="Restaurant" xml:space="preserve">
+    <value>Restaurant</value>
+  </data>
+  <data name="Spa" xml:space="preserve">
+    <value>Spa</value>
+  </data>
+  <data name="Event" xml:space="preserve">
+    <value>Event</value>
+  </data>
+  <data name="Other" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="TotalIncome" xml:space="preserve">
+    <value>Total Income</value>
+  </data>
+  <data name="ReservationIncome" xml:space="preserve">
+    <value>Reservation Income</value>
+  </data>
+  <data name="OtherIncome" xml:space="preserve">
+    <value>Other Income</value>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="ApprovedBy" xml:space="preserve">
+    <value>Approved By</value>
+  </data>
+  <data name="Approve" xml:space="preserve">
+    <value>Approve</value>
+  </data>
+
+  <!-- Inventory Management -->
+  <data name="AddItem" xml:space="preserve">
+    <value>Add Item</value>
+  </data>
+  <data name="StockStatus" xml:space="preserve">
+    <value>Stock Status</value>
+  </data>
+  <data name="LowStock" xml:space="preserve">
+    <value>Low Stock</value>
+  </data>
+  <data name="OutOfStock" xml:space="preserve">
+    <value>Out of Stock</value>
+  </data>
+  <data name="InStock" xml:space="preserve">
+    <value>In Stock</value>
+  </data>
+  <data name="SearchItems" xml:space="preserve">
+    <value>Search items...</value>
+  </data>
+  <data name="TotalItems" xml:space="preserve">
+    <value>Total Items</value>
+  </data>
+  <data name="TotalValue" xml:space="preserve">
+    <value>Total Value</value>
+  </data>
+  <data name="ItemName" xml:space="preserve">
+    <value>Item Name</value>
+  </data>
+  <data name="SKU" xml:space="preserve">
+    <value>SKU</value>
+  </data>
+  <data name="Quantity" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="UnitPrice" xml:space="preserve">
+    <value>Unit Price</value>
+  </data>
+  <data name="ReorderLevel" xml:space="preserve">
+    <value>Reorder Level</value>
+  </data>
+  <data name="AddStock" xml:space="preserve">
+    <value>Add Stock</value>
+  </data>
+  <data name="RemoveStock" xml:space="preserve">
+    <value>Remove Stock</value>
+  </data>
+  <data name="TransactionType" xml:space="preserve">
+    <value>Transaction Type</value>
+  </data>
+  <data name="AllTypes" xml:space="preserve">
+    <value>All Types</value>
+  </data>
+  <data name="StockIn" xml:space="preserve">
+    <value>Stock In</value>
+  </data>
+  <data name="StockOut" xml:space="preserve">
+    <value>Stock Out</value>
+  </data>
+  <data name="Adjustment" xml:space="preserve">
+    <value>Adjustment</value>
+  </data>
+  <data name="Item" xml:space="preserve">
+    <value>Item</value>
+  </data>
+  <data name="Reference" xml:space="preserve">
+    <value>Reference</value>
+  </data>
+  <data name="Notes" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="MyProfile" xml:space="preserve">
+    <value>My Profile</value>
+  </data>
+  <data name="FooterTagline" xml:space="preserve">
+    <value>Experience luxury at its finest. Your comfort is our priority.</value>
+  </data>
+  <data name="Privacy" xml:space="preserve">
+    <value>Privacy</value>
+  </data>
+  <!-- Attendance Status -->
+  <data name="Present" xml:space="preserve">
+    <value>Present</value>
+  </data>
+  <data name="Absent" xml:space="preserve">
+    <value>Absent</value>
+  </data>
+  <data name="Late" xml:space="preserve">
+    <value>Late</value>
+  </data>
+  <data name="OnLeave" xml:space="preserve">
+    <value>On Leave</value>
+  </data>
+  <data name="Hours" xml:space="preserve">
+    <value>Hours</value>
+  </data>
+  <data name="NoAttendanceRecords" xml:space="preserve">
+    <value>No attendance records found</value>
+  </data>
+  <data name="CheckInTime" xml:space="preserve">
+    <value>Check In</value>
+  </data>
+  <data name="CheckOutTime" xml:space="preserve">
+    <value>Check Out</value>
+  </data>
+  <data name="WorkingHours" xml:space="preserve">
+    <value>Working Hours</value>
+  </data>
+  <data name="BackToProfile" xml:space="preserve">
+    <value>Back to Profile</value>
+  </data>
+  <data name="MyAttendance" xml:space="preserve">
+    <value>My Attendance</value>
+  </data>
+  <data name="AccountNotLinked" xml:space="preserve">
+    <value>Account Not Linked</value>
+  </data>
+  <data name="AccountNotLinkedMessage" xml:space="preserve">
+    <value>Your account is not linked to an employee profile.</value>
+  </data>
+  <data name="ContactAdminMessage" xml:space="preserve">
+    <value>Please contact your administrator to link your account.</value>
+  </data>
+  <data name="BackToHome" xml:space="preserve">
+    <value>Back to Home</value>
   </data>
 </root>

@@ -31,21 +31,30 @@ public class RoomsController : Controller
         return View(rooms);
     }
 
-    public async Task<IActionResult> Search()
+    public async Task<IActionResult> Search(RoomSearchDto? searchDto)
     {
         ViewBag.Hotels = new SelectList(await _hotelService.GetActiveHotelsAsync(), "Id", "Name");
         ViewBag.Amenities = await _amenityService.GetActiveAmenitiesAsync();
-        return View();
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> Search(RoomSearchDto searchDto)
-    {
-        var rooms = await _roomService.SearchRoomsAsync(searchDto);
-        ViewBag.Hotels = new SelectList(await _hotelService.GetActiveHotelsAsync(), "Id", "Name");
-        ViewBag.Amenities = await _amenityService.GetActiveAmenitiesAsync();
-        ViewBag.SearchPerformed = true;
-        return View(rooms);
+        
+        // Check if search parameters were provided
+        bool hasSearchParams = searchDto != null && 
+            (searchDto.CheckInDate.HasValue || searchDto.CheckOutDate.HasValue || 
+             searchDto.MinPrice.HasValue || searchDto.MaxPrice.HasValue || 
+             searchDto.Type.HasValue || searchDto.HotelId.HasValue);
+        
+        if (hasSearchParams)
+        {
+            var rooms = await _roomService.SearchRoomsAsync(searchDto!);
+            ViewBag.SearchPerformed = true;
+            ViewBag.CheckInDate = searchDto!.CheckInDate?.ToString("yyyy-MM-dd");
+            ViewBag.CheckOutDate = searchDto.CheckOutDate?.ToString("yyyy-MM-dd");
+            ViewBag.MinPrice = searchDto.MinPrice;
+            ViewBag.MaxPrice = searchDto.MaxPrice;
+            ViewBag.SelectedType = searchDto.Type;
+            return View(rooms);
+        }
+        
+        return View(Enumerable.Empty<RoomListDto>());
     }
 
     public async Task<IActionResult> Details(int id)

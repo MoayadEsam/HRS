@@ -1,0 +1,514 @@
+@model HotelReservation.Core.DTOs.DashboardSummaryDto
+@inject IStringLocalizer<SharedResource> Localizer
+
+@{
+    ViewData["Title"] = Localizer["AdminDashboard"];
+}
+
+<style>
+    /* Dashboard Stat Cards - Modern Light Design */
+    .stat-card {
+        background: #ffffff;
+        border: none;
+        border-radius: 16px;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        transition: all 0.3s ease;
+        overflow: hidden;
+        position: relative;
+    }
+    .stat-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    }
+    .stat-card .card-body {
+        padding: 1.5rem;
+    }
+    .stat-card .stat-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+    }
+    .stat-card .stat-icon.rooms { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; }
+    .stat-card .stat-icon.reservations { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); color: #fff; }
+    .stat-card .stat-icon.occupancy { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: #fff; }
+    .stat-card .stat-icon.staff { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: #fff; }
+    
+    .stat-card .stat-label {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #64748b;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 0.5rem;
+    }
+    .stat-card .stat-value {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #1e293b;
+        line-height: 1.2;
+    }
+    .stat-card .stat-subtitle {
+        font-size: 0.85rem;
+        color: #94a3b8;
+        margin-top: 0.25rem;
+    }
+    .stat-card .stat-footer {
+        background: #f8fafc;
+        padding: 0.75rem 1.5rem;
+        border-top: 1px solid #e2e8f0;
+    }
+    .stat-card .stat-footer a {
+        color: #64748b;
+        font-size: 0.85rem;
+        font-weight: 500;
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+    .stat-card .stat-footer a:hover {
+        color: #c9a227;
+    }
+    .stat-card .progress-mini {
+        height: 6px;
+        background: #e2e8f0;
+        border-radius: 3px;
+        overflow: hidden;
+        margin-top: 0.75rem;
+    }
+    .stat-card .progress-mini .progress-bar {
+        background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+        border-radius: 3px;
+    }
+
+    /* Finance Cards */
+    .finance-card {
+        background: #ffffff;
+        border: none;
+        border-radius: 16px;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        transition: all 0.3s ease;
+    }
+    .finance-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+    .finance-card .finance-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+    }
+    .finance-card .finance-icon.income { background: rgba(16, 185, 129, 0.1); color: #10b981; }
+    .finance-card .finance-icon.expense { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
+    .finance-card .finance-icon.profit { background: rgba(99, 102, 241, 0.1); color: #6366f1; }
+    .finance-card .finance-label { font-size: 0.85rem; color: #64748b; font-weight: 500; }
+    .finance-card .finance-value { font-size: 1.5rem; font-weight: 700; }
+    .finance-card .finance-value.positive { color: #10b981; }
+    .finance-card .finance-value.negative { color: #ef4444; }
+    .finance-card .finance-value.neutral { color: #6366f1; }
+</style>
+
+<div class="container-fluid py-4">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="mb-1" style="color: #1e293b; font-weight: 700;">
+                <i class="fas fa-tachometer-alt me-2" style="color: #c9a227;"></i>@Localizer["AdminDashboard"]
+            </h2>
+            <p class="text-muted mb-0" style="font-size: 0.9rem;">
+                <i class="fas fa-calendar me-1"></i>@DateTime.Now.ToString("dddd, MMMM d, yyyy")
+            </p>
+        </div>
+    </div>
+
+    <!-- Quick Stats Row -->
+    <div class="row mb-4">
+        <!-- Total Rooms -->
+        <div class="col-xl-3 col-md-6 mb-3">
+            <div class="stat-card h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <div class="stat-label">@Localizer["TotalRooms"]</div>
+                            <div class="stat-value">@Model.TotalRooms</div>
+                            <div class="stat-subtitle">
+                                <i class="fas fa-check-circle me-1" style="color: #10b981;"></i>
+                                @Model.AvailableRooms @Localizer["Available"]
+                            </div>
+                        </div>
+                        <div class="stat-icon rooms">
+                            <i class="fas fa-door-open"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-footer">
+                    <a asp-controller="Rooms" asp-action="Index">
+                        @Localizer["ViewDetails"] <i class="fas fa-arrow-right ms-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Today Reservations -->
+        <div class="col-xl-3 col-md-6 mb-3">
+            <div class="stat-card h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <div class="stat-label">@Localizer["TodayReservations"]</div>
+                            <div class="stat-value">@Model.TodayCheckIns</div>
+                            <div class="stat-subtitle">
+                                <i class="fas fa-sign-out-alt me-1" style="color: #f59e0b;"></i>
+                                @Model.TodayCheckOuts @Localizer["CheckOuts"]
+                            </div>
+                        </div>
+                        <div class="stat-icon reservations">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-footer">
+                    <a asp-controller="Reservations" asp-action="Index">
+                        @Localizer["ViewDetails"] <i class="fas fa-arrow-right ms-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Occupancy Rate -->
+        <div class="col-xl-3 col-md-6 mb-3">
+            <div class="stat-card h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div style="flex: 1;">
+                            <div class="stat-label">@Localizer["OccupancyRate"]</div>
+                            <div class="stat-value">@Model.OccupancyRate.ToString("F1")%</div>
+                            <div class="stat-subtitle">
+                                <i class="fas fa-bed me-1" style="color: #4facfe;"></i>
+                                @Model.OccupiedRooms @Localizer["Occupied"]
+                            </div>
+                            <div class="progress-mini">
+                                <div class="progress-bar" style="width: @Model.OccupancyRate%"></div>
+                            </div>
+                        </div>
+                        <div class="stat-icon occupancy">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Active Staff -->
+        <div class="col-xl-3 col-md-6 mb-3">
+            <div class="stat-card h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <div class="stat-label">@Localizer["ActiveStaff"]</div>
+                            <div class="stat-value">@Model.TotalEmployees</div>
+                            <div class="stat-subtitle">
+                                <i class="fas fa-user-check me-1" style="color: #10b981;"></i>
+                                @Model.PresentToday @Localizer["PresentToday"]
+                            </div>
+                        </div>
+                        <div class="stat-icon staff">
+                            <i class="fas fa-users"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-footer">
+                    <a asp-controller="Staff" asp-action="Employees">
+                        @Localizer["ViewDetails"] <i class="fas fa-arrow-right ms-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Financial Summary Row -->
+    <div class="row mb-4">
+        <div class="col-xl-4 col-md-6 mb-3">
+            <div class="finance-card h-100">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="finance-label mb-1">@Localizer["MonthlyIncome"]</div>
+                            <div class="finance-value positive">@Model.MonthlyIncome.ToString("C")</div>
+                        </div>
+                        <div class="finance-icon income">
+                            <i class="fas fa-arrow-up"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-md-6 mb-3">
+            <div class="finance-card h-100">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="finance-label mb-1">@Localizer["MonthlyExpenses"]</div>
+                            <div class="finance-value negative">@Model.MonthlyExpenses.ToString("C")</div>
+                        </div>
+                        <div class="finance-icon expense">
+                            <i class="fas fa-arrow-down"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-md-12 mb-3">
+            <div class="finance-card h-100">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="finance-label mb-1">@Localizer["NetProfit"]</div>
+                            <div class="finance-value @(Model.MonthlyIncome - Model.MonthlyExpenses >= 0 ? "positive" : "negative")">
+                                @((Model.MonthlyIncome - Model.MonthlyExpenses).ToString("C"))
+                            </div>
+                        </div>
+                        <div class="finance-icon profit">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Row -->
+    <div class="row mb-4">
+        <div class="col-xl-8 mb-4">
+            <div class="card border-0 shadow-sm h-100" style="border-radius: 16px;">
+                <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center" style="border-radius: 16px 16px 0 0; padding: 1.25rem 1.5rem;">
+                    <h5 class="mb-0" style="font-weight: 600; color: #1e293b;">
+                        <i class="fas fa-chart-line me-2" style="color: #6366f1;"></i>@Localizer["FinancialOverview"]
+                    </h5>
+                    <a asp-controller="Finance" asp-action="Reports" class="btn btn-sm" style="background: linear-gradient(135deg, #c9a227 0%, #d4af37 100%); color: #fff; border: none; border-radius: 8px; padding: 0.5rem 1rem; font-weight: 500;">
+                        @Localizer["ViewReports"]
+                    </a>
+                </div>
+                <div class="card-body">
+                    <canvas id="financialChart" height="120"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 mb-4">
+            <div class="card border-0 shadow-sm h-100" style="border-radius: 16px;">
+                <div class="card-header bg-white border-0" style="border-radius: 16px 16px 0 0; padding: 1.25rem 1.5rem;">
+                    <h5 class="mb-0" style="font-weight: 600; color: #1e293b;">
+                        <i class="fas fa-chart-pie me-2" style="color: #4facfe;"></i>@Localizer["RoomOccupancy"]
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="occupancyChart" height="220"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Row -->
+    <div class="row">
+        <!-- Pending Tasks -->
+        <div class="col-xl-4 mb-4">
+            <div class="card border-0 shadow-sm h-100" style="border-radius: 16px;">
+                <div class="card-header bg-white border-0" style="border-radius: 16px 16px 0 0; padding: 1.25rem 1.5rem;">
+                    <h5 class="mb-0" style="font-weight: 600; color: #1e293b;">
+                        <i class="fas fa-tasks me-2" style="color: #f59e0b;"></i>@Localizer["PendingTasks"]
+                    </h5>
+                </div>
+                <div class="card-body p-0">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-4 py-3">
+                            <span style="color: #475569;"><i class="fas fa-clock me-2" style="color: #f59e0b;"></i>@Localizer["PendingReservations"]</span>
+                            <span class="badge" style="background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%); color: #fff; padding: 0.4rem 0.75rem; border-radius: 20px;">@Model.PendingReservations</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-4 py-3">
+                            <span style="color: #475569;"><i class="fas fa-file-invoice me-2" style="color: #ef4444;"></i>@Localizer["PendingExpenses"]</span>
+                            <span class="badge" style="background: linear-gradient(135deg, #ef4444 0%, #f87171 100%); color: #fff; padding: 0.4rem 0.75rem; border-radius: 20px;">@Model.PendingExpenses</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-4 py-3">
+                            <span style="color: #475569;"><i class="fas fa-money-bill me-2" style="color: #06b6d4;"></i>@Localizer["PendingSalaries"]</span>
+                            <span class="badge" style="background: linear-gradient(135deg, #06b6d4 0%, #22d3ee 100%); color: #fff; padding: 0.4rem 0.75rem; border-radius: 20px;">@Model.PendingSalaries</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-4 py-3">
+                            <span style="color: #475569;"><i class="fas fa-exclamation-triangle me-2" style="color: #ef4444;"></i>@Localizer["LowStockItems"]</span>
+                            <span class="badge" style="background: linear-gradient(135deg, #ef4444 0%, #f87171 100%); color: #fff; padding: 0.4rem 0.75rem; border-radius: 20px;">@Model.LowStockItems</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Reservations -->
+        <div class="col-xl-4 mb-4">
+            <div class="card border-0 shadow-sm h-100" style="border-radius: 16px;">
+                <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center" style="border-radius: 16px 16px 0 0; padding: 1.25rem 1.5rem;">
+                    <h5 class="mb-0" style="font-weight: 600; color: #1e293b;">
+                        <i class="fas fa-calendar-alt me-2" style="color: #10b981;"></i>@Localizer["RecentReservations"]
+                    </h5>
+                    <a asp-controller="Reservations" asp-action="Index" class="btn btn-sm" style="background: linear-gradient(135deg, #c9a227 0%, #d4af37 100%); color: #fff; border: none; border-radius: 8px; padding: 0.5rem 1rem; font-weight: 500;">
+                        @Localizer["ViewAll"]
+                    </a>
+                </div>
+                <div class="card-body p-0">
+                    @if (Model.RecentReservations != null && Model.RecentReservations.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-sm table-hover mb-0">
+                                <tbody>
+                                    @foreach (var reservation in Model.RecentReservations.Take(5))
+                                    {
+                                        <tr>
+                                            <td>
+                                                <strong>@reservation.GuestName</strong><br />
+                                                <small class="text-muted">@reservation.RoomNumber</small>
+                                            </td>
+                                            <td class="text-end">
+                                                <span class="badge @(reservation.Status == "Confirmed" ? "bg-success" : reservation.Status == "Pending" ? "bg-warning" : "bg-secondary")">
+                                                    @Localizer[reservation.Status]
+                                                </span><br />
+                                                <small>@reservation.CheckInDate.ToString("MMM d")</small>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="text-muted text-center p-3">@Localizer["NoRecentReservations"]</p>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="col-xl-4 mb-4">
+            <div class="card border-0 shadow-sm h-100" style="border-radius: 16px;">
+                <div class="card-header bg-white border-0" style="border-radius: 16px 16px 0 0; padding: 1.25rem 1.5rem;">
+                    <h5 class="mb-0" style="font-weight: 600; color: #1e293b;">
+                        <i class="fas fa-bolt me-2" style="color: #c9a227;"></i>@Localizer["QuickActions"]
+                    </h5>
+                </div>
+                <div class="card-body p-4">
+                    <div class="d-grid gap-2">
+                        <a asp-controller="Reservations" asp-action="Create" class="btn" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; border: none; border-radius: 10px; padding: 0.75rem; font-weight: 500;">
+                            <i class="fas fa-plus me-2"></i>@Localizer["NewReservation"]
+                        </a>
+                        <a asp-controller="Finance" asp-action="CreateExpense" class="btn" style="background: linear-gradient(135deg, #ef4444 0%, #f87171 100%); color: #fff; border: none; border-radius: 10px; padding: 0.75rem; font-weight: 500;">
+                            <i class="fas fa-file-invoice-dollar me-2"></i>@Localizer["RecordExpense"]
+                        </a>
+                        <a asp-controller="Finance" asp-action="CreateIncome" class="btn" style="background: linear-gradient(135deg, #10b981 0%, #34d399 100%); color: #fff; border: none; border-radius: 10px; padding: 0.75rem; font-weight: 500;">
+                            <i class="fas fa-hand-holding-usd me-2"></i>@Localizer["RecordIncome"]
+                        </a>
+                        <a asp-controller="Staff" asp-action="Attendance" class="btn" style="background: linear-gradient(135deg, #06b6d4 0%, #22d3ee 100%); color: #fff; border: none; border-radius: 10px; padding: 0.75rem; font-weight: 500;">
+                            <i class="fas fa-user-clock me-2"></i>@Localizer["RecordAttendance"]
+                        </a>
+                        <a asp-controller="Inventory" asp-action="Items" class="btn" style="background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%); color: #fff; border: none; border-radius: 10px; padding: 0.75rem; font-weight: 500;">
+                            <i class="fas fa-boxes me-2"></i>@Localizer["ManageInventory"]
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Financial Chart with modern styling
+        fetch('@Url.Action("GetFinancialChartData")')
+            .then(response => response.json())
+            .then(data => {
+                var ctx = document.getElementById('financialChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: data.labels,
+                        datasets: [{
+                            label: '@Html.Raw(Localizer["Income"])',
+                            data: data.income,
+                            borderColor: '#10b981',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            fill: true,
+                            tension: 0.4,
+                            borderWidth: 3,
+                            pointRadius: 4,
+                            pointBackgroundColor: '#10b981'
+                        }, {
+                            label: '@Html.Raw(Localizer["Expenses"])',
+                            data: data.expenses,
+                            borderColor: '#ef4444',
+                            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                            fill: true,
+                            tension: 0.4,
+                            borderWidth: 3,
+                            pointRadius: 4,
+                            pointBackgroundColor: '#ef4444'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                labels: {
+                                    usePointStyle: true,
+                                    padding: 20,
+                                    font: { weight: '500' }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: { color: 'rgba(0,0,0,0.05)' }
+                            },
+                            x: {
+                                grid: { display: false }
+                            }
+                        }
+                    }
+                });
+            });
+
+        // Occupancy Chart with modern colors
+        var occupancyCtx = document.getElementById('occupancyChart').getContext('2d');
+        new Chart(occupancyCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['@Html.Raw(Localizer["Occupied"])', '@Html.Raw(Localizer["Available"])', '@Html.Raw(Localizer["Maintenance"])'],
+                datasets: [{
+                    data: [@Model.OccupiedRooms, @Model.AvailableRooms, @(Model.TotalRooms - Model.OccupiedRooms - Model.AvailableRooms)],
+                    backgroundColor: ['#667eea', '#10b981', '#94a3b8'],
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                cutout: '65%',
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            usePointStyle: true,
+                            padding: 15,
+                            font: { weight: '500' }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+}

@@ -1,0 +1,122 @@
+@model HotelReservation.Core.DTOs.InventoryItemCreateDto
+@inject IStringLocalizer<SharedResource> Localizer
+
+@{
+    ViewData["Title"] = Localizer["AddInventoryItem"];
+}
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-plus me-2"></i>@Localizer["AddInventoryItem"]
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="CreateItem" method="post">
+                        @Html.AntiForgeryToken()
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Name" class="form-label">@Localizer["ItemName"] <span class="text-danger">*</span></label>
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="SKU" class="form-label">@Localizer["SKU"] <span class="text-danger">*</span></label>
+                                <input asp-for="SKU" class="form-control" placeholder="e.g., INV-001" />
+                                <span asp-validation-for="SKU" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Description" class="form-label">@Localizer["Description"]</label>
+                            <textarea asp-for="Description" class="form-control" rows="2"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="CategoryId" class="form-label">@Localizer["Category"] <span class="text-danger">*</span></label>
+                                <select asp-for="CategoryId" asp-items="ViewBag.Categories as SelectList" class="form-select">
+                                    <option value="">@Localizer["SelectCategory"]</option>
+                                </select>
+                                <span asp-validation-for="CategoryId" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="UnitOfMeasure" class="form-label">@Localizer["UnitOfMeasure"] <span class="text-danger">*</span></label>
+                                <select asp-for="UnitOfMeasure" class="form-select">
+                                    <option value="pcs">@Localizer["Pieces"]</option>
+                                    <option value="kg">@Localizer["Kilograms"]</option>
+                                    <option value="g">@Localizer["Grams"]</option>
+                                    <option value="L">@Localizer["Liters"]</option>
+                                    <option value="mL">@Localizer["Milliliters"]</option>
+                                    <option value="m">@Localizer["Meters"]</option>
+                                    <option value="box">@Localizer["Box"]</option>
+                                    <option value="pack">@Localizer["Pack"]</option>
+                                </select>
+                                <span asp-validation-for="UnitOfMeasure" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label asp-for="Quantity" class="form-label">@Localizer["InitialQuantity"] <span class="text-danger">*</span></label>
+                                <input asp-for="Quantity" class="form-control" type="number" value="0" />
+                                <span asp-validation-for="Quantity" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label asp-for="UnitPrice" class="form-label">@Localizer["UnitPrice"] <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text">$</span>
+                                    <input asp-for="UnitPrice" class="form-control" type="number" step="0.01" />
+                                </div>
+                                <span asp-validation-for="UnitPrice" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label asp-for="ReorderLevel" class="form-label">@Localizer["ReorderLevel"]</label>
+                                <input asp-for="ReorderLevel" class="form-control" type="number" value="0" />
+                                <small class="text-muted">@Localizer["ReorderLevelHelp"]</small>
+                                <span asp-validation-for="ReorderLevel" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Supplier" class="form-label">@Localizer["Supplier"]</label>
+                                <input asp-for="Supplier" class="form-control" />
+                                <span asp-validation-for="Supplier" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Location" class="form-label">@Localizer["StorageLocation"]</label>
+                                <input asp-for="Location" class="form-control" placeholder="e.g., Warehouse A, Shelf 3" />
+                                <span asp-validation-for="Location" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Notes" class="form-label">@Localizer["Notes"]</label>
+                            <textarea asp-for="Notes" class="form-control" rows="2"></textarea>
+                            <span asp-validation-for="Notes" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a asp-action="Items" class="btn btn-outline-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>@Localizer["Cancel"]
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-2"></i>@Localizer["Save"]
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

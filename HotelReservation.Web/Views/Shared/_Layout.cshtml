@@ -10,13 +10,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    @await RenderSectionAsync("Styles", required: false)
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark premium-nav shadow-lg">
             <div class="container">
                 <a class="navbar-brand premium-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                    <i class="fas fa-home"></i> ComfortStay
+                    <i class="fas fa-gem"></i> ComfortStay
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -41,23 +42,19 @@
                                     <a class="nav-link px-3" asp-area="" asp-controller="Reservations" asp-action="MyReservations"><i class="fas fa-calendar-check me-1"></i>@Localizer["MyBookings"]</a>
                                 </li>
                             }
+                            @if (User.IsInRole("Staff") && !User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link px-3" asp-area="" asp-controller="StaffProfile" asp-action="Index"><i class="fas fa-id-badge me-1"></i>@Localizer["MyProfile"]</a>
+                                </li>
+                            }
                         }
                         @if (User.IsInRole("Admin") || User.IsInRole("Staff"))
                         {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle px-3" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <li class="nav-item">
+                                <a class="nav-link px-3" asp-controller="Management" asp-action="Index">
                                     <i class="fas fa-crown me-1"></i>@Localizer["Management"]
                                 </a>
-                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="adminDropdown">
-                                    <li><a class="dropdown-item" asp-controller="Reservations" asp-action="Index"><i class="fas fa-list me-2"></i>@Localizer["Reservations"]</a></li>
-                                    @if (User.IsInRole("Admin"))
-                                    {
-                                        <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item" asp-controller="Hotels" asp-action="Create"><i class="fas fa-plus-circle me-2"></i>@Localizer["AddHotel"]</a></li>
-                                        <li><a class="dropdown-item" asp-controller="Rooms" asp-action="Create"><i class="fas fa-door-open me-2"></i>@Localizer["AddRoom"]</a></li>
-                                        <li><a class="dropdown-item" asp-controller="Amenities" asp-action="Index"><i class="fas fa-cog me-2"></i>@Localizer["Amenities"]</a></li>
-                                    }
-                                </ul>
                             </li>
                         }
                     </ul>
@@ -112,8 +109,8 @@
         <div class="container py-5">
             <div class="row">
                 <div class="col-md-4 mb-4">
-                    <h5 class="footer-brand mb-3"><i class="fas fa-home"></i> ComfortStay</h5>
-                    <p class="text-light opacity-75">Experience luxury and comfort in our world-class hotels. Your perfect stay awaits.</p>
+                    <h5 class="footer-brand mb-3"><i class="fas fa-gem me-2"></i>ComfortStay</h5>
+                    <p class="text-light opacity-75">@Localizer["FooterTagline"]</p>
                 </div>
                 <div class="col-md-4 mb-4">
                     <h6 class="mb-3">@Localizer["QuickLinks"]</h6>
@@ -121,17 +118,8 @@
                         <li><a asp-controller="Home" asp-action="Index" class="footer-link"><i class="fas fa-chevron-right me-2"></i>@Localizer["Home"]</a></li>
                         <li><a asp-controller="Hotels" asp-action="Index" class="footer-link"><i class="fas fa-chevron-right me-2"></i>@Localizer["Hotels"]</a></li>
                         <li><a asp-controller="Rooms" asp-action="Search" class="footer-link"><i class="fas fa-chevron-right me-2"></i>@Localizer["Search"]</a></li>
-                        <li><a asp-controller="Home" asp-action="Privacy" class="footer-link"><i class="fas fa-chevron-right me-2"></i>Privacy</a></li>
+                        <li><a asp-controller="Home" asp-action="Privacy" class="footer-link"><i class="fas fa-chevron-right me-2"></i>@Localizer["Privacy"]</a></li>
                     </ul>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <h6 class="mb-3">@Localizer["FollowUs"]</h6>
-                    <div class="social-icons">
-                        <a href="#" class="footer-social-link me-3"><i class="fab fa-facebook fa-2x"></i></a>
-                        <a href="#" class="footer-social-link me-3"><i class="fab fa-instagram fa-2x"></i></a>
-                        <a href="#" class="footer-social-link me-3"><i class="fab fa-twitter fa-2x"></i></a>
-                        <a href="#" class="footer-social-link"><i class="fab fa-linkedin fa-2x"></i></a>
-                    </div>
                 </div>
             </div>
             <hr class="my-4 border-light opacity-25">

@@ -1,0 +1,194 @@
+@model IEnumerable<HotelReservation.Core.DTOs.IncomeListDto>
+@inject IStringLocalizer<SharedResource> Localizer
+
+@{
+    ViewData["Title"] = Localizer["Incomes"];
+}
+
+<div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>
+            <i class="fas fa-hand-holding-usd me-2"></i>@Localizer["IncomeManagement"]
+        </h2>
+        <a asp-action="CreateIncome" class="btn btn-primary">
+            <i class="fas fa-plus me-2"></i>@Localizer["AddIncome"]
+        </a>
+    </div>
+
+    <!-- Filter Card -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <form asp-action="Income" method="get" class="row g-3">
+                <div class="col-md-3">
+                    <label class="form-label">@Localizer["Source"]</label>
+                    <select name="source" class="form-select">
+                        <option value="">@Localizer["AllSources"]</option>
+                        <option value="Reservation" selected="@(ViewBag.SelectedSource == "Reservation")">@Localizer["Reservation"]</option>
+                        <option value="Restaurant" selected="@(ViewBag.SelectedSource == "Restaurant")">@Localizer["Restaurant"]</option>
+                        <option value="Spa" selected="@(ViewBag.SelectedSource == "Spa")">@Localizer["Spa"]</option>
+                        <option value="Event" selected="@(ViewBag.SelectedSource == "Event")">@Localizer["Event"]</option>
+                        <option value="Other" selected="@(ViewBag.SelectedSource == "Other")">@Localizer["Other"]</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">@Localizer["StartDate"]</label>
+                    <input type="date" name="startDate" class="form-control" value="@(ViewBag.StartDate?.ToString("yyyy-MM-dd"))" />
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">@Localizer["EndDate"]</label>
+                    <input type="date" name="endDate" class="form-control" value="@(ViewBag.EndDate?.ToString("yyyy-MM-dd"))" />
+                </div>
+                <div class="col-md-5 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary me-2">
+                        <i class="fas fa-filter me-1"></i>@Localizer["Filter"]
+                    </button>
+                    <a asp-action="Income" class="btn btn-outline-secondary">
+                        <i class="fas fa-times me-1"></i>@Localizer["Clear"]
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card bg-success text-white shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h6 class="text-white-50">@Localizer["TotalIncome"]</h6>
+                            <h3 class="mb-0">@Model.Sum(i => i.Amount).ToString("C")</h3>
+                        </div>
+                        <div class="opacity-50">
+                            <i class="fas fa-hand-holding-usd fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-primary text-white shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h6 class="text-white-50">@Localizer["ReservationIncome"]</h6>
+                            <h3 class="mb-0">@Model.Where(i => i.Source == "Reservation").Sum(i => i.Amount).ToString("C")</h3>
+                        </div>
+                        <div class="opacity-50">
+                            <i class="fas fa-bed fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-info text-white shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h6 class="text-white-50">@Localizer["OtherIncome"]</h6>
+                            <h3 class="mb-0">@Model.Where(i => i.Source != "Reservation").Sum(i => i.Amount).ToString("C")</h3>
+                        </div>
+                        <div class="opacity-50">
+                            <i class="fas fa-coins fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Income Table -->
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="incomesTable" class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>@Localizer["Date"]</th>
+                            <th>@Localizer["Source"]</th>
+                            <th>@Localizer["Description"]</th>
+                            <th>@Localizer["Amount"]</th>
+                            <th>@Localizer["PaymentMethod"]</th>
+                            <th>@Localizer["Reference"]</th>
+                            <th>@Localizer["Actions"]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var income in Model)
+                        {
+                            var sourceClass = income.Source switch
+                            {
+                                "Reservation" => "bg-primary",
+                                "Restaurant" => "bg-warning",
+                                "Spa" => "bg-info",
+                                "Event" => "bg-success",
+                                _ => "bg-secondary"
+                            };
+                            <tr>
+                                <td>@income.IncomeDate.ToString("d")</td>
+                                <td><span class="badge @sourceClass">@Localizer[income.Source]</span></td>
+                                <td>@income.Description</td>
+                                <td class="text-success fw-bold">@income.Amount.ToString("C")</td>
+                                <td>@Localizer[income.PaymentMethod ?? "Cash"]</td>
+                                <td>@(income.ReferenceNumber ?? "-")</td>
+                                <td>
+                                    <a asp-action="EditIncome" asp-route-id="@income.Id" class="btn btn-primary btn-sm" title="@Localizer["Edit"]">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-@income.Id" title="@Localizer["Delete"]">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+
+                                    <!-- Delete Modal -->
+                                    <div class="modal fade" id="deleteModal-@income.Id" tabindex="-1">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">@Localizer["ConfirmDelete"]</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>@Localizer["DeleteIncomeConfirmation"]</p>
+                                                    <p class="text-muted">@income.Description - @income.Amount.ToString("C")</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@Localizer["Cancel"]</button>
+                                                    <form asp-action="DeleteIncome" method="post" class="d-inline">
+                                                        @Html.AntiForgeryToken()
+                                                        <input type="hidden" name="id" value="@income.Id" />
+                                                        <button type="submit" class="btn btn-danger">@Localizer["Delete"]</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" />
+}
+
+@section Scripts {
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#incomesTable').DataTable({
+                order: [[0, 'desc']],
+                language: {
+                    url: '@Url.Content("~/js/datatables/" + System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName + ".json")'
+                }
+            });
+        });
+    </script>
+}

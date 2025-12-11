@@ -6,6 +6,7 @@ C:\Users\Administrator\HRS\HotelReservation.Core\obj\Debug\net9.0\HotelReservati
 C:\Users\Administrator\HRS\HotelReservation.Core\obj\Debug\net9.0\HotelReservation.Core.AssemblyInfoInputs.cache
 C:\Users\Administrator\HRS\HotelReservation.Core\obj\Debug\net9.0\HotelReservation.Core.AssemblyInfo.cs
 C:\Users\Administrator\HRS\HotelReservation.Core\obj\Debug\net9.0\HotelReservation.Core.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\HRS\HotelReservation.Core\obj\Debug\net9.0\HotelReservation.Core.sourcelink.json
 C:\Users\Administrator\HRS\HotelReservation.Core\obj\Debug\net9.0\HotelReservation.Core.dll
 C:\Users\Administrator\HRS\HotelReservation.Core\obj\Debug\net9.0\refint\HotelReservation.Core.dll
 C:\Users\Administrator\HRS\HotelReservation.Core\obj\Debug\net9.0\HotelReservation.Core.pdb

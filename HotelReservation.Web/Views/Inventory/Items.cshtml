@@ -1,0 +1,275 @@
+@model IEnumerable<HotelReservation.Core.DTOs.InventoryItemListDto>
+@inject IStringLocalizer<SharedResource> Localizer
+
+@{
+    ViewData["Title"] = Localizer["InventoryItems"];
+}
+
+<div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>
+            <i class="fas fa-boxes me-2"></i>@Localizer["InventoryManagement"]
+        </h2>
+        <div>
+            <a asp-action="Categories" class="btn btn-outline-primary me-2">
+                <i class="fas fa-tags me-2"></i>@Localizer["Categories"]
+            </a>
+            <a asp-action="Transactions" class="btn btn-outline-info me-2">
+                <i class="fas fa-history me-2"></i>@Localizer["Transactions"]
+            </a>
+            <a asp-action="CreateItem" class="btn btn-primary">
+                <i class="fas fa-plus me-2"></i>@Localizer["AddItem"]
+            </a>
+        </div>
+    </div>
+
+    <!-- Filter Card -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <form asp-action="Items" method="get" class="row g-3">
+                <div class="col-md-3">
+                    <label class="form-label">@Localizer["Category"]</label>
+                    <select name="categoryId" class="form-select">
+                        <option value="">@Localizer["AllCategories"]</option>
+                        @if (ViewBag.Categories != null)
+                        {
+                            foreach (var cat in ViewBag.Categories as SelectList)
+                            {
+                                <option value="@cat.Value" selected="@(cat.Value == ViewBag.SelectedCategoryId?.ToString())">@cat.Text</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">@Localizer["StockStatus"]</label>
+                    <select name="stockStatus" class="form-select">
+                        <option value="">@Localizer["All"]</option>
+                        <option value="Low" selected="@(ViewBag.StockStatus == "Low")">@Localizer["LowStock"]</option>
+                        <option value="OutOfStock" selected="@(ViewBag.StockStatus == "OutOfStock")">@Localizer["OutOfStock"]</option>
+                        <option value="InStock" selected="@(ViewBag.StockStatus == "InStock")">@Localizer["InStock"]</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">@Localizer["Search"]</label>
+                    <input type="text" name="search" class="form-control" placeholder="@Localizer["SearchItems"]" value="@ViewBag.Search" />
+                </div>
+                <div class="col-md-3 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary me-2">
+                        <i class="fas fa-filter me-1"></i>@Localizer["Filter"]
+                    </button>
+                    <a asp-action="Items" class="btn btn-outline-secondary">
+                        <i class="fas fa-times me-1"></i>@Localizer["Clear"]
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h6 class="text-white-50">@Localizer["TotalItems"]</h6>
+                            <h3 class="mb-0">@Model.Count()</h3>
+                        </div>
+                        <div class="opacity-50">
+                            <i class="fas fa-boxes fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h6 class="text-white-50">@Localizer["TotalValue"]</h6>
+                            <h3 class="mb-0">@Model.Sum(i => i.TotalValue).ToString("C")</h3>
+                        </div>
+                        <div class="opacity-50">
+                            <i class="fas fa-dollar-sign fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-warning text-white shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h6 class="text-white-50">@Localizer["LowStock"]</h6>
+                            <h3 class="mb-0">@Model.Count(i => i.IsLowStock)</h3>
+                        </div>
+                        <div class="opacity-50">
+                            <i class="fas fa-exclamation-triangle fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-danger text-white shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h6 class="text-white-50">@Localizer["OutOfStock"]</h6>
+                            <h3 class="mb-0">@Model.Count(i => i.Quantity <= 0)</h3>
+                        </div>
+                        <div class="opacity-50">
+                            <i class="fas fa-times-circle fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Items Table -->
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="itemsTable" class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>@Localizer["SKU"]</th>
+                            <th>@Localizer["Name"]</th>
+                            <th>@Localizer["Category"]</th>
+                            <th>@Localizer["Quantity"]</th>
+                            <th>@Localizer["UnitPrice"]</th>
+                            <th>@Localizer["TotalValue"]</th>
+                            <th>@Localizer["Status"]</th>
+                            <th>@Localizer["Actions"]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            var statusClass = item.Quantity <= 0 ? "bg-danger" : item.IsLowStock ? "bg-warning" : "bg-success";
+                            var statusText = item.Quantity <= 0 ? "OutOfStock" : item.IsLowStock ? "LowStock" : "InStock";
+                            <tr>
+                                <td><code>@item.SKU</code></td>
+                                <td class="fw-bold">@item.Name</td>
+                                <td><span class="badge bg-secondary">@item.CategoryName</span></td>
+                                <td>
+                                    <span class="@(item.IsLowStock || item.Quantity <= 0 ? "text-danger fw-bold" : "")">
+                                        @item.Quantity @item.UnitOfMeasure
+                                    </span>
+                                    @if (item.ReorderLevel > 0)
+                                    {
+                                        <small class="text-muted d-block">(@Localizer["Min"]: @item.ReorderLevel)</small>
+                                    }
+                                </td>
+                                <td>@item.UnitPrice.ToString("C")</td>
+                                <td class="text-success fw-bold">@item.TotalValue.ToString("C")</td>
+                                <td>
+                                    <span class="badge @statusClass">@Localizer[statusText]</span>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#adjustModal-@item.Id" title="@Localizer["AdjustStock"]">
+                                        <i class="fas fa-plus-minus"></i>
+                                    </button>
+                                    <a asp-action="EditItem" asp-route-id="@item.Id" class="btn btn-sm btn-primary" title="@Localizer["Edit"]">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-@item.Id" title="@Localizer["Delete"]">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+
+                                    <!-- Adjust Stock Modal -->
+                                    <div class="modal fade" id="adjustModal-@item.Id" tabindex="-1">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <form asp-action="AdjustStock" method="post">
+                                                    @Html.AntiForgeryToken()
+                                                    <input type="hidden" name="itemId" value="@item.Id" />
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">
+                                                            <i class="fas fa-plus-minus me-2"></i>@Localizer["AdjustStock"]
+                                                        </h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p class="mb-3">
+                                                            <strong>@item.Name</strong><br />
+                                                            <span class="text-muted">@Localizer["CurrentStock"]: @item.Quantity @item.UnitOfMeasure</span>
+                                                        </p>
+                                                        <div class="mb-3">
+                                                            <label class="form-label">@Localizer["TransactionType"]</label>
+                                                            <select name="transactionType" class="form-select" required>
+                                                                <option value="In">@Localizer["StockIn"]</option>
+                                                                <option value="Out">@Localizer["StockOut"]</option>
+                                                                <option value="Adjustment">@Localizer["Adjustment"]</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label">@Localizer["Quantity"]</label>
+                                                            <input type="number" name="quantity" class="form-control" required min="1" />
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label">@Localizer["Notes"]</label>
+                                                            <textarea name="notes" class="form-control" rows="2"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@Localizer["Cancel"]</button>
+                                                        <button type="submit" class="btn btn-success">@Localizer["Save"]</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Delete Modal -->
+                                    <div class="modal fade" id="deleteModal-@item.Id" tabindex="-1">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">@Localizer["ConfirmDelete"]</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>@Localizer["DeleteItemConfirmation", item.Name]</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@Localizer["Cancel"]</button>
+                                                    <form asp-action="DeleteItem" method="post" class="d-inline">
+                                                        @Html.AntiForgeryToken()
+                                                        <input type="hidden" name="id" value="@item.Id" />
+                                                        <button type="submit" class="btn btn-danger">@Localizer["Delete"]</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" />
+}
+
+@section Scripts {
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#itemsTable').DataTable({
+                language: {
+                    url: '@Url.Content("~/js/datatables/" + System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName + ".json")'
+                }
+            });
+        });
+    </script>
+}

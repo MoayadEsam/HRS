@@ -125,6 +125,9 @@
   <data name="Actions" xml:space="preserve">
     <value>İşlemler</value>
   </data>
+  <data name="GoTo" xml:space="preserve">
+    <value>Git</value>
+  </data>
   
   <!-- Home Page -->
   <data name="FindYourPerfectStay" xml:space="preserve">
@@ -373,5 +376,935 @@
   </data>
   <data name="AlreadyHaveAccount" xml:space="preserve">
     <value>Zaten hesabınız var mı?</value>
+  </data>
+  <data name="WelcomeBack" xml:space="preserve">
+    <value>Tekrar Hoş Geldiniz</value>
+  </data>
+  <data name="SignInToAccount" xml:space="preserve">
+    <value>LuxeStay hesabınıza giriş yapın</value>
+  </data>
+  <data name="EmailAddress" xml:space="preserve">
+    <value>E-posta Adresi</value>
+  </data>
+  <data name="KeepMeSignedIn" xml:space="preserve">
+    <value>Oturumumu açık tut</value>
+  </data>
+  <data name="SignIn" xml:space="preserve">
+    <value>Giriş Yap</value>
+  </data>
+  <data name="DemoAccounts" xml:space="preserve">
+    <value>Demo Hesaplar</value>
+  </data>
+  <data name="NewToLuxeStay" xml:space="preserve">
+    <value>LuxeStay'de yeni misiniz?</value>
+  </data>
+  <data name="CreateAnAccount" xml:space="preserve">
+    <value>Hesap oluşturun</value>
+  </data>
+  <data name="JoinLuxeStay" xml:space="preserve">
+    <value>LuxeStay'e Katılın</value>
+  </data>
+  <data name="CreateAccountAndStart" xml:space="preserve">
+    <value>Hesabınızı oluşturun ve yolculuğunuza başlayın</value>
+  </data>
+  <data name="CreateAccount" xml:space="preserve">
+    <value>Hesap Oluştur</value>
+  </data>
+  <data name="SignInHere" xml:space="preserve">
+    <value>Buradan giriş yapın</value>
+  </data>
+  <data name="AccessDenied" xml:space="preserve">
+    <value>Erişim Reddedildi</value>
+  </data>
+  <data name="NoPermission" xml:space="preserve">
+    <value>Bu kaynağa erişim izniniz yok.</value>
+  </data>
+  <data name="ReturnToHome" xml:space="preserve">
+    <value>Ana Sayfaya Dön</value>
+  </data>
+  
+  <!-- Hotels -->
+  <data name="AddNewProperty" xml:space="preserve">
+    <value>Yeni Tesis Ekle</value>
+  </data>
+  <data name="CreateNewLuxuryHotel" xml:space="preserve">
+    <value>Portföyünüze yeni bir lüks otel ekleyin</value>
+  </data>
+  <data name="BasicInformation" xml:space="preserve">
+    <value>Temel Bilgiler</value>
+  </data>
+  <data name="PropertyName" xml:space="preserve">
+    <value>Tesis Adı</value>
+  </data>
+  <data name="LocationDetails" xml:space="preserve">
+    <value>Konum Detayları</value>
+  </data>
+  <data name="StreetAddress" xml:space="preserve">
+    <value>Sokak Adresi</value>
+  </data>
+  <data name="PostalCode" xml:space="preserve">
+    <value>Posta Kodu</value>
+  </data>
+  <data name="ContactInformation" xml:space="preserve">
+    <value>İletişim Bilgileri</value>
+  </data>
+  <data name="CreateProperty" xml:space="preserve">
+    <value>Tesis Oluştur</value>
+  </data>
+  <data name="EditHotel" xml:space="preserve">
+    <value>Oteli Düzenle</value>
+  </data>
+  <data name="SaveChanges" xml:space="preserve">
+    <value>Değişiklikleri Kaydet</value>
+  </data>
+  <data name="DeleteHotel" xml:space="preserve">
+    <value>Oteli Sil</value>
+  </data>
+  <data name="ConfirmDeleteHotel" xml:space="preserve">
+    <value>Bu oteli silmek istediğinizden emin misiniz?</value>
+  </data>
+  <data name="ConfirmDelete" xml:space="preserve">
+    <value>Silmeyi Onayla</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Ad</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Konum</value>
+  </data>
+  <data name="Rating" xml:space="preserve">
+    <value>Puan</value>
+  </data>
+  <data name="TotalRooms" xml:space="preserve">
+    <value>Toplam Oda</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Telefon</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>Hakkında</value>
+  </data>
+  <data name="AvailableRoomsInHotel" xml:space="preserve">
+    <value>Müsait Odalar</value>
+  </data>
+  <data name="SearchAvailableRooms" xml:space="preserve">
+    <value>Müsait Odaları Ara</value>
+  </data>
+  <data name="AdminActions" xml:space="preserve">
+    <value>Yönetici İşlemleri</value>
+  </data>
+  <data name="BackToHotels" xml:space="preserve">
+    <value>Otellere Dön</value>
+  </data>
+  <data name="Star" xml:space="preserve">
+    <value>Yıldız</value>
+  </data>
+  <data name="Stars" xml:space="preserve">
+    <value>Yıldız</value>
+  </data>
+  <data name="HotelImageUrl" xml:space="preserve">
+    <value>Otel Görsel URL</value>
+  </data>
+  <data name="EnterImageUrl" xml:space="preserve">
+    <value>Bu otel için bir görsel URL'si girin</value>
+  </data>
+  <data name="IsActive" xml:space="preserve">
+    <value>Aktif</value>
+  </data>
+  
+  <!-- Rooms -->
+  <data name="AddNewRoom" xml:space="preserve">
+    <value>Yeni Oda Ekle</value>
+  </data>
+  <data name="CreateNewLuxuryRoom" xml:space="preserve">
+    <value>Yeni bir lüks konaklama birimi oluşturun</value>
+  </data>
+  <data name="PropertySelection" xml:space="preserve">
+    <value>Tesis Seçimi</value>
+  </data>
+  <data name="SelectHotel" xml:space="preserve">
+    <value>Otel Seçin</value>
+  </data>
+  <data name="ChooseProperty" xml:space="preserve">
+    <value>-- Bir tesis seçin --</value>
+  </data>
+  <data name="RoomDetails" xml:space="preserve">
+    <value>Oda Detayları</value>
+  </data>
+  <data name="GuestCapacity" xml:space="preserve">
+    <value>Misafir Kapasitesi</value>
+  </data>
+  <data name="CreateRoom" xml:space="preserve">
+    <value>Oda Oluştur</value>
+  </data>
+  <data name="EditRoom" xml:space="preserve">
+    <value>Odayı Düzenle</value>
+  </data>
+  <data name="DeleteRoom" xml:space="preserve">
+    <value>Odayı Sil</value>
+  </data>
+  <data name="ConfirmDeleteRoom" xml:space="preserve">
+    <value>Bu odayı silmek istediğinizden emin misiniz?</value>
+  </data>
+  <data name="Hotel" xml:space="preserve">
+    <value>Otel</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Tip</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Fiyat</value>
+  </data>
+  <data name="ManageRooms" xml:space="preserve">
+    <value>Odaları Yönet</value>
+  </data>
+  <data name="NoRoomsFoundAdmin" xml:space="preserve">
+    <value>Oda bulunamadı.</value>
+  </data>
+  <data name="BookThisRoom" xml:space="preserve">
+    <value>Bu Odayı Rezerve Et</value>
+  </data>
+  <data name="RoomCurrentlyBooked" xml:space="preserve">
+    <value>Bu oda şu anda dolu.</value>
+  </data>
+  <data name="ViewHotel" xml:space="preserve">
+    <value>Oteli Görüntüle</value>
+  </data>
+  <data name="BackToSearch" xml:space="preserve">
+    <value>Aramaya Dön</value>
+  </data>
+  <data name="IsAvailable" xml:space="preserve">
+    <value>Müsait</value>
+  </data>
+  
+  <!-- Reservations -->
+  <data name="AllReservations" xml:space="preserve">
+    <value>Tüm Rezervasyonlar</value>
+  </data>
+  <data name="ExportCSV" xml:space="preserve">
+    <value>CSV Dışa Aktar</value>
+  </data>
+  <data name="Guest" xml:space="preserve">
+    <value>Misafir</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Toplam</value>
+  </data>
+  <data name="NoReservationsFound" xml:space="preserve">
+    <value>Rezervasyon bulunamadı.</value>
+  </data>
+  <data name="CreateReservation" xml:space="preserve">
+    <value>Rezervasyon Oluştur</value>
+  </data>
+  <data name="NumberOfGuests" xml:space="preserve">
+    <value>Misafir Sayısı</value>
+  </data>
+  <data name="SpecialRequests" xml:space="preserve">
+    <value>Özel İstekler</value>
+  </data>
+  <data name="PriceSummary" xml:space="preserve">
+    <value>Fiyat Özeti</value>
+  </data>
+  <data name="NumberOfNights" xml:space="preserve">
+    <value>Gece Sayısı</value>
+  </data>
+  <data name="ConfirmReservation" xml:space="preserve">
+    <value>Rezervasyonu Onayla</value>
+  </data>
+  <data name="MyReservations" xml:space="preserve">
+    <value>Rezervasyonlarım</value>
+  </data>
+  <data name="Booked" xml:space="preserve">
+    <value>Dolu</value>
+  </data>
+  <data name="NoReservationsYet" xml:space="preserve">
+    <value>Henüz rezervasyonunuz yok.</value>
+  </data>
+  <data name="SearchForRooms" xml:space="preserve">
+    <value>Müsait odaları arayın</value>
+  </data>
+  <data name="CancelReservation" xml:space="preserve">
+    <value>Rezervasyonu İptal Et</value>
+  </data>
+  <data name="ConfirmCancelReservation" xml:space="preserve">
+    <value>Bu rezervasyonu iptal etmek istediğinizden emin misiniz?</value>
+  </data>
+  <data name="ReservationDetails" xml:space="preserve">
+    <value>Rezervasyon Detayları</value>
+  </data>
+  <data name="HotelInformation" xml:space="preserve">
+    <value>Otel Bilgileri</value>
+  </data>
+  <data name="RoomInformation" xml:space="preserve">
+    <value>Oda Bilgileri</value>
+  </data>
+  <data name="ReservationDates" xml:space="preserve">
+    <value>Rezervasyon Tarihleri</value>
+  </data>
+  <data name="PriceBreakdown" xml:space="preserve">
+    <value>Fiyat Detayları</value>
+  </data>
+  <data name="GuestInformation" xml:space="preserve">
+    <value>Misafir Bilgileri</value>
+  </data>
+  <data name="BookingInformation" xml:space="preserve">
+    <value>Rezervasyon Bilgileri</value>
+  </data>
+  <data name="Created" xml:space="preserve">
+    <value>Oluşturulma</value>
+  </data>
+  <data name="LastUpdated" xml:space="preserve">
+    <value>Son Güncelleme</value>
+  </data>
+  <data name="DownloadPDF" xml:space="preserve">
+    <value>PDF İndir</value>
+  </data>
+  
+  <!-- Amenities -->
+  <data name="ManageAmenities" xml:space="preserve">
+    <value>Olanakları Yönet</value>
+  </data>
+  <data name="AddNewAmenity" xml:space="preserve">
+    <value>Yeni Olanak Ekle</value>
+  </data>
+  <data name="CreateNewAmenity" xml:space="preserve">
+    <value>Yeni Olanak Oluştur</value>
+  </data>
+  <data name="CreateAmenity" xml:space="preserve">
+    <value>Olanak Oluştur</value>
+  </data>
+  <data name="EditAmenity" xml:space="preserve">
+    <value>Olanağı Düzenle</value>
+  </data>
+  <data name="DeleteAmenity" xml:space="preserve">
+    <value>Olanağı Sil</value>
+  </data>
+  <data name="ConfirmDeleteAmenity" xml:space="preserve">
+    <value>Bu olanağı silmek istediğinizden emin misiniz?</value>
+  </data>
+  <data name="IconClass" xml:space="preserve">
+    <value>İkon Sınıfı</value>
+  </data>
+  <data name="FontAwesomeIconHint" xml:space="preserve">
+    <value>Font Awesome ikon sınıfı (örn., "fas fa-wifi", "fas fa-swimming-pool")</value>
+  </data>
+  <data name="NoAmenitiesFound" xml:space="preserve">
+    <value>Olanak bulunamadı. Başlamak için ilk olanağınızı ekleyin.</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>Aktif</value>
+  </data>
+  <data name="Inactive" xml:space="preserve">
+    <value>Pasif</value>
+  </data>
+  <data name="Icon" xml:space="preserve">
+    <value>İkon</value>
+  </data>
+  
+  <!-- Privacy & Error -->
+  <data name="PrivacyPolicy" xml:space="preserve">
+    <value>Gizlilik Politikası</value>
+  </data>
+  <data name="PrivacyIntro" xml:space="preserve">
+    <value>Bu bir demo Otel Rezervasyon Sistemidir. Gizliliğiniz bizim için önemlidir.</value>
+  </data>
+  <data name="DataCollection" xml:space="preserve">
+    <value>Veri Toplama</value>
+  </data>
+  <data name="DataCollectionDesc" xml:space="preserve">
+    <value>Hesap oluştururken veya rezervasyon yaparken sağladığınız kişisel bilgileri topluyoruz, bunlar:</value>
+  </data>
+  <data name="NameAndContact" xml:space="preserve">
+    <value>Ad ve iletişim bilgileri</value>
+  </data>
+  <data name="ReservationDetailsPrivacy" xml:space="preserve">
+    <value>Rezervasyon detayları</value>
+  </data>
+  <data name="DataUsage" xml:space="preserve">
+    <value>Veri Kullanımı</value>
+  </data>
+  <data name="DataUsageDesc" xml:space="preserve">
+    <value>Bilgileriniz yalnızca otel rezervasyonlarınızı ve hesabınızı yönetmek amacıyla kullanılır.</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>İletişim</value>
+  </data>
+  <data name="PrivacyContact" xml:space="preserve">
+    <value>Gizlilikle ilgili sorularınız için lütfen privacy@hotelreservation.com adresinden bizimle iletişime geçin</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Hata</value>
+  </data>
+  <data name="ErrorOccurred" xml:space="preserve">
+    <value>İsteğiniz işlenirken bir hata oluştu.</value>
+  </data>
+  <data name="RequestId" xml:space="preserve">
+    <value>İstek Kimliği</value>
+  </data>
+  <data name="DevelopmentMode" xml:space="preserve">
+    <value>Geliştirme Modu</value>
+  </data>
+  
+  <!-- Room Types -->
+  <data name="Single" xml:space="preserve">
+    <value>Tek Kişilik</value>
+  </data>
+  <data name="Double" xml:space="preserve">
+    <value>Çift Kişilik</value>
+  </data>
+  <data name="Suite" xml:space="preserve">
+    <value>Süit</value>
+  </data>
+  <data name="Deluxe" xml:space="preserve">
+    <value>Deluxe</value>
+  </data>
+  
+  <!-- Reservation Status -->
+  <data name="Pending" xml:space="preserve">
+    <value>Beklemede</value>
+  </data>
+  <data name="Confirmed" xml:space="preserve">
+    <value>Onaylandı</value>
+  </data>
+  <data name="Cancelled" xml:space="preserve">
+    <value>İptal Edildi</value>
+  </data>
+  <data name="Completed" xml:space="preserve">
+    <value>Tamamlandı</value>
+  </data>
+  
+  <!-- Additional Missing Keys -->
+  <data name="ExportCsv" xml:space="preserve">
+    <value>CSV Dışa Aktar</value>
+  </data>
+  <data name="Reservation" xml:space="preserve">
+    <value>Rezervasyon</value>
+  </data>
+  <data name="Nights" xml:space="preserve">
+    <value>gece</value>
+  </data>
+  <data name="DownloadPdf" xml:space="preserve">
+    <value>PDF İndir</value>
+  </data>
+  <data name="SpecialRequestsPlaceholder" xml:space="preserve">
+    <value>Özel istek veya gereksinimleriniz...</value>
+  </data>
+  <data name="SearchForAvailableRooms" xml:space="preserve">
+    <value>Uygun odaları arayın</value>
+  </data>
+  <data name="IconClassHelp" xml:space="preserve">
+    <value>Font Awesome ikon sınıfı (örn., "fas fa-wifi", "fas fa-swimming-pool")</value>
+  </data>
+  <data name="PrivacyPolicyIntro" xml:space="preserve">
+    <value>Bu bir demo Otel Rezervasyon Sistemidir. Gizliliğiniz bizim için önemlidir.</value>
+  </data>
+  <data name="ReservationDetails" xml:space="preserve">
+    <value>Rezervasyon detayları</value>
+  </data>
+  <data name="ContactDesc" xml:space="preserve">
+    <value>Gizlilikle ilgili sorularınız için lütfen privacy@hotelreservation.com adresinden bizimle iletişime geçin</value>
+  </data>
+  <data name="DevelopmentModeDesc" xml:space="preserve">
+    <value>Geliştirme ortamına geçiş, oluşan hata hakkında daha ayrıntılı bilgi gösterecektir.</value>
+  </data>
+  <data name="DevelopmentWarning" xml:space="preserve">
+    <value>Geliştirme ortamı, dağıtılmış uygulamalar için etkinleştirilmemelidir.</value>
+  </data>
+
+  <!-- Management Page -->
+  <data name="ManagementHubDescription" xml:space="preserve">
+    <value>Tüm yönetim özelliklerine tek bir yerden erişin</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Kontrol Paneli</value>
+  </data>
+  <data name="DashboardDescription" xml:space="preserve">
+    <value>Analitikleri, istatistikleri ve raporları görüntüleyin</value>
+  </data>
+  <data name="ReservationsDescription" xml:space="preserve">
+    <value>Rezervasyonları, giriş ve çıkışları yönetin</value>
+  </data>
+  <data name="HotelManagement" xml:space="preserve">
+    <value>Otel Yönetimi</value>
+  </data>
+  <data name="AddHotelDescription" xml:space="preserve">
+    <value>Yeni bir otel tesisi ekleyin</value>
+  </data>
+  <data name="AddRoomDescription" xml:space="preserve">
+    <value>Otellere oda ekleyin</value>
+  </data>
+  <data name="AmenitiesDescription" xml:space="preserve">
+    <value>Oda olanaklarını yönetin</value>
+  </data>
+  <data name="StaffManagement" xml:space="preserve">
+    <value>Personel Yönetimi</value>
+  </data>
+  <data name="Departments" xml:space="preserve">
+    <value>Departmanlar</value>
+  </data>
+  <data name="DepartmentsDescription" xml:space="preserve">
+    <value>Departmanları yönetin</value>
+  </data>
+  <data name="Employees" xml:space="preserve">
+    <value>Çalışanlar</value>
+  </data>
+  <data name="EmployeesDescription" xml:space="preserve">
+    <value>Personeli yönetin</value>
+  </data>
+  <data name="Salaries" xml:space="preserve">
+    <value>Maaşlar</value>
+  </data>
+  <data name="SalariesDescription" xml:space="preserve">
+    <value>Bordroları işleyin</value>
+  </data>
+  <data name="Attendance" xml:space="preserve">
+    <value>Devam Takibi</value>
+  </data>
+  <data name="AttendanceDescription" xml:space="preserve">
+    <value>Devamları takip edin</value>
+  </data>
+  <data name="FinanceManagement" xml:space="preserve">
+    <value>Finans Yönetimi</value>
+  </data>
+  <data name="Expenses" xml:space="preserve">
+    <value>Giderler</value>
+  </data>
+  <data name="ExpensesDescription" xml:space="preserve">
+    <value>Giderleri takip edin</value>
+  </data>
+  <data name="Incomes" xml:space="preserve">
+    <value>Gelirler</value>
+  </data>
+  <data name="IncomesDescription" xml:space="preserve">
+    <value>Gelirleri takip edin</value>
+  </data>
+  <data name="FinancialReports" xml:space="preserve">
+    <value>Finansal Raporlar</value>
+  </data>
+  <data name="FinancialReportsDescription" xml:space="preserve">
+    <value>Finansal raporları görüntüleyin</value>
+  </data>
+  <data name="InventoryManagement" xml:space="preserve">
+    <value>Envanter Yönetimi</value>
+  </data>
+  <data name="Categories" xml:space="preserve">
+    <value>Kategoriler</value>
+  </data>
+  <data name="CategoriesDescription" xml:space="preserve">
+    <value>Kategorileri yönetin</value>
+  </data>
+  <data name="InventoryItems" xml:space="preserve">
+    <value>Envanter Kalemleri</value>
+  </data>
+  <data name="InventoryItemsDescription" xml:space="preserve">
+    <value>Envanteri yönetin</value>
+  </data>
+  <data name="Transactions" xml:space="preserve">
+    <value>İşlemler</value>
+  </data>
+  <data name="TransactionsDescription" xml:space="preserve">
+    <value>Stok hareketlerini görüntüleyin</value>
+  </data>
+
+  <!-- Admin Dashboard -->
+  <data name="AdminDashboard" xml:space="preserve">
+    <value>Yönetici Paneli</value>
+  </data>
+  <data name="TodayReservations" xml:space="preserve">
+    <value>Bugünkü Rezervasyonlar</value>
+  </data>
+  <data name="CheckOuts" xml:space="preserve">
+    <value>Çıkışlar</value>
+  </data>
+  <data name="OccupancyRate" xml:space="preserve">
+    <value>Doluluk Oranı</value>
+  </data>
+  <data name="Occupied" xml:space="preserve">
+    <value>Dolu</value>
+  </data>
+  <data name="ActiveStaff" xml:space="preserve">
+    <value>Aktif Personel</value>
+  </data>
+  <data name="PresentToday" xml:space="preserve">
+    <value>Bugün Mevcut</value>
+  </data>
+  <data name="MonthlyIncome" xml:space="preserve">
+    <value>Aylık Gelir</value>
+  </data>
+  <data name="MonthlyExpenses" xml:space="preserve">
+    <value>Aylık Giderler</value>
+  </data>
+  <data name="NetProfit" xml:space="preserve">
+    <value>Net Kar</value>
+  </data>
+  <data name="FinancialOverview" xml:space="preserve">
+    <value>Finansal Genel Bakış</value>
+  </data>
+  <data name="ViewReports" xml:space="preserve">
+    <value>Raporları Görüntüle</value>
+  </data>
+  <data name="RoomOccupancy" xml:space="preserve">
+    <value>Oda Doluluk</value>
+  </data>
+  <data name="PendingTasks" xml:space="preserve">
+    <value>Bekleyen Görevler</value>
+  </data>
+  <data name="PendingReservations" xml:space="preserve">
+    <value>Bekleyen Rezervasyonlar</value>
+  </data>
+  <data name="PendingExpenses" xml:space="preserve">
+    <value>Bekleyen Giderler</value>
+  </data>
+  <data name="PendingSalaries" xml:space="preserve">
+    <value>Bekleyen Maaşlar</value>
+  </data>
+  <data name="LowStockItems" xml:space="preserve">
+    <value>Düşük Stok Kalemleri</value>
+  </data>
+  <data name="RecentReservations" xml:space="preserve">
+    <value>Son Rezervasyonlar</value>
+  </data>
+  <data name="ViewAll" xml:space="preserve">
+    <value>Tümünü Görüntüle</value>
+  </data>
+  <data name="NoRecentReservations" xml:space="preserve">
+    <value>Yakın zamanda rezervasyon yok</value>
+  </data>
+  <data name="QuickActions" xml:space="preserve">
+    <value>Hızlı İşlemler</value>
+  </data>
+  <data name="NewReservation" xml:space="preserve">
+    <value>Yeni Rezervasyon</value>
+  </data>
+  <data name="RecordExpense" xml:space="preserve">
+    <value>Gider Kaydet</value>
+  </data>
+  <data name="RecordIncome" xml:space="preserve">
+    <value>Gelir Kaydet</value>
+  </data>
+  <data name="RecordAttendance" xml:space="preserve">
+    <value>Devam Kaydet</value>
+  </data>
+  <data name="ManageInventory" xml:space="preserve">
+    <value>Envanteri Yönet</value>
+  </data>
+
+  <!-- Staff Management -->
+  <data name="AddDepartment" xml:space="preserve">
+    <value>Departman Ekle</value>
+  </data>
+  <data name="ViewEmployees" xml:space="preserve">
+    <value>Çalışanları Görüntüle</value>
+  </data>
+  <data name="AddEmployee" xml:space="preserve">
+    <value>Çalışan Ekle</value>
+  </data>
+  <data name="FilterByDepartment" xml:space="preserve">
+    <value>Departmana Göre Filtrele</value>
+  </data>
+  <data name="AllDepartments" xml:space="preserve">
+    <value>Tüm Departmanlar</value>
+  </data>
+  <data name="Position" xml:space="preserve">
+    <value>Pozisyon</value>
+  </data>
+  <data name="Department" xml:space="preserve">
+    <value>Departman</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>İletişim</value>
+  </data>
+  <data name="Salary" xml:space="preserve">
+    <value>Maaş</value>
+  </data>
+  <data name="HiredOn" xml:space="preserve">
+    <value>İşe Başlama</value>
+  </data>
+  <data name="SalaryManagement" xml:space="preserve">
+    <value>Maaş Yönetimi</value>
+  </data>
+  <data name="ProcessSalaries" xml:space="preserve">
+    <value>Maaşları İşle</value>
+  </data>
+  <data name="AllEmployees" xml:space="preserve">
+    <value>Tüm Çalışanlar</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>Ay</value>
+  </data>
+  <data name="AllMonths" xml:space="preserve">
+    <value>Tüm Aylar</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>Yıl</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>Tümü</value>
+  </data>
+  <data name="Paid" xml:space="preserve">
+    <value>Ödendi</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filtrele</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Temizle</value>
+  </data>
+  <data name="TotalSalaries" xml:space="preserve">
+    <value>Toplam Maaşlar</value>
+  </data>
+  <data name="TotalRecords" xml:space="preserve">
+    <value>Toplam Kayıt</value>
+  </data>
+  <data name="Period" xml:space="preserve">
+    <value>Dönem</value>
+  </data>
+  <data name="GrossAmount" xml:space="preserve">
+    <value>Brüt Tutar</value>
+  </data>
+  <data name="Deductions" xml:space="preserve">
+    <value>Kesintiler</value>
+  </data>
+  <data name="Bonus" xml:space="preserve">
+    <value>Prim</value>
+  </data>
+  <data name="NetAmount" xml:space="preserve">
+    <value>Net Tutar</value>
+  </data>
+  <data name="PaymentDate" xml:space="preserve">
+    <value>Ödeme Tarihi</value>
+  </data>
+  <data name="MarkAsPaid" xml:space="preserve">
+    <value>Ödendi Olarak İşaretle</value>
+  </data>
+  <data name="ProcessSalariesDescription" xml:space="preserve">
+    <value>Seçili ay için tüm çalışanlara maaş kaydı oluşturun.</value>
+  </data>
+  <data name="ProcessSalariesWarning" xml:space="preserve">
+    <value>Bu işlem, her çalışanın temel maaşına göre maaş kayıtları oluşturacaktır. Bu dönem için mevcut kayıtlar tekrarlanmayacaktır.</value>
+  </data>
+  <data name="Process" xml:space="preserve">
+    <value>İşle</value>
+  </data>
+  <data name="Show" xml:space="preserve">
+    <value>Göster</value>
+  </data>
+  <data name="Entries" xml:space="preserve">
+    <value>kayıt</value>
+  </data>
+  <data name="NoDataAvailable" xml:space="preserve">
+    <value>Tabloda veri yok</value>
+  </data>
+  <data name="Showing" xml:space="preserve">
+    <value>Gösteriliyor</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>ile</value>
+  </data>
+  <data name="Of" xml:space="preserve">
+    <value>arası,</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Önceki</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Sonraki</value>
+  </data>
+
+  <!-- Finance Management -->
+  <data name="ExpenseManagement" xml:space="preserve">
+    <value>Gider Yönetimi</value>
+  </data>
+  <data name="AddExpense" xml:space="preserve">
+    <value>Gider Ekle</value>
+  </data>
+  <data name="AllCategories" xml:space="preserve">
+    <value>Tüm Kategoriler</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>Başlangıç Tarihi</value>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>Bitiş Tarihi</value>
+  </data>
+  <data name="Approved" xml:space="preserve">
+    <value>Onaylandı</value>
+  </data>
+  <data name="TotalExpenses" xml:space="preserve">
+    <value>Toplam Giderler</value>
+  </data>
+  <data name="IncomeManagement" xml:space="preserve">
+    <value>Gelir Yönetimi</value>
+  </data>
+  <data name="AddIncome" xml:space="preserve">
+    <value>Gelir Ekle</value>
+  </data>
+  <data name="Source" xml:space="preserve">
+    <value>Kaynak</value>
+  </data>
+  <data name="AllSources" xml:space="preserve">
+    <value>Tüm Kaynaklar</value>
+  </data>
+  <data name="Restaurant" xml:space="preserve">
+    <value>Restoran</value>
+  </data>
+  <data name="Spa" xml:space="preserve">
+    <value>Spa</value>
+  </data>
+  <data name="Event" xml:space="preserve">
+    <value>Etkinlik</value>
+  </data>
+  <data name="Other" xml:space="preserve">
+    <value>Diğer</value>
+  </data>
+  <data name="TotalIncome" xml:space="preserve">
+    <value>Toplam Gelir</value>
+  </data>
+  <data name="ReservationIncome" xml:space="preserve">
+    <value>Rezervasyon Geliri</value>
+  </data>
+  <data name="OtherIncome" xml:space="preserve">
+    <value>Diğer Gelir</value>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Tutar</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Tarih</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Kategori</value>
+  </data>
+  <data name="ApprovedBy" xml:space="preserve">
+    <value>Onaylayan</value>
+  </data>
+  <data name="Approve" xml:space="preserve">
+    <value>Onayla</value>
+  </data>
+
+  <!-- Inventory Management -->
+  <data name="AddItem" xml:space="preserve">
+    <value>Kalem Ekle</value>
+  </data>
+  <data name="StockStatus" xml:space="preserve">
+    <value>Stok Durumu</value>
+  </data>
+  <data name="LowStock" xml:space="preserve">
+    <value>Düşük Stok</value>
+  </data>
+  <data name="OutOfStock" xml:space="preserve">
+    <value>Stok Yok</value>
+  </data>
+  <data name="InStock" xml:space="preserve">
+    <value>Stokta Var</value>
+  </data>
+  <data name="SearchItems" xml:space="preserve">
+    <value>Kalem ara...</value>
+  </data>
+  <data name="TotalItems" xml:space="preserve">
+    <value>Toplam Kalem</value>
+  </data>
+  <data name="TotalValue" xml:space="preserve">
+    <value>Toplam Değer</value>
+  </data>
+  <data name="ItemName" xml:space="preserve">
+    <value>Kalem Adı</value>
+  </data>
+  <data name="SKU" xml:space="preserve">
+    <value>Stok Kodu</value>
+  </data>
+  <data name="Quantity" xml:space="preserve">
+    <value>Miktar</value>
+  </data>
+  <data name="UnitPrice" xml:space="preserve">
+    <value>Birim Fiyat</value>
+  </data>
+  <data name="ReorderLevel" xml:space="preserve">
+    <value>Yeniden Sipariş Seviyesi</value>
+  </data>
+  <data name="AddStock" xml:space="preserve">
+    <value>Stok Ekle</value>
+  </data>
+  <data name="RemoveStock" xml:space="preserve">
+    <value>Stok Çıkar</value>
+  </data>
+  <data name="TransactionType" xml:space="preserve">
+    <value>İşlem Türü</value>
+  </data>
+  <data name="AllTypes" xml:space="preserve">
+    <value>Tüm Türler</value>
+  </data>
+  <data name="StockIn" xml:space="preserve">
+    <value>Stok Giriş</value>
+  </data>
+  <data name="StockOut" xml:space="preserve">
+    <value>Stok Çıkış</value>
+  </data>
+  <data name="Adjustment" xml:space="preserve">
+    <value>Düzeltme</value>
+  </data>
+  <data name="Item" xml:space="preserve">
+    <value>Kalem</value>
+  </data>
+  <data name="Reference" xml:space="preserve">
+    <value>Referans</value>
+  </data>
+  <data name="Notes" xml:space="preserve">
+    <value>Notlar</value>
+  </data>
+  <data name="MyProfile" xml:space="preserve">
+    <value>Profilim</value>
+  </data>
+  <data name="FooterTagline" xml:space="preserve">
+    <value>En iyi lüksü deneyimleyin. Konforunuz bizim önceliğimiz.</value>
+  </data>
+  <data name="Privacy" xml:space="preserve">
+    <value>Gizlilik</value>
+  </data>
+  <!-- Attendance Status -->
+  <data name="Present" xml:space="preserve">
+    <value>Mevcut</value>
+  </data>
+  <data name="Absent" xml:space="preserve">
+    <value>Yok</value>
+  </data>
+  <data name="Late" xml:space="preserve">
+    <value>Geç</value>
+  </data>
+  <data name="OnLeave" xml:space="preserve">
+    <value>İzinli</value>
+  </data>
+  <data name="Hours" xml:space="preserve">
+    <value>Saat</value>
+  </data>
+  <data name="NoAttendanceRecords" xml:space="preserve">
+    <value>Devam kaydı bulunamadı</value>
+  </data>
+  <data name="CheckInTime" xml:space="preserve">
+    <value>Giriş</value>
+  </data>
+  <data name="CheckOutTime" xml:space="preserve">
+    <value>Çıkış</value>
+  </data>
+  <data name="WorkingHours" xml:space="preserve">
+    <value>Çalışma Saatleri</value>
+  </data>
+  <data name="BackToProfile" xml:space="preserve">
+    <value>Profile Dön</value>
+  </data>
+  <data name="MyAttendance" xml:space="preserve">
+    <value>Devam Durumum</value>
+  </data>
+  <data name="AccountNotLinked" xml:space="preserve">
+    <value>Hesap Bağlı Değil</value>
+  </data>
+  <data name="AccountNotLinkedMessage" xml:space="preserve">
+    <value>Hesabınız bir çalışan profiline bağlı değil.</value>
+  </data>
+  <data name="ContactAdminMessage" xml:space="preserve">
+    <value>Hesabınızı bağlamak için lütfen yöneticinizle iletişime geçin.</value>
+  </data>
+  <data name="BackToHome" xml:space="preserve">
+    <value>Ana Sayfaya Dön</value>
   </data>
 </root>

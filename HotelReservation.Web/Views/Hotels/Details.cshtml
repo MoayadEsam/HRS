@@ -1,41 +1,95 @@
 @model HotelReservation.Core.DTOs.HotelDetailsDto
+@inject IStringLocalizer<HotelReservation.Web.SharedResource> Localizer
 @{
     ViewData["Title"] = Model.Name;
 }
 
-<div class="row">
+<div class="page-header text-center mb-5">
+    <h1 class="display-5 mb-3"><i class="fas fa-hotel me-3 text-accent"></i>@Model.Name</h1>
+    <div class="text-warning mb-2">
+        @for (int i = 0; i < Model.StarRating; i++)
+        {
+            <i class="fas fa-star"></i>
+        }
+    </div>
+    <p class="lead text-muted"><i class="fas fa-map-marker-alt me-2"></i>@Model.City, @Model.Country</p>
+</div>
+
+<div class="row g-4">
     <div class="col-lg-8">
-        <div class="card shadow-sm mb-4">
-            <div class="card-header bg-primary text-white">
+        <div class="detail-card mb-4">
+            <div class="detail-card-header">
                 <h3 class="mb-0">
-                    <i class="fas fa-hotel"></i> @Model.Name
-                    <span class="text-warning float-end">
-                        @for (int i = 0; i < Model.StarRating; i++)
-                        {
-                            <i class="fas fa-star"></i>
-                        }
-                    </span>
+                    <i class="fas fa-info-circle me-2"></i>@Localizer["HotelDetails"]
                 </h3>
             </div>
-            <div class="card-body">
-                <div class="row mb-3">
+            <div class="detail-card-body">
+                <div class="row mb-4">
                     <div class="col-md-6">
-                        <p><strong><i class="fas fa-map-marker-alt text-danger"></i> Address:</strong><br />@Model.Address</p>
-                        <p><strong><i class="fas fa-city"></i> City:</strong> @Model.City</p>
-                        <p><strong><i class="fas fa-flag"></i> Country:</strong> @Model.Country</p>
+                        <div class="d-flex align-items-start mb-3">
+                            <div class="feature-icon me-3" style="width: 45px; height: 45px; flex-shrink: 0;">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <small class="text-muted d-block">@Localizer["Address"]</small>
+                                <strong>@Model.Address</strong>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-start mb-3">
+                            <div class="feature-icon me-3" style="width: 45px; height: 45px; flex-shrink: 0;">
+                                <i class="fas fa-city"></i>
+                            </div>
+                            <div>
+                                <small class="text-muted d-block">@Localizer["City"]</small>
+                                <strong>@Model.City</strong>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-start mb-3">
+                            <div class="feature-icon me-3" style="width: 45px; height: 45px; flex-shrink: 0;">
+                                <i class="fas fa-flag"></i>
+                            </div>
+                            <div>
+                                <small class="text-muted d-block">@Localizer["Country"]</small>
+                                <strong>@Model.Country</strong>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-6">
-                        <p><strong><i class="fas fa-phone"></i> Phone:</strong> @Model.PhoneNumber</p>
-                        <p><strong><i class="fas fa-envelope"></i> Email:</strong> @Model.Email</p>
-                        <p><strong><i class="fas fa-bed"></i> Total Rooms:</strong> @Model.Rooms.Count</p>
+                        <div class="d-flex align-items-start mb-3">
+                            <div class="feature-icon me-3" style="width: 45px; height: 45px; flex-shrink: 0;">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <small class="text-muted d-block">@Localizer["Phone"]</small>
+                                <strong>@Model.PhoneNumber</strong>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-start mb-3">
+                            <div class="feature-icon me-3" style="width: 45px; height: 45px; flex-shrink: 0;">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <small class="text-muted d-block">@Localizer["Email"]</small>
+                                <strong>@Model.Email</strong>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-start mb-3">
+                            <div class="feature-icon me-3" style="width: 45px; height: 45px; flex-shrink: 0;">
+                                <i class="fas fa-bed"></i>
+                            </div>
+                            <div>
+                                <small class="text-muted d-block">@Localizer["TotalRooms"]</small>
+                                <strong>@Model.Rooms.Count @Localizer["Rooms"]</strong>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
                 @if (!string.IsNullOrEmpty(Model.Description))
                 {
-                    <div class="mt-3">
-                        <h5>About</h5>
-                        <p>@Model.Description</p>
+                    <div class="mt-4 pt-4 border-top">
+                        <h5 class="mb-3"><i class="fas fa-align-left me-2 text-accent"></i>@Localizer["About"]</h5>
+                        <p class="text-muted mb-0">@Model.Description</p>
                     </div>
                 }
             </div>
@@ -43,25 +97,29 @@
 
         @if (Model.Rooms != null && Model.Rooms.Any())
         {
-            <div class="card shadow-sm">
-                <div class="card-header bg-secondary text-white">
-                    <h4 class="mb-0"><i class="fas fa-door-open"></i> Available Rooms</h4>
+            <div class="detail-card">
+                <div class="detail-card-header">
+                    <h4 class="mb-0"><i class="fas fa-door-open me-2"></i>@Localizer["AvailableRoomsInHotel"]</h4>
                 </div>
-                <div class="card-body">
-                    <div class="row">
+                <div class="detail-card-body">
+                    <div class="row g-3">
                         @foreach (var room in Model.Rooms)
                         {
-                            <div class="col-md-6 mb-3">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h6 class="card-title">Room @room.RoomNumber</h6>
-                                        <p class="card-text">
-                                            <span class="badge bg-primary">@room.TypeName</span>
-                                            <span class="badge bg-info text-dark">Capacity: @room.Capacity</span><br />
-                                            <strong class="text-success">$@room.PricePerNight / night</strong>
-                                        </p>
-                                        <a asp-controller="Rooms" asp-action="Details" asp-route-id="@room.Id" class="btn btn-sm btn-primary">
-                                            View Details
+                            <div class="col-md-6">
+                                <div class="action-card h-100">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <h6 class="mb-0">@Localizer["Room"] @room.RoomNumber</h6>
+                                        <span class="badge bg-dark">@Localizer[room.TypeName]</span>
+                                    </div>
+                                    <div class="mb-2">
+                                        <span class="amenity-tag" style="font-size: 0.8rem; padding: 0.35rem 0.75rem;">
+                                            <i class="fas fa-users text-accent"></i>@room.Capacity @Localizer["Guests"]
+                                        </span>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center mt-3">
+                                        <span class="text-accent fw-bold fs-5">$@room.PricePerNight<small class="text-muted fw-normal">/@Localizer["Night"]</small></span>
+                                        <a asp-controller="Rooms" asp-action="Details" asp-route-id="@room.Id" class="btn btn-premium btn-sm">
+                                            @Localizer["ViewDetails"] <i class="fas fa-arrow-right ms-1"></i>
                                         </a>
                                     </div>
                                 </div>
@@ -74,44 +132,42 @@
     </div>
 
     <div class="col-lg-4">
-        <div class="card shadow-sm mb-3">
-            <div class="card-body text-center">
-                <a asp-controller="Rooms" asp-action="Search" class="btn btn-success btn-lg w-100">
-                    <i class="fas fa-search"></i> Search Available Rooms
+        <div class="action-card mb-4" style="background: linear-gradient(135deg, #dcfce7, #bbf7d0);">
+            <div class="text-center">
+                <i class="fas fa-search fa-2x text-success mb-3"></i>
+                <h5 class="mb-3">@Localizer["FindAvailableRooms"]</h5>
+                <a asp-controller="Rooms" asp-action="Search" class="btn btn-hero w-100">
+                    <i class="fas fa-search me-2"></i>@Localizer["SearchAvailableRooms"]
                 </a>
             </div>
         </div>
 
         @if (User.IsInRole("Admin"))
         {
-            <div class="card shadow-sm">
-                <div class="card-header bg-warning">
-                    <h5 class="mb-0">Admin Actions</h5>
-                </div>
-                <div class="card-body">
-                    <div class="d-grid gap-2">
-                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
-                            <i class="fas fa-edit"></i> Edit Hotel
-                        </a>
-                        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">
-                            <i class="fas fa-trash"></i> Delete Hotel
-                        </a>
-                        <a asp-controller="Rooms" asp-action="Create" asp-route-hotelId="@Model.Id" class="btn btn-primary">
-                            <i class="fas fa-plus"></i> Add Room
-                        </a>
-                        <a asp-action="Index" class="btn btn-secondary">
-                            <i class="fas fa-list"></i> Back to List
-                        </a>
-                    </div>
+            <div class="action-card">
+                <h5 class="mb-3"><i class="fas fa-cog me-2 text-accent"></i>@Localizer["AdminActions"]</h5>
+                <div class="d-grid gap-2">
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-warning">
+                        <i class="fas fa-edit me-2"></i>@Localizer["EditHotel"]
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-outline-danger">
+                        <i class="fas fa-trash me-2"></i>@Localizer["DeleteHotel"]
+                    </a>
+                    <a asp-controller="Rooms" asp-action="Create" asp-route-hotelId="@Model.Id" class="btn btn-hero">
+                        <i class="fas fa-plus me-2"></i>@Localizer["AddRoom"]
+                    </a>
+                    <a asp-action="Index" class="btn btn-outline-secondary">
+                        <i class="fas fa-list me-2"></i>@Localizer["BackToList"]
+                    </a>
                 </div>
             </div>
         }
         else
         {
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <a asp-action="Index" class="btn btn-secondary w-100">
-                        <i class="fas fa-arrow-left"></i> Back to Hotels
+            <div class="action-card">
+                <div class="d-grid">
+                    <a asp-action="Index" class="btn btn-premium">
+                        <i class="fas fa-arrow-left me-2"></i>@Localizer["BackToHotels"]
                     </a>
                 </div>
             </div>

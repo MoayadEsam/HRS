@@ -1,75 +1,106 @@
 @model HotelReservation.Core.DTOs.ReservationCreateDto
+@inject IStringLocalizer<HotelReservation.Web.SharedResource> Localizer
 @{
-    ViewData["Title"] = "Create Reservation";
+    ViewData["Title"] = Localizer["CreateReservation"];
     var roomNumber = ViewBag.RoomNumber as string;
     var hotelName = ViewBag.HotelName as string;
     var pricePerNight = ViewBag.PricePerNight as decimal?;
 }
 
+<div class="page-header text-center mb-5">
+    <h1 class="display-5 mb-3"><i class="fas fa-calendar-check me-3 text-accent"></i>@Localizer["CreateReservation"]</h1>
+    <p class="lead text-muted">@Localizer["BookYourPerfectStay"]</p>
+</div>
+
 <div class="row justify-content-center">
     <div class="col-lg-8">
-        <div class="card shadow">
-            <div class="card-header bg-success text-white">
-                <h3 class="mb-0"><i class="fas fa-calendar-check"></i> Create Reservation</h3>
+        <div class="detail-card">
+            <div class="detail-card-header">
+                <h3 class="mb-0"><i class="fas fa-calendar-plus me-2"></i>@Localizer["ReservationDetails"]</h3>
             </div>
-            <div class="card-body">
+            <div class="detail-card-body">
                 @if (roomNumber != null && hotelName != null)
                 {
-                    <div class="alert alert-info">
-                        <strong>Room:</strong> @roomNumber | <strong>Hotel:</strong> @hotelName
-                        @if (pricePerNight.HasValue)
-                        {
-                            <text><br /><strong>Price:</strong> $@(pricePerNight.Value) /night</text>
-                        }
+                    <div class="action-card mb-4" style="background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.05));">
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <div class="d-flex align-items-center">
+                                    <div class="feature-icon me-3" style="width: 60px; height: 60px;">
+                                        <i class="fas fa-door-open"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="mb-1">@Localizer["Room"] @roomNumber</h5>
+                                        <p class="text-muted mb-0"><i class="fas fa-hotel me-2"></i>@hotelName</p>
+                                    </div>
+                                </div>
+                            </div>
+                            @if (pricePerNight.HasValue)
+                            {
+                                <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                                    <div class="price-display" style="font-size: 1.75rem;">$@pricePerNight.Value<small>/@Localizer["Night"]</small></div>
+                                </div>
+                            }
+                        </div>
                     </div>
                 }
                 
                 <form asp-action="Create" method="post" id="reservationForm">
-                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger rounded-3 mb-4"></div>
                     <input type="hidden" asp-for="RoomId" />
                     
-                    <div class="row mb-3">
+                    <h5 class="text-accent mb-3"><i class="fas fa-calendar me-2"></i>@Localizer["SelectDates"]</h5>
+                    <div class="row mb-4">
                         <div class="col-md-6">
-                            <label asp-for="CheckInDate" class="form-label"></label>
-                            <input asp-for="CheckInDate" class="form-control" type="date" id="checkInDate" />
-                            <span asp-validation-for="CheckInDate" class="text-danger"></span>
+                            <label asp-for="CheckInDate" class="form-label fw-semibold">@Localizer["CheckInDate"]</label>
+                            <input asp-for="CheckInDate" class="form-control form-control-lg" type="date" id="checkInDate" />
+                            <span asp-validation-for="CheckInDate" class="text-danger small"></span>
                         </div>
                         <div class="col-md-6">
-                            <label asp-for="CheckOutDate" class="form-label"></label>
-                            <input asp-for="CheckOutDate" class="form-control" type="date" id="checkOutDate" />
-                            <span asp-validation-for="CheckOutDate" class="text-danger"></span>
+                            <label asp-for="CheckOutDate" class="form-label fw-semibold">@Localizer["CheckOutDate"]</label>
+                            <input asp-for="CheckOutDate" class="form-control form-control-lg" type="date" id="checkOutDate" />
+                            <span asp-validation-for="CheckOutDate" class="text-danger small"></span>
                         </div>
                     </div>
                     
-                    <div class="mb-3">
-                        <label asp-for="NumberOfGuests" class="form-label"></label>
-                        <input asp-for="NumberOfGuests" class="form-control" type="number" min="1" max="10" value="1" />
-                        <span asp-validation-for="NumberOfGuests" class="text-danger"></span>
+                    <hr class="my-4">
+                    <h5 class="text-accent mb-3"><i class="fas fa-users me-2"></i>@Localizer["GuestInformation"]</h5>
+                    <div class="mb-4">
+                        <label asp-for="NumberOfGuests" class="form-label fw-semibold">@Localizer["NumberOfGuests"]</label>
+                        <input asp-for="NumberOfGuests" class="form-control form-control-lg" type="number" min="1" max="10" value="1" />
+                        <span asp-validation-for="NumberOfGuests" class="text-danger small"></span>
                     </div>
                     
-                    <div class="mb-3">
-                        <label asp-for="SpecialRequests" class="form-label"></label>
-                        <textarea asp-for="SpecialRequests" class="form-control" rows="3" placeholder="Any special requests or requirements..."></textarea>
-                        <span asp-validation-for="SpecialRequests" class="text-danger"></span>
+                    <div class="mb-4">
+                        <label asp-for="SpecialRequests" class="form-label fw-semibold">@Localizer["SpecialRequests"]</label>
+                        <textarea asp-for="SpecialRequests" class="form-control" rows="3" placeholder="@Localizer["SpecialRequestsPlaceholder"]"></textarea>
+                        <span asp-validation-for="SpecialRequests" class="text-danger small"></span>
                     </div>
                     
-                    <div class="card bg-light mb-3" id="priceCalculation" style="display:none;">
-                        <div class="card-body">
-                            <h5>Price Summary</h5>
-                            <p>
-                                <strong>Number of Nights:</strong> <span id="numberOfNights">0</span><br />
-                                <strong>Price per Night:</strong> $<span id="pricePerNight">@pricePerNight</span><br />
-                                <strong class="text-success fs-4">Total Price:</strong> <strong class="text-success fs-4">$<span id="totalPrice">0</span></strong>
-                            </p>
+                    <div class="action-card mb-4" id="priceCalculation" style="display:none; background: linear-gradient(135deg, #dcfce7, #bbf7d0);">
+                        <h5 class="mb-3"><i class="fas fa-receipt me-2 text-success"></i>@Localizer["PriceSummary"]</h5>
+                        <div class="row">
+                            <div class="col-6">
+                                <p class="mb-1"><strong>@Localizer["NumberOfNights"]:</strong></p>
+                                <p class="mb-1"><strong>@Localizer["PricePerNight"]:</strong></p>
+                            </div>
+                            <div class="col-6 text-end">
+                                <p class="mb-1"><span id="numberOfNights">0</span> @Localizer["Nights"]</p>
+                                <p class="mb-1">$<span id="pricePerNight">@pricePerNight</span></p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0 text-success">@Localizer["TotalPrice"]:</h5>
+                            <h4 class="mb-0 text-success">$<span id="totalPrice">0</span></h4>
                         </div>
                     </div>
                     
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <a asp-controller="Rooms" asp-action="Search" class="btn btn-secondary">
-                            <i class="fas fa-times"></i> Cancel
+                    <div class="d-flex gap-3 justify-content-end mt-4">
+                        <a asp-controller="Rooms" asp-action="Search" class="btn btn-outline-secondary btn-lg px-4">
+                            <i class="fas fa-times me-2"></i>@Localizer["Cancel"]
                         </a>
-                        <button type="submit" class="btn btn-success btn-lg">
-                            <i class="fas fa-calendar-check"></i> Confirm Reservation
+                        <button type="submit" class="btn btn-hero btn-lg px-5">
+                            <i class="fas fa-calendar-check me-2"></i>@Localizer["ConfirmReservation"]
                         </button>
                     </div>
                 </form>
@@ -99,9 +130,9 @@
                     
                     $('#numberOfNights').text(nights);
                     $('#totalPrice').text(total.toFixed(2));
-                    $('#priceCalculation').show();
+                    $('#priceCalculation').slideDown(300);
                 } else {
-                    $('#priceCalculation').hide();
+                    $('#priceCalculation').slideUp(300);
                 }
             }
             

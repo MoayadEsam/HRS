@@ -1,44 +1,45 @@
 @model HotelReservation.Core.DTOs.AmenityListDto
+@inject IStringLocalizer<HotelReservation.Web.SharedResource> Localizer
 @{
-    ViewData["Title"] = "Delete Amenity";
+    ViewData["Title"] = Localizer["DeleteAmenity"];
 }
 
 <div class="row justify-content-center">
     <div class="col-lg-6">
         <div class="card shadow border-danger">
             <div class="card-header bg-danger text-white">
-                <h3 class="mb-0"><i class="fas fa-exclamation-triangle"></i> Delete Amenity</h3>
+                <h3 class="mb-0"><i class="fas fa-exclamation-triangle"></i> @Localizer["DeleteAmenity"]</h3>
             </div>
             <div class="card-body">
                 <div class="alert alert-danger">
-                    <i class="fas fa-exclamation-circle"></i> Are you sure you want to delete this amenity?
+                    <i class="fas fa-exclamation-circle"></i> @Localizer["ConfirmDeleteAmenity"]
                 </div>
                 
                 <dl class="row">
-                    <dt class="col-sm-4">Name:</dt>
+                    <dt class="col-sm-4">@Localizer["Name"]:</dt>
                     <dd class="col-sm-8">@Model.Name</dd>
                     
                     @if (!string.IsNullOrEmpty(Model.Description))
                     {
-                        <dt class="col-sm-4">Description:</dt>
+                        <dt class="col-sm-4">@Localizer["Description"]:</dt>
                         <dd class="col-sm-8">@Model.Description</dd>
                     }
                     
                     @if (!string.IsNullOrEmpty(Model.IconClass))
                     {
-                        <dt class="col-sm-4">Icon:</dt>
+                        <dt class="col-sm-4">@Localizer["Icon"]:</dt>
                         <dd class="col-sm-8"><i class="@Model.IconClass"></i> @Model.IconClass</dd>
                     }
                     
-                    <dt class="col-sm-4">Status:</dt>
+                    <dt class="col-sm-4">@Localizer["Status"]:</dt>
                     <dd class="col-sm-8">
                         @if (Model.IsActive)
                         {
-                            <span class="badge bg-success">Active</span>
+                            <span class="badge bg-success">@Localizer["Active"]</span>
                         }
                         else
                         {
-                            <span class="badge bg-danger">Inactive</span>
+                            <span class="badge bg-danger">@Localizer["Inactive"]</span>
                         }
                     </dd>
                 </dl>
@@ -47,10 +48,10 @@
                     <input type="hidden" asp-for="Id" />
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <a asp-action="Index" class="btn btn-secondary">
-                            <i class="fas fa-times"></i> Cancel
+                            <i class="fas fa-times"></i> @Localizer["Cancel"]
                         </a>
                         <button type="submit" class="btn btn-danger">
-                            <i class="fas fa-trash"></i> Confirm Delete
+                            <i class="fas fa-trash"></i> @Localizer["ConfirmDelete"]
                         </button>
                     </div>
                 </form>
