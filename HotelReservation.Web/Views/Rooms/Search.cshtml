@@ -2,6 +2,7 @@
 @using HotelReservation.Core.Enums
 @{
     ViewData["Title"] = Localizer["FindYourPerfectRoom"];
+    var today = DateTime.Today.ToString("yyyy-MM-dd");
 }
 
 <div class="page-header text-center mb-5">
@@ -15,11 +16,11 @@
             <div class="row g-3">
                 <div class="col-md-3">
                     <label class="form-label">@Localizer["CheckInDate"]</label>
-                    <input type="date" name="CheckInDate" class="form-control" value="@ViewBag.CheckInDate" />
+                    <input type="date" name="CheckInDate" class="form-control" value="@ViewBag.CheckInDate" min="@today" />
                 </div>
                 <div class="col-md-3">
                     <label class="form-label">@Localizer["CheckOutDate"]</label>
-                    <input type="date" name="CheckOutDate" class="form-control" value="@ViewBag.CheckOutDate" />
+                    <input type="date" name="CheckOutDate" class="form-control" value="@ViewBag.CheckOutDate" min="@today" />
                 </div>
                 <div class="col-md-2">
                     <label class="form-label">@Localizer["MinPrice"]</label>
@@ -35,7 +36,7 @@
                         <option value="">@Localizer["AllTypes"]</option>
                         @foreach (RoomType type in Enum.GetValues(typeof(RoomType)))
                         {
-                            <option value="@type">@type</option>
+                            <option value="@type">@Localizer[type.ToString()]</option>
                         }
                     </select>
                 </div>

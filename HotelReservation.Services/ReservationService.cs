@@ -22,7 +22,7 @@ public class ReservationService : IReservationService
 
     public async Task<IEnumerable<ReservationListDto>> GetAllReservationsAsync()
     {
-        var reservations = await _unitOfWork.Reservations.GetUpcomingReservationsAsync();
+        var reservations = await _unitOfWork.Reservations.GetAllReservationsWithDetailsAsync();
         return _mapper.Map<IEnumerable<ReservationListDto>>(reservations);
     }
 

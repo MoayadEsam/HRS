@@ -339,15 +339,11 @@
   <data name="Room" xml:space="preserve">
     <value>Room</value>
   </data>
-  <data name="Guests" xml:space="preserve">
-    <value>guests</value>
-  </data>
+
   <data name="Night" xml:space="preserve">
     <value>night</value>
   </data>
-  <data name="ViewDetails" xml:space="preserve">
-    <value>View Details</value>
-  </data>
+
   <data name="LoginToBook" xml:space="preserve">
     <value>Login to Book</value>
   </data>
@@ -439,6 +435,15 @@
   <data name="LocationDetails" xml:space="preserve">
     <value>Location Details</value>
   </data>
+  <data name="HotelImage" xml:space="preserve">
+    <value>Hotel Image</value>
+  </data>
+  <data name="UploadFromDevice" xml:space="preserve">
+    <value>Upload from your device</value>
+  </data>
+  <data name="Or" xml:space="preserve">
+    <value>or</value>
+  </data>
   <data name="StreetAddress" xml:space="preserve">
     <value>Street Address</value>
   </data>
@@ -450,6 +455,27 @@
   </data>
   <data name="CreateProperty" xml:space="preserve">
     <value>Create Property</value>
+  </data>
+  <data name="HotelNamePlaceholder" xml:space="preserve">
+    <value>The Grand Palace Hotel</value>
+  </data>
+  <data name="HotelDescriptionPlaceholder" xml:space="preserve">
+    <value>Describe the luxury experience your hotel offers...</value>
+  </data>
+  <data name="AddressPlaceholder" xml:space="preserve">
+    <value>123 Luxury Boulevard</value>
+  </data>
+  <data name="CityPlaceholder" xml:space="preserve">
+    <value>New York</value>
+  </data>
+  <data name="CountryPlaceholder" xml:space="preserve">
+    <value>United States</value>
+  </data>
+  <data name="PhonePlaceholder" xml:space="preserve">
+    <value>+1 (555) 123-4567</value>
+  </data>
+  <data name="EmailPlaceholder" xml:space="preserve">
+    <value>info@hotel.com</value>
   </data>
   <data name="EditHotel" xml:space="preserve">
     <value>Edit Hotel</value>
@@ -510,6 +536,9 @@
   </data>
   <data name="IsActive" xml:space="preserve">
     <value>Active</value>
+  </data>
+  <data name="SelectSampleImage" xml:space="preserve">
+    <value>Or select a sample image:</value>
   </data>
   
   <!-- Rooms -->
@@ -576,10 +605,17 @@
   <data name="IsAvailable" xml:space="preserve">
     <value>Available</value>
   </data>
+  <data name="RoomDescriptionPlaceholder" xml:space="preserve">
+    <value>Describe the room's luxury features and amenities...</value>
+  </data>
+
   
   <!-- Reservations -->
   <data name="AllReservations" xml:space="preserve">
     <value>All Reservations</value>
+  </data>
+  <data name="ManageAllBookings" xml:space="preserve">
+    <value>Manage all bookings and reservations</value>
   </data>
   <data name="ExportCSV" xml:space="preserve">
     <value>Export CSV</value>
@@ -595,6 +631,12 @@
   </data>
   <data name="CreateReservation" xml:space="preserve">
     <value>Create Reservation</value>
+  </data>
+  <data name="SelectDates" xml:space="preserve">
+    <value>Select Dates</value>
+  </data>
+  <data name="BookYourPerfectStay" xml:space="preserve">
+    <value>Book your perfect stay at our luxury properties</value>
   </data>
   <data name="NumberOfGuests" xml:space="preserve">
     <value>Number of Guests</value>
@@ -774,9 +816,7 @@
   </data>
   
   <!-- Additional Missing Keys -->
-  <data name="ExportCsv" xml:space="preserve">
-    <value>Export CSV</value>
-  </data>
+
   <data name="Reservation" xml:space="preserve">
     <value>Reservation</value>
   </data>
@@ -798,9 +838,7 @@
   <data name="PrivacyPolicyIntro" xml:space="preserve">
     <value>This is a demo Hotel Reservation System. Your privacy is important to us.</value>
   </data>
-  <data name="ReservationDetails" xml:space="preserve">
-    <value>Reservation details</value>
-  </data>
+
   <data name="ContactDesc" xml:space="preserve">
     <value>For any privacy-related questions, please contact us at privacy@hotelreservation.com</value>
   </data>
@@ -1011,9 +1049,7 @@
   <data name="Department" xml:space="preserve">
     <value>Department</value>
   </data>
-  <data name="Contact" xml:space="preserve">
-    <value>Contact</value>
-  </data>
+
   <data name="Salary" xml:space="preserve">
     <value>Salary</value>
   </data>
@@ -1231,9 +1267,7 @@
   <data name="TransactionType" xml:space="preserve">
     <value>Transaction Type</value>
   </data>
-  <data name="AllTypes" xml:space="preserve">
-    <value>All Types</value>
-  </data>
+
   <data name="StockIn" xml:space="preserve">
     <value>Stock In</value>
   </data>

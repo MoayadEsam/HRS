@@ -63,6 +63,16 @@ public class ReservationRepository : GenericRepository<Reservation>, IReservatio
             .ToListAsync();
     }
 
+    public async Task<IEnumerable<Reservation>> GetAllReservationsWithDetailsAsync()
+    {
+        return await _dbSet
+            .Include(r => r.User)
+            .Include(r => r.Room)
+                .ThenInclude(rm => rm.Hotel)
+            .OrderByDescending(r => r.CreatedAt)
+            .ToListAsync();
+    }
+
     public async Task<bool> HasOverlappingReservationsAsync(int roomId, DateTime checkIn, DateTime checkOut, int? excludeReservationId = null)
     {
         var query = _dbSet

@@ -70,7 +70,7 @@
                     
                     <div class="mb-4">
                         <label asp-for="Description" class="form-label fw-semibold">@Localizer["Description"]</label>
-                        <textarea asp-for="Description" class="form-control" rows="4" placeholder="Describe the room's luxury features and amenities..."></textarea>
+                        <textarea asp-for="Description" class="form-control" rows="4" placeholder="@Localizer["RoomDescriptionPlaceholder"]"></textarea>
                         <span asp-validation-for="Description" class="text-danger small"></span>
                     </div>
                     
@@ -86,7 +86,7 @@
                                         <input type="checkbox" name="AmenityIds" value="@amenity.Id" 
                                                class="form-check-input" id="amenity_@amenity.Id" />
                                         <label class="form-check-label fw-semibold" for="amenity_@amenity.Id">
-                                            @amenity.Name
+                                            @Localizer[amenity.Name]
                                         </label>
                                     </div>
                                 </div>

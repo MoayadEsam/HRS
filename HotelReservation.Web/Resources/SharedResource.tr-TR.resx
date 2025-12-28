@@ -306,12 +306,7 @@
   <data name="SearchLuxuryAccommodations" xml:space="preserve">
     <value>Lüks konaklama yerlerimizi arayın</value>
   </data>
-  <data name="CheckInDate" xml:space="preserve">
-    <value>Giriş Tarihi</value>
-  </data>
-  <data name="CheckOutDate" xml:space="preserve">
-    <value>Çıkış Tarihi</value>
-  </data>
+
   <data name="MinPrice" xml:space="preserve">
     <value>Min Fiyat</value>
   </data>
@@ -330,24 +325,18 @@
   <data name="RoomsFound" xml:space="preserve">
     <value>oda bulundu</value>
   </data>
-  <data name="Booked" xml:space="preserve">
-    <value>Dolu</value>
-  </data>
+
   <data name="Floor" xml:space="preserve">
     <value>Kat</value>
   </data>
   <data name="Room" xml:space="preserve">
     <value>Oda</value>
   </data>
-  <data name="Guests" xml:space="preserve">
-    <value>misafir</value>
-  </data>
+
   <data name="Night" xml:space="preserve">
     <value>gece</value>
   </data>
-  <data name="ViewDetails" xml:space="preserve">
-    <value>Detayları Görüntüle</value>
-  </data>
+
   <data name="LoginToBook" xml:space="preserve">
     <value>Rezervasyon İçin Giriş Yapın</value>
   </data>
@@ -439,6 +428,15 @@
   <data name="LocationDetails" xml:space="preserve">
     <value>Konum Detayları</value>
   </data>
+  <data name="HotelImage" xml:space="preserve">
+    <value>Otel Görseli</value>
+  </data>
+  <data name="UploadFromDevice" xml:space="preserve">
+    <value>Cihazınızdan yükleyin</value>
+  </data>
+  <data name="Or" xml:space="preserve">
+    <value>veya</value>
+  </data>
   <data name="StreetAddress" xml:space="preserve">
     <value>Sokak Adresi</value>
   </data>
@@ -450,6 +448,27 @@
   </data>
   <data name="CreateProperty" xml:space="preserve">
     <value>Tesis Oluştur</value>
+  </data>
+  <data name="HotelNamePlaceholder" xml:space="preserve">
+    <value>Grand Saray Otel</value>
+  </data>
+  <data name="HotelDescriptionPlaceholder" xml:space="preserve">
+    <value>Otelinizin sunduğu lüks deneyimi açıklayın...</value>
+  </data>
+  <data name="AddressPlaceholder" xml:space="preserve">
+    <value>Lüks Bulvarı No: 123</value>
+  </data>
+  <data name="CityPlaceholder" xml:space="preserve">
+    <value>İstanbul</value>
+  </data>
+  <data name="CountryPlaceholder" xml:space="preserve">
+    <value>Türkiye</value>
+  </data>
+  <data name="PhonePlaceholder" xml:space="preserve">
+    <value>+90 (212) 123-4567</value>
+  </data>
+  <data name="EmailPlaceholder" xml:space="preserve">
+    <value>info@otel.com</value>
   </data>
   <data name="EditHotel" xml:space="preserve">
     <value>Oteli Düzenle</value>
@@ -510,6 +529,9 @@
   </data>
   <data name="IsActive" xml:space="preserve">
     <value>Aktif</value>
+  </data>
+  <data name="SelectSampleImage" xml:space="preserve">
+    <value>Veya örnek bir görsel seçin:</value>
   </data>
   
   <!-- Rooms -->
@@ -576,10 +598,17 @@
   <data name="IsAvailable" xml:space="preserve">
     <value>Müsait</value>
   </data>
+  <data name="RoomDescriptionPlaceholder" xml:space="preserve">
+    <value>Odanın lüks özelliklerini ve olanaklarını açıklayın...</value>
+  </data>
+
   
   <!-- Reservations -->
   <data name="AllReservations" xml:space="preserve">
     <value>Tüm Rezervasyonlar</value>
+  </data>
+  <data name="ManageAllBookings" xml:space="preserve">
+    <value>Tüm rezervasyonları yönet</value>
   </data>
   <data name="ExportCSV" xml:space="preserve">
     <value>CSV Dışa Aktar</value>
@@ -595,6 +624,12 @@
   </data>
   <data name="CreateReservation" xml:space="preserve">
     <value>Rezervasyon Oluştur</value>
+  </data>
+  <data name="SelectDates" xml:space="preserve">
+    <value>Tarihleri Seçin</value>
+  </data>
+  <data name="BookYourPerfectStay" xml:space="preserve">
+    <value>Lüks tesislerimizde mükemmel konaklamanızı rezerve edin</value>
   </data>
   <data name="NumberOfGuests" xml:space="preserve">
     <value>Misafir Sayısı</value>
@@ -774,9 +809,7 @@
   </data>
   
   <!-- Additional Missing Keys -->
-  <data name="ExportCsv" xml:space="preserve">
-    <value>CSV Dışa Aktar</value>
-  </data>
+
   <data name="Reservation" xml:space="preserve">
     <value>Rezervasyon</value>
   </data>
@@ -798,9 +831,7 @@
   <data name="PrivacyPolicyIntro" xml:space="preserve">
     <value>Bu bir demo Otel Rezervasyon Sistemidir. Gizliliğiniz bizim için önemlidir.</value>
   </data>
-  <data name="ReservationDetails" xml:space="preserve">
-    <value>Rezervasyon detayları</value>
-  </data>
+
   <data name="ContactDesc" xml:space="preserve">
     <value>Gizlilikle ilgili sorularınız için lütfen privacy@hotelreservation.com adresinden bizimle iletişime geçin</value>
   </data>
@@ -1011,9 +1042,7 @@
   <data name="Department" xml:space="preserve">
     <value>Departman</value>
   </data>
-  <data name="Contact" xml:space="preserve">
-    <value>İletişim</value>
-  </data>
+
   <data name="Salary" xml:space="preserve">
     <value>Maaş</value>
   </data>
@@ -1231,9 +1260,7 @@
   <data name="TransactionType" xml:space="preserve">
     <value>İşlem Türü</value>
   </data>
-  <data name="AllTypes" xml:space="preserve">
-    <value>Tüm Türler</value>
-  </data>
+
   <data name="StockIn" xml:space="preserve">
     <value>Stok Giriş</value>
   </data>
@@ -1306,5 +1333,64 @@
   </data>
   <data name="BackToHome" xml:space="preserve">
     <value>Ana Sayfaya Dön</value>
+  </data>
+  
+  <!-- Database Amenities -->
+  <data name="Wi-Fi" xml:space="preserve">
+    <value>Wi-Fi</value>
+  </data>
+  <data name="Air Conditioning" xml:space="preserve">
+    <value>Klima</value>
+  </data>
+  <data name="TV" xml:space="preserve">
+    <value>TV</value>
+  </data>
+  <data name="Mini Bar" xml:space="preserve">
+    <value>Mini Bar</value>
+  </data>
+  <data name="Safe" xml:space="preserve">
+    <value>Kasa</value>
+  </data>
+  <data name="Balcony" xml:space="preserve">
+    <value>Balkon</value>
+  </data>
+  <data name="Room Service" xml:space="preserve">
+    <value>Oda Servisi</value>
+  </data>
+  <data name="Ocean View" xml:space="preserve">
+    <value>Deniz Manzarası</value>
+  </data>
+  <data name="Sea View" xml:space="preserve">
+    <value>Deniz Manzarası</value>
+  </data>
+  <data name="Bathtub" xml:space="preserve">
+    <value>Küvet</value>
+  </data>
+  <data name="Coffee Machine" xml:space="preserve">
+    <value>Kahve Makinesi</value>
+  </data>
+  <data name="Coffee Maker" xml:space="preserve">
+    <value>Kahve Makinesi</value>
+  </data>
+  <data name="Gym" xml:space="preserve">
+    <value>Spor Salonu</value>
+  </data>
+  <data name="Pool" xml:space="preserve">
+    <value>Havuz</value>
+  </data>
+  <data name="Swimming Pool" xml:space="preserve">
+    <value>Yüzme Havuzu</value>
+  </data>
+  <data name="Parking" xml:space="preserve">
+    <value>Otopark</value>
+  </data>
+  <data name="Restaurant" xml:space="preserve">
+    <value>Restoran</value>
+  </data>
+  <data name="Bar" xml:space="preserve">
+    <value>Bar</value>
+  </data>
+  <data name="Spa" xml:space="preserve">
+    <value>Spa</value>
   </data>
 </root>

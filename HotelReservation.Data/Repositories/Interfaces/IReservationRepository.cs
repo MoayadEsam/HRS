@@ -9,5 +9,6 @@ public interface IReservationRepository : IGenericRepository<Reservation>
     Task<IEnumerable<Reservation>> GetReservationsByRoomAsync(int roomId);
     Task<IEnumerable<Reservation>> GetReservationsByDateRangeAsync(DateTime startDate, DateTime endDate);
     Task<IEnumerable<Reservation>> GetUpcomingReservationsAsync();
+    Task<IEnumerable<Reservation>> GetAllReservationsWithDetailsAsync();
     Task<bool> HasOverlappingReservationsAsync(int roomId, DateTime checkIn, DateTime checkOut, int? excludeReservationId = null);
 }

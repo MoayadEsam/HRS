@@ -28,6 +28,7 @@ public class HotelRepository : GenericRepository<Hotel>, IHotelRepository
     public async Task<IEnumerable<Hotel>> GetActiveHotelsAsync()
     {
         return await _dbSet
+            .Include(h => h.Rooms)
             .Where(h => h.IsActive)
             .ToListAsync();
     }

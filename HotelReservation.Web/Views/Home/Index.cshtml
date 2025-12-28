@@ -1,10 +1,11 @@
 ﻿@model IEnumerable<HotelReservation.Core.DTOs.HotelListDto>
 @{
     ViewData["Title"] = Localizer["Home"];
+    ViewData["FullWidth"] = true;
 }
 
 <!-- Hero Section -->
-<div class="hero-section text-center mb-5">
+<div class="hero-section text-center mb-0">
     <div class="hero-content">
         <h1 class="hero-title mb-3">@Localizer["FindYourPerfectStay"]</h1>
         <p class="hero-subtitle mb-4">@Localizer["DiscoverLuxuryHotels"]</p>
@@ -16,32 +17,34 @@
 
 <!-- Features Section -->
 <div class="features-section py-5 mb-5">
-    <div class="row g-4">
-        <div class="col-md-4">
-            <div class="feature-card text-center p-4">
-                <div class="feature-icon mb-3">
-                    <i class="fas fa-crown fa-3x"></i>
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="feature-card text-center p-4">
+                    <div class="feature-icon mb-3">
+                        <i class="fas fa-crown fa-3x"></i>
+                    </div>
+                    <h4 class="feature-title">@Localizer["LuxuryProperties"]</h4>
+                    <p class="feature-text">@Localizer["LuxuryPropertiesDesc"]</p>
                 </div>
-                <h4 class="feature-title">@Localizer["LuxuryProperties"]</h4>
-                <p class="feature-text">@Localizer["LuxuryPropertiesDesc"]</p>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="feature-card text-center p-4">
-                <div class="feature-icon mb-3">
-                    <i class="fas fa-concierge-bell fa-3x"></i>
+            <div class="col-md-4">
+                <div class="feature-card text-center p-4">
+                    <div class="feature-icon mb-3">
+                        <i class="fas fa-concierge-bell fa-3x"></i>
+                    </div>
+                    <h4 class="feature-title">@Localizer["Concierge247"]</h4>
+                    <p class="feature-text">@Localizer["Concierge247Desc"]</p>
                 </div>
-                <h4 class="feature-title">@Localizer["Concierge247"]</h4>
-                <p class="feature-text">@Localizer["Concierge247Desc"]</p>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="feature-card text-center p-4">
-                <div class="feature-icon mb-3">
-                    <i class="fas fa-shield-check fa-3x"></i>
+            <div class="col-md-4">
+                <div class="feature-card text-center p-4">
+                    <div class="feature-icon mb-3">
+                        <i class="fas fa-shield-check fa-3x"></i>
+                    </div>
+                    <h4 class="feature-title">@Localizer["SecureBooking"]</h4>
+                    <p class="feature-text">@Localizer["SecureBookingDesc"]</p>
                 </div>
-                <h4 class="feature-title">@Localizer["SecureBooking"]</h4>
-                <p class="feature-text">@Localizer["SecureBookingDesc"]</p>
             </div>
         </div>
     </div>
@@ -49,43 +52,51 @@
 
 <!-- Featured Hotels Section -->
 <div class="featured-section">
-    <h2 class="section-title text-center mb-5">@Localizer["FeaturedHotels"]</h2>
-    <div class="row g-4">
-        @foreach (var hotel in Model)
-        {
-            <div class="col-lg-4 col-md-6">
-                <div class="hotel-card">
-                    <div class="hotel-card-image" style="background: linear-gradient(135deg, rgba(26, 26, 46, 0.7), rgba(22, 33, 62, 0.7)), url('@(string.IsNullOrEmpty(hotel.ImageUrl) ? "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800&q=80" : hotel.ImageUrl)') center/cover;">
-                        <div class="hotel-badge">
-                            @for (int i = 0; i < hotel.StarRating; i++)
-                            {
-                                <i class="fas fa-star"></i>
-                            }
+    <div class="container">
+        <h2 class="section-title text-center mb-5">@Localizer["FeaturedHotels"]</h2>
+        <div class="row g-4">
+            @foreach (var hotel in Model)
+            {
+                <div class="col-lg-4 col-md-6">
+                    <a asp-controller="Hotels" asp-action="Details" asp-route-id="@hotel.Id" class="hotel-card-link">
+                        <div class="hotel-card">
+                            <div class="hotel-card-image" style="background: linear-gradient(135deg, rgba(26, 26, 46, 0.7), rgba(22, 33, 62, 0.7)), url('@(string.IsNullOrEmpty(hotel.ImageUrl) ? "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800&q=80" : hotel.ImageUrl)') center/cover;">
+                                <div class="hotel-badge">
+                                    @for (int i = 0; i < hotel.StarRating; i++)
+                                    {
+                                        <i class="fas fa-star"></i>
+                                    }
+                                </div>
+                            </div>
+                            <div class="hotel-card-body">
+                                <h5 class="hotel-card-title">@hotel.Name</h5>
+                                <p class="hotel-location">
+                                    <i class="fas fa-map-marker-alt me-2"></i>@hotel.City, @hotel.Country
+                                </p>
+                                <div class="hotel-info d-flex justify-content-between align-items-center">
+                                    <span class="room-count"><i class="fas fa-door-open me-2"></i>@hotel.RoomCount @Localizer["Rooms"]</span>
+                                    <span class="btn btn-premium">
+                                        @Localizer["ViewDetails"] <i class="fas fa-arrow-right ms-2"></i>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="hotel-card-body">
-                        <h5 class="hotel-card-title">@hotel.Name</h5>
-                        <p class="hotel-location">
-                            <i class="fas fa-map-marker-alt me-2"></i>@hotel.City, @hotel.Country
-                        </p>
-                        <div class="hotel-info d-flex justify-content-between align-items-center">
-                            <span class="room-count"><i class="fas fa-door-open me-2"></i>@hotel.RoomCount @Localizer["Rooms"]</span>
-                            <a asp-controller="Hotels" asp-action="Details" asp-route-id="@hotel.Id" class="btn btn-premium">
-                                @Localizer["ViewDetails"] <i class="fas fa-arrow-right ms-2"></i>
-                            </a>
-                        </div>
-                    </div>
+                    </a>
                 </div>
-            </div>
-        }
+            }
+        </div>
     </div>
 </div>
 
 <!-- CTA Section -->
 <div class="cta-section text-center py-5 mt-5">
-    <h2 class="cta-title mb-3">@Localizer["ReadyToExperience"]</h2>
-    <p class="cta-text mb-4">@Localizer["JoinThousands"]</p>
-    <a asp-controller="Hotels" asp-action="Index" class="btn btn-hero btn-lg px-5 py-3">
-        <i class="fas fa-hotel me-2"></i>@Localizer["Hotels"]
-    </a>
+    <div class="container">
+        <h2 class="cta-title mb-3">@Localizer["ReadyToExperience"]</h2>
+        <p class="cta-text mb-4">@Localizer["JoinThousands"]</p>
+        <a asp-controller="Hotels" asp-action="Index" class="btn btn-hero btn-lg px-5 py-3">
+            <i class="fas fa-hotel me-2"></i>@Localizer["Hotels"]
+        </a>
+    </div>
 </div>
+
+

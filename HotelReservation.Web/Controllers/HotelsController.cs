@@ -10,11 +10,13 @@ public class HotelsController : Controller
 {
     private readonly IHotelService _hotelService;
     private readonly ILogger<HotelsController> _logger;
+    private readonly IWebHostEnvironment _environment;
 
-    public HotelsController(IHotelService hotelService, ILogger<HotelsController> logger)
+    public HotelsController(IHotelService hotelService, ILogger<HotelsController> logger, IWebHostEnvironment environment)
     {
         _hotelService = hotelService;
         _logger = logger;
+        _environment = environment;
     }
 
     [AllowAnonymous]
@@ -42,12 +44,32 @@ public class HotelsController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create(HotelCreateDto dto)
+    public async Task<IActionResult> Create(HotelCreateDto dto, IFormFile? ImageFile)
     {
         if (ModelState.IsValid)
         {
             try
             {
+                // Handle file upload
+                if (ImageFile != null && ImageFile.Length > 0)
+                {
+                    var uploadsFolder = Path.Combine(_environment.WebRootPath, "uploads", "hotels");
+                    if (!Directory.Exists(uploadsFolder))
+                    {
+                        Directory.CreateDirectory(uploadsFolder);
+                    }
+
+                    var uniqueFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(ImageFile.FileName);
+                    var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await ImageFile.CopyToAsync(fileStream);
+                    }
+
+                    dto.ImageUrl = "/uploads/hotels/" + uniqueFileName;
+                }
+
                 await _hotelService.CreateHotelAsync(dto);
                 TempData["Success"] = "Hotel created successfully";
                 return RedirectToAction(nameof(Index));

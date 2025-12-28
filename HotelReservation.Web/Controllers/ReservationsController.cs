@@ -75,6 +75,10 @@ public class ReservationsController : Controller
         }
 
         ViewBag.Room = room;
+        ViewBag.RoomNumber = room.RoomNumber;
+        ViewBag.HotelName = room.HotelName;
+        ViewBag.PricePerNight = room.PricePerNight;
+        
         var dto = new ReservationCreateDto
         {
             RoomId = roomId,
@@ -121,6 +125,12 @@ public class ReservationsController : Controller
 
         var room = await _roomService.GetRoomByIdAsync(dto.RoomId);
         ViewBag.Room = room;
+        if (room != null)
+        {
+            ViewBag.RoomNumber = room.RoomNumber;
+            ViewBag.HotelName = room.HotelName;
+            ViewBag.PricePerNight = room.PricePerNight;
+        }
         return View(dto);
     }
 

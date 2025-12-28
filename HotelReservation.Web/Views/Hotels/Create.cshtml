@@ -15,14 +15,14 @@
                     <h2 class="mb-2">@Localizer["AddNewProperty"]</h2>
                     <p class="text-muted">@Localizer["CreateNewLuxuryHotel"]</p>
                 </div>
-                <form asp-action="Create" method="post">
+                <form asp-action="Create" method="post" enctype="multipart/form-data">
                     <div asp-validation-summary="ModelOnly" class="alert alert-danger rounded-3 mb-4"></div>
                     
                     <h5 class="text-accent mb-3"><i class="fas fa-info-circle me-2"></i>@Localizer["BasicInformation"]</h5>
                     <div class="row mb-4">
                         <div class="col-md-8">
                             <label asp-for="Name" class="form-label fw-semibold">@Localizer["PropertyName"]</label>
-                            <input asp-for="Name" class="form-control form-control-lg" placeholder="The Grand Palace Hotel" />
+                            <input asp-for="Name" class="form-control form-control-lg" placeholder="@Localizer["HotelNamePlaceholder"]" />
                             <span asp-validation-for="Name" class="text-danger small"></span>
                         </div>
                         <div class="col-md-4">
@@ -40,18 +40,59 @@
                     
                     <div class="mb-4">
                         <label asp-for="Description" class="form-label fw-semibold">@Localizer["Description"]</label>
-                        <textarea asp-for="Description" class="form-control" rows="4" placeholder="Describe the luxury experience your hotel offers..."></textarea>
+                        <textarea asp-for="Description" class="form-control" rows="4" placeholder="@Localizer["HotelDescriptionPlaceholder"]"></textarea>
                         <span asp-validation-for="Description" class="text-danger small"></span>
                     </div>
                     
                     <div class="mb-4">
-                        <label asp-for="ImageUrl" class="form-label fw-semibold">@Localizer["HotelImageUrl"]</label>
-                        <input asp-for="ImageUrl" class="form-control" placeholder="https://example.com/hotel-image.jpg" />
-                        <div class="form-text">
-                            <i class="fas fa-info-circle me-1"></i>
-                            @Localizer["EnterImageUrl"]
+                        <label class="form-label fw-semibold">@Localizer["HotelImage"]</label>
+                        
+                        <!-- File Upload -->
+                        <div class="mb-3">
+                            <label class="form-label"><i class="fas fa-upload me-1"></i> @Localizer["UploadFromDevice"]</label>
+                            <input type="file" name="ImageFile" class="form-control" accept="image/*" id="imageFileInput" />
+                            <div id="imagePreview" class="mt-2" style="display: none;">
+                                <img id="previewImg" src="" class="img-fluid rounded" style="max-height: 150px;" />
+                            </div>
                         </div>
-                        <span asp-validation-for="ImageUrl" class="text-danger small"></span>
+                        
+                        <div class="text-center text-muted my-3">— @Localizer["Or"] —</div>
+                        
+                        <!-- Sample Image Picker -->
+                        <div class="mb-3">
+                            <small class="text-muted d-block mb-2"><i class="fas fa-images me-1"></i> @Localizer["SelectSampleImage"]</small>
+                            <div class="row g-2">
+                                <div class="col-3">
+                                    <div class="sample-image-option" onclick="selectSampleImage('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80')" style="cursor: pointer;">
+                                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=200&q=60" class="img-fluid rounded" style="height: 80px; width: 100%; object-fit: cover; border: 3px solid transparent; transition: all 0.3s;" alt="Luxury Resort" />
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="sample-image-option" onclick="selectSampleImage('https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800&q=80')" style="cursor: pointer;">
+                                        <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=200&q=60" class="img-fluid rounded" style="height: 80px; width: 100%; object-fit: cover; border: 3px solid transparent; transition: all 0.3s;" alt="Beach Hotel" />
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="sample-image-option" onclick="selectSampleImage('https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80')" style="cursor: pointer;">
+                                        <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=200&q=60" class="img-fluid rounded" style="height: 80px; width: 100%; object-fit: cover; border: 3px solid transparent; transition: all 0.3s;" alt="Pool Resort" />
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="sample-image-option" onclick="selectSampleImage('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800&q=80')" style="cursor: pointer;">
+                                        <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=200&q=60" class="img-fluid rounded" style="height: 80px; width: 100%; object-fit: cover; border: 3px solid transparent; transition: all 0.3s;" alt="Grand Hotel" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center text-muted my-3">— @Localizer["Or"] —</div>
+                        
+                        <!-- URL Input -->
+                        <div class="mb-3">
+                            <label asp-for="ImageUrl" class="form-label"><i class="fas fa-link me-1"></i> @Localizer["EnterImageUrl"]</label>
+                            <input asp-for="ImageUrl" class="form-control" id="ImageUrl" placeholder="https://example.com/hotel-image.jpg" />
+                            <span asp-validation-for="ImageUrl" class="text-danger small"></span>
+                        </div>
                     </div>
                     
                     <hr class="my-4">
@@ -59,17 +100,17 @@
                     <div class="row mb-4">
                         <div class="col-md-12 mb-3">
                             <label asp-for="Address" class="form-label fw-semibold">@Localizer["StreetAddress"]</label>
-                            <input asp-for="Address" class="form-control" placeholder="123 Luxury Boulevard" />
+                            <input asp-for="Address" class="form-control" placeholder="@Localizer["AddressPlaceholder"]" />
                             <span asp-validation-for="Address" class="text-danger small"></span>
                         </div>
                         <div class="col-md-4">
                             <label asp-for="City" class="form-label fw-semibold">@Localizer["City"]</label>
-                            <input asp-for="City" class="form-control" placeholder="New York" />
+                            <input asp-for="City" class="form-control" placeholder="@Localizer["CityPlaceholder"]" />
                             <span asp-validation-for="City" class="text-danger small"></span>
                         </div>
                         <div class="col-md-4">
                             <label asp-for="Country" class="form-label fw-semibold">@Localizer["Country"]</label>
-                            <input asp-for="Country" class="form-control" placeholder="United States" />
+                            <input asp-for="Country" class="form-control" placeholder="@Localizer["CountryPlaceholder"]" />
                             <span asp-validation-for="Country" class="text-danger small"></span>
                         </div>
                         <div class="col-md-4">
@@ -84,12 +125,12 @@
                     <div class="row mb-4">
                         <div class="col-md-6">
                             <label asp-for="PhoneNumber" class="form-label fw-semibold">@Localizer["PhoneNumber"]</label>
-                            <input asp-for="PhoneNumber" class="form-control" placeholder="+1 (555) 123-4567" />
+                            <input asp-for="PhoneNumber" class="form-control" placeholder="@Localizer["PhonePlaceholder"]" />
                             <span asp-validation-for="PhoneNumber" class="text-danger small"></span>
                         </div>
                         <div class="col-md-6">
                             <label asp-for="Email" class="form-label fw-semibold">@Localizer["EmailAddress"]</label>
-                            <input asp-for="Email" class="form-control" type="email" placeholder="info@hotel.com" />
+                            <input asp-for="Email" class="form-control" type="email" placeholder="@Localizer["EmailPlaceholder"]" />
                             <span asp-validation-for="Email" class="text-danger small"></span>
                         </div>
                     </div>
@@ -110,4 +151,44 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        // Image file preview
+        document.getElementById('imageFileInput').addEventListener('change', function(e) {
+            var file = e.target.files[0];
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('previewImg').src = e.target.result;
+                    document.getElementById('imagePreview').style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+                
+                // Clear URL input and sample selection when file is selected
+                document.getElementById('ImageUrl').value = '';
+                document.querySelectorAll('.sample-image-option img').forEach(function(img) {
+                    img.style.border = '3px solid transparent';
+                    img.style.transform = 'scale(1)';
+                });
+            }
+        });
+        
+        function selectSampleImage(url) {
+            // Set the URL in the input field
+            document.getElementById('ImageUrl').value = url;
+            
+            // Clear file input when sample is selected
+            document.getElementById('imageFileInput').value = '';
+            document.getElementById('imagePreview').style.display = 'none';
+            
+            // Remove selection from all images
+            document.querySelectorAll('.sample-image-option img').forEach(function(img) {
+                img.style.border = '3px solid transparent';
+                img.style.transform = 'scale(1)';
+            });
+            
+            // Add selection to clicked image
+            event.currentTarget.querySelector('img').style.border = '3px solid #d4af37';
+            event.currentTarget.querySelector('img').style.transform = 'scale(1.05)';
+        }
+    </script>
 }
