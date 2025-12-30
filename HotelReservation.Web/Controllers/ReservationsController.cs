@@ -28,7 +28,7 @@ public class ReservationsController : Controller
         _logger = logger;
     }
 
-    [Authorize(Roles = "Admin,Staff")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Index()
     {
         var reservations = await _reservationService.GetAllReservationsAsync();
@@ -56,7 +56,7 @@ public class ReservationsController : Controller
         }
 
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        var isAdmin = User.IsInRole("Admin") || User.IsInRole("Staff");
+        var isAdmin = User.IsInRole("Admin");
 
         if (!isAdmin && reservation.UserId != userId)
         {
@@ -134,7 +134,7 @@ public class ReservationsController : Controller
         return View(dto);
     }
 
-    [Authorize(Roles = "Admin,Staff")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Edit(int id)
     {
         var reservation = await _reservationService.GetReservationByIdAsync(id);
@@ -157,7 +157,7 @@ public class ReservationsController : Controller
     }
 
     [HttpPost]
-    [Authorize(Roles = "Admin,Staff")]
+    [Authorize(Roles = "Admin")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(int id, ReservationUpdateDto dto)
     {
@@ -207,7 +207,7 @@ public class ReservationsController : Controller
         }
 
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        var isAdmin = User.IsInRole("Admin") || User.IsInRole("Staff");
+        var isAdmin = User.IsInRole("Admin");
 
         if (!isAdmin && reservation.UserId != userId)
         {

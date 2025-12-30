@@ -15,6 +15,7 @@ public class HotelRepository : GenericRepository<Hotel>, IHotelRepository
     {
         return await _dbSet
             .Include(h => h.Rooms)
+            .Include(h => h.Images.OrderBy(i => i.DisplayOrder))
             .ToListAsync();
     }
 
@@ -22,6 +23,7 @@ public class HotelRepository : GenericRepository<Hotel>, IHotelRepository
     {
         return await _dbSet
             .Include(h => h.Rooms)
+            .Include(h => h.Images.OrderBy(i => i.DisplayOrder))
             .FirstOrDefaultAsync(h => h.Id == id);
     }
 
@@ -29,6 +31,7 @@ public class HotelRepository : GenericRepository<Hotel>, IHotelRepository
     {
         return await _dbSet
             .Include(h => h.Rooms)
+            .Include(h => h.Images.OrderBy(i => i.DisplayOrder))
             .Where(h => h.IsActive)
             .ToListAsync();
     }

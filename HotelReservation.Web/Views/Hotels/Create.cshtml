@@ -45,15 +45,14 @@
                     </div>
                     
                     <div class="mb-4">
-                        <label class="form-label fw-semibold">@Localizer["HotelImage"]</label>
+                        <label class="form-label fw-semibold"><i class="fas fa-images me-2"></i>@Localizer["HotelImages"]</label>
                         
-                        <!-- File Upload -->
+                        <!-- Multiple File Upload -->
                         <div class="mb-3">
                             <label class="form-label"><i class="fas fa-upload me-1"></i> @Localizer["UploadFromDevice"]</label>
-                            <input type="file" name="ImageFile" class="form-control" accept="image/*" id="imageFileInput" />
-                            <div id="imagePreview" class="mt-2" style="display: none;">
-                                <img id="previewImg" src="" class="img-fluid rounded" style="max-height: 150px;" />
-                            </div>
+                            <input type="file" name="ImageFiles" class="form-control" accept="image/*" id="imageFilesInput" multiple />
+                            <small class="text-muted">@Localizer["SelectMultipleImages"]</small>
+                            <div id="imagePreviewGrid" class="row g-2 mt-2"></div>
                         </div>
                         
                         <div class="text-center text-muted my-3">— @Localizer["Or"] —</div>
@@ -152,23 +151,37 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <script>
-        // Image file preview
-        document.getElementById('imageFileInput').addEventListener('change', function(e) {
-            var file = e.target.files[0];
-            if (file) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('previewImg').src = e.target.result;
-                    document.getElementById('imagePreview').style.display = 'block';
-                }
-                reader.readAsDataURL(file);
-                
-                // Clear URL input and sample selection when file is selected
+        // Multiple image file preview
+        document.getElementById('imageFilesInput').addEventListener('change', function(e) {
+            var previewGrid = document.getElementById('imagePreviewGrid');
+            previewGrid.innerHTML = '';
+            
+            var files = e.target.files;
+            if (files.length > 0) {
+                // Clear URL input and sample selection when files are selected
                 document.getElementById('ImageUrl').value = '';
                 document.querySelectorAll('.sample-image-option img').forEach(function(img) {
                     img.style.border = '3px solid transparent';
                     img.style.transform = 'scale(1)';
                 });
+                
+                for (var i = 0; i < files.length; i++) {
+                    (function(file, index) {
+                        var reader = new FileReader();
+                        reader.onload = function(e) {
+                            var col = document.createElement('div');
+                            col.className = 'col-3';
+                            col.innerHTML = `
+                                <div class="position-relative">
+                                    <img src="${e.target.result}" class="img-fluid rounded" style="height: 100px; width: 100%; object-fit: cover; border: 2px solid ${index === 0 ? '#d4af37' : '#ccc'};" />
+                                    ${index === 0 ? '<span class="badge bg-warning position-absolute top-0 start-0 m-1">Primary</span>' : ''}
+                                </div>
+                            `;
+                            previewGrid.appendChild(col);
+                        };
+                        reader.readAsDataURL(file);
+                    })(files[i], i);
+                }
             }
         });
         
@@ -177,8 +190,8 @@
             document.getElementById('ImageUrl').value = url;
             
             // Clear file input when sample is selected
-            document.getElementById('imageFileInput').value = '';
-            document.getElementById('imagePreview').style.display = 'none';
+            document.getElementById('imageFilesInput').value = '';
+            document.getElementById('imagePreviewGrid').innerHTML = '';
             
             // Remove selection from all images
             document.querySelectorAll('.sample-image-option img').forEach(function(img) {

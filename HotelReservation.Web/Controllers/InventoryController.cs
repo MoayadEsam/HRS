@@ -8,7 +8,7 @@ using Microsoft.Extensions.Localization;
 
 namespace HotelReservation.Web.Controllers;
 
-[Authorize(Roles = "Admin,Staff")]
+[Authorize(Roles = "Admin")]
 public class InventoryController : Controller
 {
     private readonly IInventoryCategoryService _categoryService;

@@ -11,7 +11,7 @@ using Microsoft.Extensions.Localization;
 
 namespace HotelReservation.Web.Controllers;
 
-[Authorize(Roles = "Admin,Staff")]
+[Authorize(Roles = "Admin")]
 public class StaffController : Controller
 {
     private readonly IDepartmentService _departmentService;

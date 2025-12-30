@@ -22,7 +22,7 @@ public class ExportController : Controller
     }
 
     [HttpGet]
-    [Authorize(Roles = "Admin,Staff")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> ReservationsCsv()
     {
         try
@@ -70,7 +70,7 @@ public class ExportController : Controller
 
             // Check if user is authorized to download this reservation's PDF
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var isAdminOrStaff = User.IsInRole("Admin") || User.IsInRole("Staff");
+            var isAdminOrStaff = User.IsInRole("Admin");
             
             // Users can only download PDFs for their own reservations (unless Admin/Staff)
             if (!isAdminOrStaff && reservation.UserId != userId)

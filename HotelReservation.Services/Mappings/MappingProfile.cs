@@ -10,8 +10,20 @@ public class MappingProfile : Profile
     {
         // Hotel mappings
         CreateMap<Hotel, HotelListDto>()
-            .ForMember(dest => dest.RoomCount, opt => opt.MapFrom(src => src.Rooms.Count));
-        CreateMap<Hotel, HotelDetailsDto>();
+            .ForMember(dest => dest.RoomCount, opt => opt.MapFrom(src => src.Rooms.Count))
+            .ForMember(dest => dest.ImageUrls, opt => opt.MapFrom(src => 
+                src.Images.OrderBy(i => i.DisplayOrder).Select(i => i.ImageUrl).ToList()))
+            .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => 
+                src.Images.Any() 
+                    ? (src.Images.FirstOrDefault(i => i.IsPrimary) ?? src.Images.OrderBy(i => i.DisplayOrder).First()).ImageUrl 
+                    : src.ImageUrl));
+        CreateMap<Hotel, HotelDetailsDto>()
+            .ForMember(dest => dest.ImageUrls, opt => opt.MapFrom(src => 
+                src.Images.OrderBy(i => i.DisplayOrder).Select(i => i.ImageUrl).ToList()))
+            .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => 
+                src.Images.Any() 
+                    ? (src.Images.FirstOrDefault(i => i.IsPrimary) ?? src.Images.OrderBy(i => i.DisplayOrder).First()).ImageUrl 
+                    : src.ImageUrl));
         CreateMap<HotelCreateDto, Hotel>();
         CreateMap<HotelUpdateDto, Hotel>();
 

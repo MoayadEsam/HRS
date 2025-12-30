@@ -42,4 +42,5 @@ public class Hotel
     
     // Navigation properties
     public virtual ICollection<Room> Rooms { get; set; } = new List<Room>();
+    public virtual ICollection<HotelImage> Images { get; set; } = new List<HotelImage>();
 }

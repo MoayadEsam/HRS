@@ -8,7 +8,7 @@ using Microsoft.Extensions.Localization;
 
 namespace HotelReservation.Web.Controllers;
 
-[Authorize(Roles = "Admin,Staff")]
+[Authorize(Roles = "Admin")]
 public class FinanceController : Controller
 {
     private readonly IExpenseCategoryService _expenseCategoryService;

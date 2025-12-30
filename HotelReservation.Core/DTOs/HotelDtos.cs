@@ -55,6 +55,7 @@ public class HotelListDto
     public bool IsActive { get; set; }
     public int RoomCount { get; set; }
     public string? ImageUrl { get; set; }
+    public List<string> ImageUrls { get; set; } = new();
 }
 
 public class HotelDetailsDto
@@ -69,6 +70,7 @@ public class HotelDetailsDto
     public int StarRating { get; set; }
     public string? Description { get; set; }
     public string? ImageUrl { get; set; }
+    public List<string> ImageUrls { get; set; } = new();
     public bool IsActive { get; set; }
     public DateTime CreatedAt { get; set; }
     public List<RoomListDto> Rooms { get; set; } = new();

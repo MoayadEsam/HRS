@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HotelReservation.Web.Controllers;
 
-[Authorize(Roles = "Admin,Staff")]
+[Authorize(Roles = "Admin")]
 public class ManagementController : Controller
 {
     public IActionResult Index()
