@@ -19,6 +19,12 @@
                         @Html.AntiForgeryToken()
 
                         <div class="mb-3">
+                            <label asp-for="Title" class="form-label">@Localizer["Title"] <span class="text-danger">*</span></label>
+                            <input asp-for="Title" class="form-control" />
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
                             <label asp-for="CategoryId" class="form-label">@Localizer["Category"] <span class="text-danger">*</span></label>
                             <select asp-for="CategoryId" asp-items="ViewBag.Categories as SelectList" class="form-select">
                                 <option value="">@Localizer["SelectCategory"]</option>

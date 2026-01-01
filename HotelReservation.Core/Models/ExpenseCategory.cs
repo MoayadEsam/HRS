@@ -16,6 +16,8 @@ public class ExpenseCategory
     [StringLength(50)]
     public string? IconClass { get; set; }
     
+    public decimal Budget { get; set; }
+    
     public bool IsActive { get; set; } = true;
     
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

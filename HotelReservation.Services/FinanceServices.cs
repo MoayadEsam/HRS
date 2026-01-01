@@ -82,6 +82,7 @@ public class ExpenseCategoryService : IExpenseCategoryService
             Name = dto.Name,
             Description = dto.Description,
             IconClass = dto.IconClass,
+            Budget = dto.Budget,
             IsActive = true,
             CreatedAt = DateTime.UtcNow
         };
@@ -99,6 +100,7 @@ public class ExpenseCategoryService : IExpenseCategoryService
         category.Name = dto.Name;
         category.Description = dto.Description;
         category.IconClass = dto.IconClass;
+        category.Budget = dto.Budget;
         category.IsActive = dto.IsActive;
 
         await _context.SaveChangesAsync();
