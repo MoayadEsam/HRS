@@ -58,10 +58,10 @@ public static class DbInitializer
         if (!seedStatus.HasAmenities) await SeedAmenitiesAsync(context);
         if (!seedStatus.HasRooms) await SeedRoomsAsync(context);
         
-        // Seed new management tables
+        // Seed new management tables - Always attempt (methods have internal duplicate checks)
+        await SeedExpenseCategoriesAsync(context);
+        await SeedInventoryCategoriesAsync(context);
         if (!seedStatus.HasDepartments) await SeedDepartmentsAsync(context);
-        if (!seedStatus.HasExpenseCategories) await SeedExpenseCategoriesAsync(context);
-        if (!seedStatus.HasInventoryCategories) await SeedInventoryCategoriesAsync(context);
         
         // Seed comprehensive sample data
         if (!seedStatus.HasEmployees) await SeedEmployeesAsync(context);
@@ -389,7 +389,11 @@ public static class DbInitializer
 
     private static async Task SeedExpenseCategoriesAsync(ApplicationDbContext context)
     {
-        // Check removed - handled by CheckSeedStatusAsync
+        // Double-check if categories already exist to prevent duplicates
+        if (await context.ExpenseCategories.AnyAsync())
+        {
+            return;
+        }
 
         var categories = new List<ExpenseCategory>
         {
@@ -411,7 +415,11 @@ public static class DbInitializer
 
     private static async Task SeedInventoryCategoriesAsync(ApplicationDbContext context)
     {
-        // Check removed - handled by CheckSeedStatusAsync
+        // Double-check if categories already exist to prevent duplicates
+        if (await context.InventoryCategories.AnyAsync())
+        {
+            return;
+        }
 
         var categories = new List<InventoryCategory>
         {
