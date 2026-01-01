@@ -1,4 +1,4 @@
-@model IEnumerable<HotelReservation.Core.DTOs.ExpenseCategoryDto>
+@model IEnumerable<HotelReservation.Core.DTOs.ExpenseCategoryListDto>
 @inject IStringLocalizer<SharedResource> Localizer
 
 @{
@@ -23,9 +23,8 @@
                         <tr>
                             <th>@Localizer["Name"]</th>
                             <th>@Localizer["Description"]</th>
-                            <th>@Localizer["Budget"]</th>
                             <th>@Localizer["ExpenseCount"]</th>
-                            <th>@Localizer["TotalSpent"]</th>
+                            <th>@Localizer["TotalAmount"]</th>
                             <th>@Localizer["Status"]</th>
                             <th>@Localizer["Actions"]</th>
                         </tr>
@@ -33,22 +32,11 @@
                     <tbody>
                         @foreach (var category in Model)
                         {
-                            var budgetPercentage = category.Budget > 0 ? (category.TotalSpent / category.Budget) * 100 : 0;
-                            var progressClass = budgetPercentage >= 100 ? "bg-danger" : budgetPercentage >= 75 ? "bg-warning" : "bg-success";
                             <tr>
                                 <td class="fw-bold">@category.Name</td>
                                 <td>@(category.Description ?? "-")</td>
-                                <td>@category.Budget.ToString("C")</td>
                                 <td><span class="badge bg-secondary">@category.ExpenseCount</span></td>
-                                <td>
-                                    <div>@category.TotalSpent.ToString("C")</div>
-                                    @if (category.Budget > 0)
-                                    {
-                                        <div class="progress mt-1" style="height: 5px;">
-                                            <div class="progress-bar @progressClass" style="width: @budgetPercentage%"></div>
-                                        </div>
-                                    }
-                                </td>
+                                <td>@category.TotalAmount.ToString("C")</td>
                                 <td>
                                     <span class="badge @(category.IsActive ? "bg-success" : "bg-secondary")">
                                         @(category.IsActive ? Localizer["Active"] : Localizer["Inactive"])
