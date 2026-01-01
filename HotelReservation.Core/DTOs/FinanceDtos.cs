@@ -164,12 +164,45 @@ public class IncomeCreateDto
     [Range(0.01, double.MaxValue, ErrorMessage = "Amount must be greater than 0")]
     public decimal Amount { get; set; }
     
-    public IncomeType Type { get; set; }
+    // Auto-convert Source string to IncomeType enum
+    public IncomeType Type
+    {
+        get
+        {
+            return Source switch
+            {
+                "Reservation" => IncomeType.RoomBooking,
+                "Restaurant" => IncomeType.FoodAndBeverage,
+                "Spa" => IncomeType.Spa,
+                "Event" => IncomeType.EventHall,
+                "Parking" => IncomeType.Parking,
+                "Laundry" => IncomeType.Laundry,
+                "MiniBar" => IncomeType.MiniBar,
+                "Other" => IncomeType.Other,
+                _ => IncomeType.Other
+            };
+        }
+    }
     
     [Required(ErrorMessage = "Income date is required")]
     public DateTime IncomeDate { get; set; }
     
-    public PaymentMethod PaymentMethodEnum { get; set; } = Models.PaymentMethod.Cash;
+    // Auto-convert PaymentMethod string to PaymentMethod enum
+    public PaymentMethod PaymentMethodEnum
+    {
+        get
+        {
+            return PaymentMethod switch
+            {
+                "Cash" => Models.PaymentMethod.Cash,
+                "CreditCard" => Models.PaymentMethod.CreditCard,
+                "DebitCard" => Models.PaymentMethod.DebitCard,
+                "BankTransfer" => Models.PaymentMethod.BankTransfer,
+                "Check" => Models.PaymentMethod.Check,
+                _ => Models.PaymentMethod.Cash
+            };
+        }
+    }
     
     [StringLength(50)]
     public string? PaymentMethod { get; set; }

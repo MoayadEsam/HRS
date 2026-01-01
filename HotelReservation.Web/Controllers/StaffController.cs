@@ -357,7 +357,7 @@ public class StaffController : Controller
         if (isPaid.HasValue)
             salaries = salaries.Where(s => s.IsPaid == isPaid.Value);
         
-        var employees = await _employeeService.GetActiveEmployeesAsync();
+        var employees = await _employeeService.GetAllEmployeesAsync();
 
         ViewBag.SelectedMonth = month;
         ViewBag.SelectedYear = year;
@@ -409,7 +409,7 @@ public class StaffController : Controller
             Overtime = salary.Overtime
         };
         
-        var employees = await _employeeService.GetActiveEmployeesAsync();
+        var employees = await _employeeService.GetAllEmployeesAsync();
         ViewBag.Employees = new SelectList(employees, "Id", "FullName", salary.EmployeeId);
         ViewBag.SalaryDetails = salary;
         
@@ -422,7 +422,7 @@ public class StaffController : Controller
     {
         if (!ModelState.IsValid)
         {
-            var employees = await _employeeService.GetActiveEmployeesAsync();
+            var employees = await _employeeService.GetAllEmployeesAsync();
             ViewBag.Employees = new SelectList(employees, "Id", "FullName", dto.EmployeeId);
             return View(dto);
         }
@@ -440,7 +440,7 @@ public class StaffController : Controller
 
     public async Task<IActionResult> CreateSalary()
     {
-        var employees = await _employeeService.GetActiveEmployeesAsync();
+        var employees = await _employeeService.GetAllEmployeesAsync();
         ViewBag.Employees = new SelectList(employees, "Id", "FullName");
         ViewBag.Months = GetMonthSelectList(DateTime.Today.Month);
         ViewBag.Years = GetYearSelectList(DateTime.Today.Year);
@@ -458,7 +458,7 @@ public class StaffController : Controller
     {
         if (!ModelState.IsValid)
         {
-            var employees = await _employeeService.GetActiveEmployeesAsync();
+            var employees = await _employeeService.GetAllEmployeesAsync();
             ViewBag.Employees = new SelectList(employees, "Id", "FullName");
             ViewBag.Months = GetMonthSelectList(dto.Month);
             ViewBag.Years = GetYearSelectList(dto.Year);

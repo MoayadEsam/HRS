@@ -442,8 +442,8 @@ public class SalaryService : ISalaryService
 
     public async Task<int> GenerateMonthlySalariesAsync(int month, int year)
     {
+        // Generate salaries for all employees, not just active ones
         var activeEmployees = await _context.Employees
-            .Where(e => e.IsActive)
             .ToListAsync();
 
         var existingSalaries = await _context.Salaries
