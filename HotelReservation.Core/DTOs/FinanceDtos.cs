@@ -172,7 +172,7 @@ public class IncomeCreateDto
             return Source switch
             {
                 "Reservation" => IncomeType.RoomBooking,
-                "Restaurant" => IncomeType.FoodAndBeverage,
+                "Restaurant" => IncomeType.Restaurant,
                 "Spa" => IncomeType.Spa,
                 "Event" => IncomeType.EventHall,
                 "Parking" => IncomeType.Parking,
