@@ -389,13 +389,12 @@ public static class DbInitializer
 
     private static async Task SeedExpenseCategoriesAsync(ApplicationDbContext context)
     {
-        // Double-check if categories already exist to prevent duplicates
-        if (await context.ExpenseCategories.AnyAsync())
-        {
-            return;
-        }
+        // Get existing category names
+        var existingNames = await context.ExpenseCategories
+            .Select(c => c.Name)
+            .ToListAsync();
 
-        var categories = new List<ExpenseCategory>
+        var defaultCategories = new List<ExpenseCategory>
         {
             new ExpenseCategory { Name = "Utilities", Description = "Electricity, water, gas bills", IconClass = "fa-bolt", IsActive = true },
             new ExpenseCategory { Name = "Salaries", Description = "Staff wages and benefits", IconClass = "fa-money-bill", IsActive = true },
@@ -409,19 +408,26 @@ public static class DbInitializer
             new ExpenseCategory { Name = "Miscellaneous", Description = "Other operational expenses", IconClass = "fa-ellipsis-h", IsActive = true }
         };
 
-        await context.ExpenseCategories.AddRangeAsync(categories);
-        await context.SaveChangesAsync();
+        // Only add categories that don't already exist
+        var categoriesToAdd = defaultCategories
+            .Where(c => !existingNames.Contains(c.Name))
+            .ToList();
+
+        if (categoriesToAdd.Any())
+        {
+            await context.ExpenseCategories.AddRangeAsync(categoriesToAdd);
+            await context.SaveChangesAsync();
+        }
     }
 
     private static async Task SeedInventoryCategoriesAsync(ApplicationDbContext context)
     {
-        // Double-check if categories already exist to prevent duplicates
-        if (await context.InventoryCategories.AnyAsync())
-        {
-            return;
-        }
+        // Get existing category names
+        var existingNames = await context.InventoryCategories
+            .Select(c => c.Name)
+            .ToListAsync();
 
-        var categories = new List<InventoryCategory>
+        var defaultCategories = new List<InventoryCategory>
         {
             new InventoryCategory { Name = "Linens", Description = "Bed sheets, towels, and fabrics", IsActive = true },
             new InventoryCategory { Name = "Toiletries", Description = "Soaps, shampoos, and bathroom amenities", IsActive = true },
@@ -435,8 +441,16 @@ public static class DbInitializer
             new InventoryCategory { Name = "Guest Amenities", Description = "Complimentary guest items", IsActive = true }
         };
 
-        await context.InventoryCategories.AddRangeAsync(categories);
-        await context.SaveChangesAsync();
+        // Only add categories that don't already exist
+        var categoriesToAdd = defaultCategories
+            .Where(c => !existingNames.Contains(c.Name))
+            .ToList();
+
+        if (categoriesToAdd.Any())
+        {
+            await context.InventoryCategories.AddRangeAsync(categoriesToAdd);
+            await context.SaveChangesAsync();
+        }
     }
 
     private static async Task SeedEmployeesAsync(ApplicationDbContext context)
