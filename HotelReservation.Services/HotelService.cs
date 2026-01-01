@@ -1,8 +1,10 @@
 using AutoMapper;
 using HotelReservation.Core.DTOs;
 using HotelReservation.Core.Models;
+using HotelReservation.Data.Context;
 using HotelReservation.Data.Repositories.Interfaces;
 using HotelReservation.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace HotelReservation.Services;
 
@@ -10,11 +12,13 @@ public class HotelService : IHotelService
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
+    private readonly ApplicationDbContext _context;
 
-    public HotelService(IUnitOfWork unitOfWork, IMapper mapper)
+    public HotelService(IUnitOfWork unitOfWork, IMapper mapper, ApplicationDbContext context)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
+        _context = context;
     }
 
     public async Task<IEnumerable<HotelListDto>> GetAllHotelsAsync()
@@ -60,30 +64,40 @@ public class HotelService : IHotelService
 
     public async Task<bool> DeleteHotelAsync(int id)
     {
-        var hotel = await _unitOfWork.Hotels.GetHotelWithRoomsAsync(id);
+        var hotel = await _context.Hotels
+            .Include(h => h.Images)
+            .Include(h => h.Rooms)
+                .ThenInclude(r => r.Reservations)
+            .FirstOrDefaultAsync(h => h.Id == id);
+            
         if (hotel == null)
             return false;
 
-        // Delete related images first
+        // Delete reservations for each room first
+        foreach (var room in hotel.Rooms)
+        {
+            if (room.Reservations != null && room.Reservations.Any())
+            {
+                _context.Reservations.RemoveRange(room.Reservations);
+            }
+        }
+
+        // Delete related images
         if (hotel.Images != null && hotel.Images.Any())
         {
-            foreach (var image in hotel.Images.ToList())
-            {
-                _unitOfWork.Hotels.RemoveImage(image);
-            }
+            _context.HotelImages.RemoveRange(hotel.Images);
         }
 
-        // Delete related rooms first
+        // Delete related rooms
         if (hotel.Rooms != null && hotel.Rooms.Any())
         {
-            foreach (var room in hotel.Rooms.ToList())
-            {
-                _unitOfWork.Rooms.Remove(room);
-            }
+            _context.Rooms.RemoveRange(hotel.Rooms);
         }
 
-        _unitOfWork.Hotels.Remove(hotel);
-        await _unitOfWork.SaveChangesAsync();
+        // Delete the hotel
+        _context.Hotels.Remove(hotel);
+        await _context.SaveChangesAsync();
         return true;
     }
 }
+
