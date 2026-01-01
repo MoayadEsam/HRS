@@ -35,4 +35,9 @@ public class HotelRepository : GenericRepository<Hotel>, IHotelRepository
             .Where(h => h.IsActive)
             .ToListAsync();
     }
+
+    public void RemoveImage(HotelImage image)
+    {
+        _context.Set<HotelImage>().Remove(image);
+    }
 }

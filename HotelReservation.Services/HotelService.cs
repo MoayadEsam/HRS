@@ -60,9 +60,27 @@ public class HotelService : IHotelService
 
     public async Task<bool> DeleteHotelAsync(int id)
     {
-        var hotel = await _unitOfWork.Hotels.GetByIdAsync(id);
+        var hotel = await _unitOfWork.Hotels.GetHotelWithRoomsAsync(id);
         if (hotel == null)
             return false;
+
+        // Delete related images first
+        if (hotel.Images != null && hotel.Images.Any())
+        {
+            foreach (var image in hotel.Images.ToList())
+            {
+                _unitOfWork.Hotels.RemoveImage(image);
+            }
+        }
+
+        // Delete related rooms first
+        if (hotel.Rooms != null && hotel.Rooms.Any())
+        {
+            foreach (var room in hotel.Rooms.ToList())
+            {
+                _unitOfWork.Rooms.Remove(room);
+            }
+        }
 
         _unitOfWork.Hotels.Remove(hotel);
         await _unitOfWork.SaveChangesAsync();

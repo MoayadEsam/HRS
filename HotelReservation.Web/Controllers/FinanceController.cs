@@ -351,15 +351,15 @@ public class FinanceController : Controller
         ViewBag.IncomeTypes = GetIncomeTypeSelectList((int)income.Type);
         ViewBag.PaymentMethods = GetPaymentMethodSelectList(income.PaymentMethod);
 
-        var dto = new IncomeUpdateDto
+    var dto = new IncomeUpdateDto
         {
             Id = income.Id,
             Title = income.Title,
-            Description = income.Description,
+            Description = income.Description ?? string.Empty,
             Amount = income.Amount,
-            Type = income.Type,
+            Source = income.TypeName,
             IncomeDate = income.IncomeDate,
-            PaymentMethodEnum = income.PaymentMethod,
+            PaymentMethod = income.PaymentMethodName,
             Reference = income.Reference,
             ReservationId = income.ReservationId
         };

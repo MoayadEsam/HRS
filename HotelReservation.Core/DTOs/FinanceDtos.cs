@@ -148,6 +148,9 @@ public class IncomeDetailsDto : IncomeListDto
 
 public class IncomeCreateDto
 {
+    private IncomeType? _type;
+    private PaymentMethod? _paymentMethodEnum;
+    
     [Required(ErrorMessage = "Title is required")]
     [StringLength(200)]
     public string Title { get; set; } = string.Empty;
@@ -164,11 +167,14 @@ public class IncomeCreateDto
     [Range(0.01, double.MaxValue, ErrorMessage = "Amount must be greater than 0")]
     public decimal Amount { get; set; }
     
-    // Auto-convert Source string to IncomeType enum
+    // Auto-convert Source string to IncomeType enum, or use explicitly set value
     public IncomeType Type
     {
         get
         {
+            if (_type.HasValue)
+                return _type.Value;
+                
             return Source switch
             {
                 "Reservation" => IncomeType.RoomBooking,
@@ -182,16 +188,20 @@ public class IncomeCreateDto
                 _ => IncomeType.Other
             };
         }
+        set => _type = value;
     }
     
     [Required(ErrorMessage = "Income date is required")]
     public DateTime IncomeDate { get; set; }
     
-    // Auto-convert PaymentMethod string to PaymentMethod enum
+    // Auto-convert PaymentMethod string to PaymentMethod enum, or use explicitly set value
     public PaymentMethod PaymentMethodEnum
     {
         get
         {
+            if (_paymentMethodEnum.HasValue)
+                return _paymentMethodEnum.Value;
+                
             return PaymentMethod switch
             {
                 "Cash" => Models.PaymentMethod.Cash,
@@ -202,6 +212,7 @@ public class IncomeCreateDto
                 _ => Models.PaymentMethod.Cash
             };
         }
+        set => _paymentMethodEnum = value;
     }
     
     [StringLength(50)]
